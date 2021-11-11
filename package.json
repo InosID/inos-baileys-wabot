@@ -23,10 +23,11 @@
   "author": "CxD9Team",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.2",
     "figlet": "^1.5.2"
-  }
+  },
   "bugs": {
     "url": "https://github.com/CxD9-Teams/cxd9-bot/issues"
   },
-  "homepage": "https://github.com/CxD9-Teams/cxd9-bot#readme",
+  "homepage": "https://github.com/CxD9-Teams/cxd9-bot#readme"
 }
