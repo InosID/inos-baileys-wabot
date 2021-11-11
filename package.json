@@ -23,6 +23,7 @@
   "author": "CxD9Team",
   "license": "ISC",
   "dependencies": {
+    "cfonts": "^2.10.0",
     "chalk": "^4.1.2",
     "figlet": "^1.5.2"
   },
