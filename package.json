@@ -2,7 +2,7 @@
   "name": "cxd9-bot",
   "version": "1.0.0",
   "description": "Whatsapp Bot Termux",
-  "main": "main.js",
+  "main": "index.js",
   "directories": {
     "lib": "lib"
   },
