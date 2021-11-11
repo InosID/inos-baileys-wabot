@@ -1,4 +1,4 @@
 # cxd9-bot
-WhatsApp Bot Using Baileys Library
+> WhatsApp Bot Using Baileys Library
 
-![cxd9-team](https://github.com/cxd9-Teams.png?size=10)
+![cxd9-team](https://github.com/cxd9-Teams.png?size=100)
