@@ -1,2 +1,2 @@
-// modules
-  //Numpang bang:v
+let fs = require('fs')
+let mainF = require('./main')
