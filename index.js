@@ -1,3 +1,4 @@
+let { WAConnection } = require('@adiwajshing/baileys')
 let fs = require('fs')
 let msgMain = require('./msg/message')
 let CFonts = require('cfonts')
@@ -12,6 +13,7 @@ function start() {
     align: "center",
     gradient: ['yellow', 'yellow']
   })
+  let conn = new WAConnection()
   msgMain()
 }
 
