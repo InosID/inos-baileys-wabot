@@ -20,7 +20,17 @@ async function start() {
   conn.on('qr', () => {
     console.log('')
   })
-  msgMain()
+  fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
+  console.log(color('[BOT] Connected!', 'green'))
+  conn.on('chats-received', async ({ hasNewChats }) => {
+    console.log(color('[SYSTEM] You have ${conn.chats.length} chats, new chats available: ${hasNewChats}`, 'magenta'))
+  }
+  conn.on('contacts-received', () => {
+    console.log(color('[SYSTEM] You have ' + Object.keys(conn.contacts).length + ' contacts', 'brown'))
+  })
+  conn.on('chat-update', async (message) => {
+    msgMain()
+  })
 }
 
 start()
