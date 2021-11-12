@@ -9,6 +9,6 @@
 
 ---
 
-<a href="https://github.com/CxD9-Teams"><img src="https://github.com/CxD9-Teams.png"></a> | [![moo-d](https://github.com/moo-d.png)](https://github.com/moo-d) | [![mrfzvx12](https://github.com/mrfzvx12.png?size=100)](https://github.com/mrfzvx12) | [![Finox999](https://github.com/Finox999.png?size=100)](https://github.com/Finox999)
+<a href="https://github.com/CxD9-Teams"><img src="https://github.com/CxD9-Teams.png"></a> | [![moo-d](https://github.com/moo-d.png)](https://github.com/moo-d) | [![mrfzvx12](https://github.com/mrfzvx12.png)](https://github.com/mrfzvx12) | [![Finox999](https://github.com/Finox999.png)](https://github.com/Finox999)
 ----|----|----|----
 **Powered By CxD9-Teams** | **[moo-d](https://github.com/moo-d)** | [mrfzvx12](https://github.com/mrfzvx12) | **[Finox999](https://github.com/Finox999)**
