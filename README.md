@@ -9,6 +9,5 @@
 </p>
 
 ***
-[![moo-d](https://github.com/moo-d.png?size=100)](https://github.com/moo-d)
-[![mrfzvx12](https://github.com/mrfzvx12.png?size=100)](https://github.com/mrfzvx12)
-[![Finox999](https://github.com/Finox999.png?size=100)](https://github.com/Finox999)
+[![moo-d](https://github.com/moo-d.png?size=100)](https://github.com/moo-d) |  [![mrfzvx12](https://github.com/mrfzvx12.png?size=100)](https://github.com/mrfzvx12) |  [![Finox999](https://github.com/Finox999.png?size=100)](https://github.com/Finox999)
+--------|--------|--------|
