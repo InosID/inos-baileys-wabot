@@ -1,4 +1,4 @@
-let { WAConnection } = require('@adiwajshing/baileys')
+let { WAConnection, ReconnectMode } = require('@adiwajshing/baileys')
 let fs = require('fs')
 let msgMain = require('./msg/message')
 let CFonts = require('cfonts')
@@ -14,6 +14,12 @@ function start() {
     gradient: ['yellow', 'yellow']
   })
   let conn = new WAConnection()
+  conn.autoReconnect = ReconnectMode.onConnectionLost
+  conn.version = [2, 2140, 6]
+  conn.logger.level = 'warn'
+  conn.on('qr', () => {
+    console.log('')
+  })
   msgMain()
 }
 
