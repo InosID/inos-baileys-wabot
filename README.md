@@ -7,8 +7,8 @@
   </a>
 </p>
 
----
+***
 
-[![moo-d](https://github.com/CxD9-Teams.png?size=100)](https://github.com/CxD9-Teams) | [![moo-d](https://github.com/moo-d.png?size=100)](https://github.com/moo-d) | [![mrfzvx12](https://github.com/mrfzvx12.png?size=100)](https://github.com/mrfzvx12) | [![Finox999](https://github.com/Finox999.png?size=100)](https://github.com/Finox999)
-----|----|----|----
-Powered By CxD9-Teams | [moo-d](https://github.com/moo-d) | [mrfzvx12](https://github.com/mrfzvx12) | [Finox999](https://github.com/Finox999)
+[![moo-d](https://github.com/CxD9-Teams.png?size=100)](https://github.com/CxD9-Teams) | Powered By CxD9-Teams | [![moo-d](https://github.com/moo-d.png?size=100)](https://github.com/moo-d) | [moo-d](https://github.com/moo-d)
+----|----|----|----|
+[![mrfzvx12](https://github.com/mrfzvx12.png?size=100)](https://github.com/mrfzvx12) | [mrfzvx12](https://github.com/mrfzvx12) | [![Finox999](https://github.com/Finox999.png?size=100)](https://github.com/Finox999) | [Finox999](https://github.com/Finox999)
