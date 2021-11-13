@@ -21,6 +21,7 @@ async function start() {
     console.log('')
   })
   fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
+  await conn.connect({timeoutMs: 30*1000})
   console.log(color('[BOT] Connected!', 'green'))
   conn.on('chats-received', async ({ hasNewChats }) => {
     console.log(color('[SYSTEM] You have ${conn.chats.length} chats, new chats available: ${hasNewChats}`, 'magenta'))
