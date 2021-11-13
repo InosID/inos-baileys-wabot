@@ -1,4 +1,4 @@
-let { WAConnection, ReconnectMode } = require('@adiwajshing/baileys')
+let Baileys = require('@adiwajshing/baileys')
 let fs = require('fs')
 let msgMain = require('./msg/message')
 let CFonts = require('cfonts')
@@ -13,12 +13,12 @@ async function start() {
     align: "center",
     gradient: ['yellow', 'yellow']
   })
-  let conn = new WAConnection()
-  conn.autoReconnect = ReconnectMode.onConnectionLost
+  let conn = new Baileys.WAConnection()
+  conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
   conn.on('qr', () => {
-    console.log('')
+    console.log(color('[SYSTEM] Scan The QR Code!', 'yellow'))
   })
   fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
   await conn.connect({timeoutMs: 30*1000})
