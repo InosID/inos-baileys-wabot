@@ -30,7 +30,7 @@ async function start() {
     console.log(color('[SYSTEM] You have ' + Object.keys(conn.contacts).length + ' contacts', 'brown'))
   })
   conn.on('chat-update', async (message) => {
-    msgMain(message)
+    msgMain(conn, message)
   })
 }
 
