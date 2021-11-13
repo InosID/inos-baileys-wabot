@@ -1,6 +1,6 @@
 require('./../setting')
 let Baileys = require('@adiwajshing/baileys')
 
-module.exports = msgMain = (WAC, message) => {
+module.exports = msgMain = (CXD, message) => {
   console.log('test')
 }
