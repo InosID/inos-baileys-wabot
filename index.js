@@ -13,23 +13,23 @@ async function start() {
     align: "center",
     gradient: ['yellow', 'yellow']
   })
-  let conn = new Baileys.WAConnection()
-  conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
-  conn.version = [2, 2140, 6]
-  conn.logger.level = 'warn'
-  conn.on('qr', () => {
+  let WAC = new Baileys.WAConnection()
+  WAC.autoReconnect = Baileys.ReconnectMode.onConnectionLost
+  WAC.version = [2, 2140, 6]
+  WAC.logger.level = 'warn'
+  WAC.on('qr', () => {
     console.log(color('[SYSTEM] Scan The QR Code!', 'yellow'))
   })
-  fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
-  await conn.connect({timeoutMs: 30*1000})
+  fs.existsSync('./sessions.json') && WAC.loadAuthInfo('./sessions.json')
+  await WAC.connect({timeoutMs: 30*1000})
   console.log(color('[BOT] Connected!', 'green'))
-  conn.on('chats-received', async ({ hasNewChats }) => {
-    console.log(color(`[SYSTEM] You have ${conn.chats.length} chats, new chats available: ${hasNewChats}`, 'magenta'))
+  WAC.on('chats-received', async ({ hasNewChats }) => {
+    console.log(color(`[SYSTEM] You have ${WAC.chats.length} chats, new chats available: ${hasNewChats}`, 'magenta'))
   })
-  conn.on('contacts-received', () => {
-    console.log(color('[SYSTEM] You have ' + Object.keys(conn.contacts).length + ' contacts', 'brown'))
+  WAC.on('contacts-received', () => {
+    console.log(color('[SYSTEM] You have ' + Object.keys(WAC.contacts).length + ' contacts', 'brown'))
   })
-  conn.on('chat-update', async (message) => {
+  WAC.on('chat-update', async (message) => {
     msgMain(conn, message)
   })
 }
