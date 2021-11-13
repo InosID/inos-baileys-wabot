@@ -1,4 +1,5 @@
 let Baileys = require('@adiwajshing/baileys')
+let conn = new Baileys.WAConnection()
 let fs = require('fs')
 let msgMain = require('./msg/message')
 let CFonts = require('cfonts')
@@ -13,25 +14,56 @@ async function start() {
     align: "center",
     gradient: ['yellow', 'yellow']
   })
-  let WAC = new Baileys.WAConnection()
-  WAC.autoReconnect = Baileys.ReconnectMode.onConnectionLost
-  WAC.version = [2, 2140, 6]
-  WAC.logger.level = 'warn'
-  WAC.on('qr', () => {
+  conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
+  conn.version = [2, 2140, 6]
+  conn.logger.level = 'warn'
+  conn.on('qr', () => {
     console.log(color('[SYSTEM] Scan The QR Code!', 'yellow'))
   })
-  fs.existsSync('./sessions.json') && WAC.loadAuthInfo('./sessions.json')
-  await WAC.connect({timeoutMs: 30*1000})
+  fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
+  await conn.connect({timeoutMs: 30*1000})
   console.log(color('[BOT] Connected!', 'green'))
-  WAC.on('chats-received', async ({ hasNewChats }) => {
-    console.log(color(`[SYSTEM] You have ${WAC.chats.length} chats, new chats available: ${hasNewChats}`, 'magenta'))
+  conn.on('chats-received', async ({ hasNewChats }) => {
+    console.log(color(`[SYSTEM] You have ${conn.chats.length} chats, new chats available: ${hasNewChats}`, 'magenta'))
   })
-  WAC.on('contacts-received', () => {
-    console.log(color('[SYSTEM] You have ' + Object.keys(WAC.contacts).length + ' contacts', 'brown'))
-  })
-  WAC.on('chat-update', async (message) => {
-    msgMain(conn, message)
+  conn.on('contacts-received', () => {
+    console.log(color('[SYSTEM] You have ' + Object.keys(conn.contacts).length + ' contacts', 'brown'))
   })
 }
+  /**
+ * Uncache if there is file change
+ * @param {string} module Module name or path
+ * @param {function} cb <optional> 
+ */
+ function nocache(module, cb = () => { }) { 
+   console.log("‣ Module", `'${module}'`, "is now being watched for changes"); 
+   fs.watchFile(require.resolve(module), async () => { 
+     await uncache(require.resolve(module)); 
+     cb(module); 
+   }); 
+ }
+
+
+/**
+ * Uncache a module
+ * @param {string} module Module name or path
+ */
+function uncache(module = '.') {
+  return new Promise((resolve, reject) => {
+    try {
+      delete require.cache[require.resolve(module)];
+      resolve();
+      } catch (e) {
+        reject(e);
+        }
+        });
+        }
+
+require('./msg/message.js');
+nocache('./msg/message.js', module => console.log(color(`message.js is now updated!`)));
+
+  conn.on('chat-update', async (message) => {
+    require('./msg/message.js')(conn, message);
+  })
 
 start()
