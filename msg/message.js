@@ -4,6 +4,7 @@ let fs = require('fs')
 let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
 
 require('./../config')
+require('./sendMsg')
 
 module.exports = msgMain = (CXD = new conn, msg) => {
   try {
