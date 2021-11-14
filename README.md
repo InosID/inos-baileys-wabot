@@ -2,9 +2,9 @@
 > WhatsApp Bot Using Baileys Library By CxD9-Team!
 
 # deploy
-<p align="center">
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/CxD9-Teams/cxd9-bot)
-</p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/CxD9-Teams/cxd9-bot">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a></p>
 
 **Powered By**
 <p align="center">
