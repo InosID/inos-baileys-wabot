@@ -55,43 +55,6 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let groupId = isGroupMsg ? groupMetadata.jid : ''
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
 
-    CXD.reply = (txt) => {
-      CXD.sendMessage(
-        from,
-        txt,
-        text, {
-          quoted: msg
-        }
-      )
-    }
-    CXD.sendText = (txt) => {
-      CXD.sendMessage(
-        from,
-        txt,
-        text
-      )
-    }
-    CXD.sendImage = (img, caption, replying) => {
-      if (replying = true) {
-        CXD.sendMessage(
-          from,
-          img,
-          image, {
-            caption: caption
-            quoted: msg
-          }
-        )
-      } else {
-        CXD.sendMessage(
-          from,
-          img,
-          image, {
-            caption: caption
-          }
-        )
-      }
-    }
-
     global.pushname = CXD.contacts[sender] != undefined ? CXD.contacts[sender].vname || CXD.contacts[sender].notify : undefined
 
     let isMedia = type === "imageMessage" || type === "videoMessage"
