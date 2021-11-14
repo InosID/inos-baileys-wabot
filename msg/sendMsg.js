@@ -51,6 +51,13 @@ CXD.sendImage = (img, caption, replying) => {
   }
 }
 
+/**
+ * Send file
+ * @param {object} file
+ * @param {string} type
+ * @param {string} captions
+ * @param {boolean} replying
+ */
 CXD.sendFile = (file, type, captions, replying) => {
   if (type == 'document') {
     if (replying == true) {
