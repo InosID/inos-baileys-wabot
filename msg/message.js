@@ -29,7 +29,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
       buttonsMessage
     } = Baileys.MessageType
     type = Object.keys(msg.message)[0]
-    cmd = type === "conversation" && mek.message.conversation ? mek.message.conversation: type == "imageMessage" && mek.message.imageMessage.caption ? mek.message.imageMessage.caption: type == "videoMessage" && mek.message.videoMessage.caption ? mek.message.videoMessage.caption: type == "extendedTextMessage" && mek.message.extendedTextMessage.text ? mek.message.extendedTextMessage.text: type == "buttonsResponseMessage" && mek.message[type].selectedButtonId ? mek.message[type].selectedButtonId: ""
+    cmd = type === "conversation" && msg.message.conversation ? msg.message.conversation: type == "imageMessage" && msg.message.imageMessage.caption ? msg.message.imageMessage.caption: type == "videoMessage" && msg.message.videoMessage.caption ? msg.message.videoMessage.caption: type == "extendedTextMessage" && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text: type == "buttonsResponseMessage" && msg.message[type].selectedButtonId ? msg.message[type].selectedButtonId: ""
     let getCmd = (id) => { let position = null
       Object.keys(_scommand).forEach((i) => {
         if (_scommand[i].id === id) {
@@ -41,8 +41,8 @@ module.exports = msgMain = (CXD = new conn, msg) => {
       }
     }
     let prefix = global.botConf.prefix[0]
-    body = type === 'listResponseMessage' && msg.message.listResponseMessage.title ? msg.message.listResponseMessage.title: type == 'buttonsResponseMessage' && msg.message.buttonsResponseMessage.selectedButtonId ? mek.message.buttonsResponseMessage.selectedButtonId: type == "conversation" && mek.message.conversation.startsWith(prefix) ? mek.message.conversation: type == "imageMessage" && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption: type == "videoMessage" && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption: type == "extendedTextMessage" && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text: ""
-    let chats = (type === 'conversation') ? mek.message.conversation: (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text: ''
+    body = type === 'listResponseMessage' && msg.message.listResponseMessage.title ? msg.message.listResponseMessage.title: type == 'buttonsResponseMessage' && msg.message.buttonsResponseMessage.selectedButtonId ? msg.message.buttonsResponseMessage.selectedButtonId: type == "conversation" && msg.message.conversation.startsWith(prefix) ? msg.message.conversation: type == "imageMessage" && msg.message.imageMessage.caption.startsWith(prefix) ? msg.message.imageMessage.caption: type == "videoMessage" && msg.message.videoMessage.caption.startsWith(prefix) ? msg.message.videoMessage.caption: type == "extendedTextMessage" && msg.message.extendedTextMessage.text.startsWith(prefix) ? msg.message.extendedTextMessage.text: ""
+    let chats = (type === 'conversation') ? msg.message.conversation: (type === 'extendedTextMessage') ? msg.message.extendedTextMessage.text: ''
     listbut = (type == 'listResponseMessage') ? msg.message.listResponseMessage.title: ''
     let args = body.trim().split(/ +/).slice(1)
     let isCmd = body.startsWith(prefix)
@@ -63,7 +63,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
       )
     }
 
-    global.pushname = MUT.contacts[sender] != undefined ? MUT.contacts[sender].vname || MUT.contacts[sender].notify : undefined
+    global.pushname = CXD.contacts[sender] != undefined ? CXD.contacts[sender].vname || CXD.contacts[sender].notify : undefined
 
     let isMedia = type === "imageMessage" || type === "videoMessage"
     let isQuotedImage = type === "extendedTextMessage" && content.includes("imageMessage")
