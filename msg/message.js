@@ -3,7 +3,7 @@ let { color } = require('./../lib/color')
 let fs = require('fs')
 let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
 
-require('./../setting')
+require('./../config')
 
 module.exports = msgMain = (CXD = new conn, msg) => {
   try {
@@ -57,10 +57,39 @@ module.exports = msgMain = (CXD = new conn, msg) => {
 
     CXD.reply = (txt) => {
       CXD.sendMessage(
-        from, txt, text, {
+        from,
+        txt,
+        text, {
           quoted: msg
         }
       )
+    }
+    CXD.sendText = (txt) => {
+      CXD.sendMessage(
+        from,
+        txt,
+        text
+      )
+    }
+    CXD.sendImage = (img, caption, replying) => {
+      if (replying = true) {
+        CXD.sendMessage(
+          from,
+          img,
+          image, {
+            caption: caption
+            quoted: msg
+          }
+        )
+      } else {
+        CXD.sendMessage(
+          from,
+          img,
+          image, {
+            caption: caption
+          }
+        )
+      }
     }
 
     global.pushname = CXD.contacts[sender] != undefined ? CXD.contacts[sender].vname || CXD.contacts[sender].notify : undefined
