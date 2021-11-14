@@ -1,0 +1,7 @@
+{
+  "name": "cxd9-bot",
+  "description": "WhatsApp Bot Heroku",
+  "repository": "https://github.com/CxD9-Teams/cxd9-bot",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["bot"]
+}
