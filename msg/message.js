@@ -70,8 +70,8 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let isQuotedVideo = type === "extendedTextMessage" && content.includes("videoMessage")
     let isQuotedAudio = type === "extendedTextMessage" && content.includes("audioMessage")
     let isQuotedSticker = type === "extendedTextMessage" && content.includes("stickerMessage")
-    if (isCmd && isGroupMsg) console.log('[CXD]', command, 'from', sender.split('@')[0], 'args :', args.length)
-    if (!isGroupMsg && isCmd) console.log('[CXD]', command, 'from', sender.split('@')[0], 'args :', args.length)
+    if (isCmd && isGroupMsg) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
+    if (!isGroupMsg && isCmd) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     switch(body) {
       case prefix + 'p':
         CXD.reply('Test')
