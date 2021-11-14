@@ -50,3 +50,61 @@ CXD.sendImage = (img, caption, replying) => {
     )
   }
 }
+
+CXD.sendFile = (file, type, captions, replying) => {
+  if (type == 'document') {
+    if (replying == true) {
+      CXD.sendMessage(
+        from,
+        file,
+        type, {
+          quoted: msg
+        }
+      )
+    } else {
+      CXD.sendMessage(
+        from,
+        file,
+        type
+      )
+    }
+  } else if (type == 'image') {
+    if (replying == true) {
+      CXD.sendMessage(
+        from,
+        file,
+        type, {
+          caption: captions,
+          quoted: msg
+        }
+      )
+    } else {
+      CXD.sendMessage(
+        from,
+        file,
+        type, {
+          caption: captions
+        }
+      )
+    }
+  } else if (type === 'video') {
+    if (replying == true) {
+      CXD.sendMessage(
+        from,
+        file,
+        type, {
+          caption: captions,
+          quoted: msg
+        }
+      )
+    } else {
+      CXD.sendMessage(
+        from,
+        file,
+        type, {
+          caption: captions
+        }
+      )
+    }
+  }
+}
