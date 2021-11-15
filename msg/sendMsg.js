@@ -1,3 +1,5 @@
+let Baileys = require('@adiwajshing/baileys')
+let CXD = new Baileys.WAConnection()
 let fetcher = require('./../lib/fetcher')
 let get = require('got')
 
@@ -42,7 +44,7 @@ CXD.sendImage = (img, caption, replying) => {
       from,
       img,
       image, {
-        caption: caption
+        caption: caption,
         quoted: msg
       }
     )
