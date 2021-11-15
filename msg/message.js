@@ -74,7 +74,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     if (!isGroupMsg && isCmd) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     switch(body) {
       case prefix + 'p':
-        CXD.reply('Test')
+        CXD.reply(from, 'Test')
       break
     }
   } catch(err) {
