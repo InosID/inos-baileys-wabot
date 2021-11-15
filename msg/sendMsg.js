@@ -132,5 +132,17 @@ CXD.sendFile = (file, type, captions, replying) => {
         }
       )
     }
+  } else if (type == 'gif') {
+    if (replying == true) {
+      CXD.sendMessage(
+        from,
+        file,
+        video, {
+          mimetype: Baileys.Mimetype.gif,
+          quoted: msg,
+          caption: captions
+        }
+      )
+    }
   }
 }
