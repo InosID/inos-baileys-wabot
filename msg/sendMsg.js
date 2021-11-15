@@ -1,5 +1,19 @@
 let Baileys = require('@adiwajshing/baileys')
 let CXD = new Baileys.WAConnection()
+let {
+  text,
+  extendedText,
+  contact,
+  location,
+  liveLocation,
+  image,
+  video,
+  sticker,
+  document,
+  audio,
+  product,
+  buttonsMessage
+} = Baileys.MessageType
 let fetcher = require('./../lib/fetcher')
 let get = require('got')
 
