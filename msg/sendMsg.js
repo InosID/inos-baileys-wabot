@@ -1,4 +1,5 @@
 let fetcher = require('./../lib/fetcher')
+let get = require('got')
 
 global.fetch = fetcher.fetchJson
 global.buffer = fetcher.getBuffer
@@ -159,4 +160,23 @@ CXD.sendFile = (file, type, captions, replying) => {
  * @param {string} captions
  * @param {boolean} replying
  */
-//CXD.sendFileFromUrl = (url, type, captions, replying) => {
+CXD.sendFileFromUrl = (url, type, captions, replying) => {
+  if (type == 'document') {
+    var fetch = global.buffer(url)
+    if (replying == true) {
+      CXD.sendMessage(
+        from,
+        url,
+        type, {
+          quoted: msg
+        }
+      )
+    } else {
+      CXD.sendMessage(
+        from,
+        url,
+        type
+      )
+    }
+  }
+}
