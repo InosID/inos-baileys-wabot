@@ -10,7 +10,7 @@ global.buffer = fetcher.getBuffer
  * Reply message
  * @param {string} txt
  */
-CXD.reply = (txt) => {
+global.reply = (txt) => {
   CXD.sendMessage(
     from,
     txt,
@@ -24,7 +24,7 @@ CXD.reply = (txt) => {
  * Send text
  * @param {string} txt
  */
-CXD.sendText = (txt) => {
+global.sendText = (txt) => {
   CXD.sendMessage(
     from,
     txt,
@@ -38,7 +38,7 @@ CXD.sendText = (txt) => {
  * @param {string} caption
  * @param {boolean} replying
  */
-CXD.sendImage = (img, caption, replying) => {
+global.sendImage = (img, caption, replying) => {
   if (replying = true) {
     CXD.sendMessage(
       from,
@@ -66,7 +66,7 @@ CXD.sendImage = (img, caption, replying) => {
  * @param {string} captions
  * @param {boolean} replying
  */
-CXD.sendFile = (file, type, captions, replying) => {
+global.sendFile = (file, type, captions, replying) => {
   if (type == 'document') {
     if (replying == true) {
       CXD.sendMessage(
@@ -162,7 +162,7 @@ CXD.sendFile = (file, type, captions, replying) => {
  * @param {string} captions
  * @param {boolean} replying
  */
-CXD.sendFileFromUrl = (url, type, captions, replying) => {
+global.sendFileFromUrl = (url, type, captions, replying) => {
   if (type == 'document') {
     var fetch = global.buffer(url)
     if (replying == true) {
