@@ -4,6 +4,16 @@
 <p align="center">
 <img src="https://gpvc.arturio.dev/CxD9-Teams" />
 <p/>
+<p align="center">
+<a href="https://github.com/CxD9-Teams/followers"><img title="Followers" src="https://img.shields.io/github/followers/mrfzvx12?label=Followers&style=social"></a>
+<a href="https://github.com/CxD9-Teams/cxd9-bot/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/CxD9-Teams/cxd9-bot?&style=social"></a>
+<a href="https://github.com/CxD9-Teams/cxd9-bot/network/members"><img title="Fork" src="https://img.shields.io/github/forks/CxD9-Teams/cxd9-bot?style=social"></a>
+<a href="https://github.com/CxD9-Teams/cxd9-bot/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/CxD9-Teams/cxd9-bot?label=Watching&style=social"></a>
+<a href="https://github.com/CxD9-Teams/cxd9-bot/watchers"><img title="Contributor" src="https://img.shields.io/github/contributors/CxD9-Teams/cxd9-bot?logo=github&style=social"></a>
+</p>
+<p align="center">
+<a href="https://github.com/CxD9-Teams/cxd9-bot"><img src="https://img.shields.io/github/repo-size/CxD9-Teams/cxd9-bot?label=Repo%20size&style=flat"></a>
+</p>
 
 - [x] **HEROKU APP**
 
