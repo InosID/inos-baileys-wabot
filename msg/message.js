@@ -27,8 +27,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
       document,
       audio,
       product,
-      buttonsMessage,
-      gif
+      buttonsMessage
     } = Baileys.MessageType
     type = Object.keys(msg.message)[0]
     cmd = type === "conversation" && msg.message.conversation ? msg.message.conversation: type == "imageMessage" && msg.message.imageMessage.caption ? msg.message.imageMessage.caption: type == "videoMessage" && msg.message.videoMessage.caption ? msg.message.videoMessage.caption: type == "extendedTextMessage" && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text: type == "buttonsResponseMessage" && msg.message[type].selectedButtonId ? msg.message[type].selectedButtonId: ""
