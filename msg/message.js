@@ -1,6 +1,8 @@
 let Baileys = require('@adiwajshing/baileys')
-let { color } = require('./../lib/color')
 let fs = require('fs')
+let axios = require('axios')
+
+let { color } = require('./../lib/color')
 let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
 
 require('./../config')
