@@ -1,3 +1,8 @@
+let fetcher = require('./../lib/fetcher')
+
+global.fetch = fetcher.fetchJson
+global.buffer = fetcher.getBuffer
+
 /**
  * Reply message
  * @param {string} txt
@@ -146,3 +151,12 @@ CXD.sendFile = (file, type, captions, replying) => {
     }
   }
 }
+
+/**
+ * Send file from url
+ * @param {string} url
+ * @param {string} type
+ * @param {string} captions
+ * @param {boolean} replying
+ */
+//CXD.sendFileFromUrl = (url, type, captions, replying) => {
