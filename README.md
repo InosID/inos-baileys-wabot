@@ -6,6 +6,16 @@
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a></p>-->
 
+- [x] **RDP/VPS USER**
+
+**First download tools**, Click icon to download !
+
+<a href="https://git-scm.com/downloads"><img src="http://img.shields.io/badge/-Git-F1502F?style=flat&logo=git&logoColor=FFFFFF"></a>
+<a href="https://nodejs.org/en/download"><img
+src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoColor=white"></a>
+<a href="https://ffmpeg.org/download.html"><img src="http://img.shields.io/badge/-Ffmpeg-000000?style=flat&logo=ffmpeg&logoColor=green"></a>
+<a href="https://notepad-plus-plus.org/downloads/v8.1.9"><img src="http://img.shields.io/badge/-Notepad++-orange?style=flat"></a>
+
 **Powered By**
 <p align="center">
   <a href="https://github.com/CxD9-Teams">
