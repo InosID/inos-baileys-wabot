@@ -113,13 +113,24 @@ CXD.sendFile = (file, type, captions, replying) => {
         }
       )
     }
-  } /*else if (type == 'audio') {
+  } else if (type == 'audio') {
     if (replying == true) {
       CXD.sendMessage(
         from,
-        type,
-        
+        file,
+        type, {
+          mimetype: 'audio/mp4',
+          quoted: msg
+        }
       )
-    }*/
+    } else {
+      CXD.sendMessage(
+        from,
+        file,
+        type, {
+          mimetype: 'audio/mp4',
+        }
+      )
+    }
   }
 }
