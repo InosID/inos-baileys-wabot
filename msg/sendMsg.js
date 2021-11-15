@@ -113,5 +113,13 @@ CXD.sendFile = (file, type, captions, replying) => {
         }
       )
     }
+  } /*else if (type == 'audio') {
+    if (replying == true) {
+      CXD.sendMessage(
+        from,
+        type,
+        
+      )
+    }*/
   }
 }
