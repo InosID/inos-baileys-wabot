@@ -99,69 +99,33 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         }
       } else if (type == 'gif') {
         if (replying == true) {
-          CXD.sendMessage(
-            from,
-            file,
-            video, {
-              mimetype: Baileys.Mimetype.gif,
-              quoted: msg,
-              caption: captions
-            }
-          )
+          CXD.sendMessage(from, file, video, { mimetype: Baileys.Mimetype.gif,quoted: msg, caption: captions })
         }
+      } else {
+        console.log(color("[ERROR] ", "red") + 'File Type ' + type + ' not found.')
       }
     }
     CXD.sendFileFromUrl = (from, url, type, captions, replying) => {
       if (type == 'document') {
         var fetch = global.buffer(url)
         if (replying == true) {
-          CXD.sendMessage(
-            from,
-            fetch,
-            type, {
-              quoted: msg
-            }
-          )
+          CXD.sendMessage(from, fetch, type, { quoted: msg })
         } else {
-          CXD.sendMessage(
-            from,
-            fetch,
-            type
-          )
+          CXD.sendMessage(from, fetch, type)
         }
       } else if (type == 'image') {
         var fetch = global.buffer(url)
         if (replying == true) {
-          CXD.sendMessage(
-            from,
-            fetch,
-            type, {
-              quoted: msg
-            }
-          )
+          CXD.sendMessage(from, fetch, type, { quoted: msg })
         } else {
-          CXD.sendMessage(
-            from,
-            fetch,
-            type
-          )
+          CXD.sendMessage(from, fetch, type)
         }
       } else if (type == 'video') {
         var fetch = global.buffer(url)
         if (replying == true) {
-          CXD.sendMessage(
-            from,
-            fetch,
-            type, {
-              quoted: msg
-            }
-          )
+          CXD.sendMessage(from, type, { quoted: msg })
         } else {
-          CXD.sendMessage(
-            from,
-            fetch,
-            type
-          )
+          CXD.sendMessage(from, fetch, type)
         }
       } else if (type == 'audio') {
         var fetch = global.buffer(url)
