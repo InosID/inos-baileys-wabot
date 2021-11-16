@@ -59,12 +59,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let groupName = isGroupMsg ? groupMetadata.subject : ''
     let groupId = isGroupMsg ? groupMetadata.jid : ''
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
-
-    /**
-     * Reply message
-     * @param {string} txt
-     */
-    global.reply = (from, txt) => {
+    CXD.reply = (from, txt) => {
       CXD.sendMessage(
         from,
         txt,
@@ -73,26 +68,14 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         }
       )
     }
-
-    /**
-     * Send text
-     * @param {string} txt
-     */
-    global.sendText = (from, txt) => {
+    CXD.sendText = (from, txt) => {
       CXD.sendMessage(
         from,
         txt,
         text
       )
     }
-
-    /**
-     * Send Image File
-     * @param {object} img
-     * @param {string} caption
-     * @param {boolean} replying
-     */
-    global.sendImage = (from, img, caption, replying) => {
+    CXD.sendImage = (from, img, caption, replying) => {
       if (replying = true) {
         CXD.sendMessage(
           from,
@@ -112,15 +95,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         )
       }
     }
-
-    /**
-     * Send file
-     * @param {object} file
-     * @param {string} type
-     * @param {string} captions
-     * @param {boolean} replying
-     */
-    global.sendFile = (from, file, type, captions, replying) => {
+    CXD.sendFile = (from, file, type, captions, replying) => {
       if (type == 'document') {
         if (replying == true) {
           CXD.sendMessage(
@@ -208,15 +183,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         }
       }
     }
-
-    /**
-     * Send file from url
-     * @param {string} url
-     * @param {string} type
-     * @param {string} captions
-     * @param {boolean} replying
-     */
-    global.sendFileFromUrl = (from, url, type, captions, replying) => {
+    CXD.sendFileFromUrl = (from, url, type, captions, replying) => {
       if (type == 'document') {
         var fetch = global.buffer(url)
         if (replying == true) {
@@ -236,9 +203,6 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         }
       }
     }
-    CXD.reply = global.reply
-    CXD.sendImage = global.sendImage
-    CXD.sendFile = global.sendFile
 
     global.pushname = CXD.contacts[sender] != undefined ? CXD.contacts[sender].vname || CXD.contacts[sender].notify : undefined
 
