@@ -88,7 +88,7 @@ Send image
 
 ```js
 let Baileys = require('@adiwajshing/baileys')
-let fs
+let fs = require('fs')
 
 // Get type from Baileys
 let { text, image } = Baileys.MessageType
