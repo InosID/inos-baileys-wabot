@@ -65,11 +65,30 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     CXD.sendText = (from, txt) => {
       CXD.sendMessage(from, txt, text)
     }
-    CXD.sendImage = (from, img, caption, replying) => {
-      if (replying = true) {
-        CXD.sendMessage(from, img, image, { caption: caption, quoted: msg })
+    CXD.sendImage = (from, img, captions, replying) => {
+      if (img.includes("https://")) {
+        try {
+          var fetch = global.buffer(url)
+          if (replying = true) {
+            CXD.sendMessage(from, fetch, image, { caption: captions, quoted: msg })
+          } else {
+            CXD.sendMessage(from, fetch, image, { caption: captions })
+          }
+        } catch(e) {
+          console.log(color("[ERROR]", "red"), e)
+          CXD.reply(from, "Error!")
+        }
       } else {
-        CXD.sendMessage(from, img, image, { caption: caption })
+        if (replying = true) {
+          try {
+            CXD.sendMessage(from, img, image, { caption: captions, quoted: msg })
+          } else {
+            CXD.sendMessage(from, img, image, { caption: captions })
+          } catch(e) {
+            console.log(color("[ERROR", "red"), e)
+            CXD.reply(from, "Error!")
+          }
+        }
       }
     }
     CXD.sendFile = (from, file, type, captions, replying) => {
