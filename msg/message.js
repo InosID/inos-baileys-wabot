@@ -99,7 +99,9 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         }
       } else if (type == 'gif') {
         if (replying == true) {
-          CXD.sendMessage(from, file, video, { mimetype: Baileys.Mimetype.gif,quoted: msg, caption: captions })
+          CXD.sendMessage(from, file, video, { mimetype: Baileys.Mimetype.gif, quoted: msg, caption: captions })
+        } else {
+          CXD.sendMessage(from, file, video, { mimetype: Baileys.Mimetype.gif, caption: captions })
         }
       } else {
         console.log(color("[ERROR] ", "red") + 'File Type ' + type + ' not found.')
@@ -130,8 +132,19 @@ module.exports = msgMain = (CXD = new conn, msg) => {
       } else if (type == 'audio') {
         var fetch = global.buffer(url)
         if (replying == true) {
-          CXD.sendMessage(from, fetch,
+          CXD.sendMessage(from, fetch, type, { mimetype: 'audio/mp4', quoted: msg })
+        } else {
+          CXD.sendMessage(from, fetch, type, { mimetype: 'audio/mp4' })
         }
+      } else if (type == 'gif') {
+        var fetch = global.buffer(url)
+        if (replying == true) {
+          CXD.sendMessage(from, fetch, video, { mimetype: Baileys.Mimetype.gif, quoted: msg, caption: captions })
+        } else {
+          CXD.sendMessage(from, fetch, video, { mimetype: Baileys.Mimetype.gif })
+        }
+      } else {
+        console.log(color("[ERROR] ", "red") + 'File Type ' + type + ' not found.')
       }
     }
 
