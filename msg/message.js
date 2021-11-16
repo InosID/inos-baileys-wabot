@@ -189,7 +189,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         if (replying == true) {
           CXD.sendMessage(
             from,
-            url,
+            fetch,
             type, {
               quoted: msg
             }
@@ -197,7 +197,41 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         } else {
           CXD.sendMessage(
             from,
-            url,
+            fetch,
+            type
+          )
+        }
+      } else if (type == 'image') {
+        var fetch = global.buffer(url)
+        if (replying == true) {
+          CXD.sendMessage(
+            from,
+            fetch,
+            type, {
+              quoted: msg
+            }
+          )
+        } else {
+          CXD.sendMessage(
+            from,
+            fetch,
+            type
+          )
+        }
+      } else if (type == 'video') {
+        var fetch = global.buffer(url)
+        if (replying == true) {
+          CXD.sendMessage(
+            from,
+            fetch,
+            type, {
+              quoted: msg
+            }
+          )
+        } else {
+          CXD.sendMessage(
+            from,
+            fetch,
             type
           )
         }
