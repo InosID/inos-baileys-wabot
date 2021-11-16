@@ -102,4 +102,9 @@ CXD.sendImage(from, locationImg, "This is caption.", false)
 // Send image with reply
 CXD.sendImage(from, locationImg, "This is caption.", true)
 // True means with reply
+
+// Send image in website
+let website = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKTvqbVbQdjSx7J6IvfQpk-8iNopG_Ox7UCg&usqp=CAU"
+
+CXD.sendImage(from, website, "This is caption.", false)
 ```
