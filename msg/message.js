@@ -60,114 +60,42 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let groupId = isGroupMsg ? groupMetadata.jid : ''
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
     CXD.reply = (from, txt) => {
-      CXD.sendMessage(
-        from,
-        txt,
-        text, {
-          quoted: msg
-        }
-      )
+      CXD.sendMessage(from, txt, text, { quoted: msg })
     }
     CXD.sendText = (from, txt) => {
-      CXD.sendMessage(
-        from,
-        txt,
-        text
-      )
+      CXD.sendMessage(from, txt, text)
     }
     CXD.sendImage = (from, img, caption, replying) => {
       if (replying = true) {
-        CXD.sendMessage(
-          from,
-          img,
-          image, {
-            caption: caption,
-            quoted: msg
-          }
-        )
+        CXD.sendMessage(from, img, image, { caption: caption, quoted: msg })
       } else {
-        CXD.sendMessage(
-          from,
-          img,
-          image, {
-            caption: caption
-          }
-        )
+        CXD.sendMessage(from, img, image, { caption: caption })
       }
     }
     CXD.sendFile = (from, file, type, captions, replying) => {
       if (type == 'document') {
         if (replying == true) {
-          CXD.sendMessage(
-            from,
-            file,
-            type, {
-              quoted: msg
-            }
-          )
+          CXD.sendMessage(from, file, type, { quoted: msg })
         } else {
-          CXD.sendMessage(
-            from,
-            file,
-            type
-          )
+          CXD.sendMessage(from, file, type)
         }
       } else if (type == 'image') {
         if (replying == true) {
-          CXD.sendMessage(
-            from,
-            file,
-            type, {
-              caption: captions,
-              quoted: msg
-            }
-          )
+          CXD.sendMessage(from, file, type, { caption: captions, quoted: msg })
         } else {
-          CXD.sendMessage(
-            from,
-            file,
-            type, {
-              caption: captions
-            }
-          )
+          CXD.sendMessage(from, file, type, { caption: captions })
         }
       } else if (type === 'video') {
         if (replying == true) {
-          CXD.sendMessage(
-            from,
-            file,
-            type, {
-              caption: captions,
-              quoted: msg
-            }
-          )
+          CXD.sendMessage(from, file, type, { caption: captions, quoted: msg })
         } else {
-          CXD.sendMessage(
-            from,
-            file,
-            type, {
-              caption: captions
-            }
-          )
+          CXD.sendMessage(from, file, type, { caption: captions })
         }
       } else if (type == 'audio') {
         if (replying == true) {
-          CXD.sendMessage(
-            from,
-            file,
-            type, {
-              mimetype: 'audio/mp4',
-              quoted: msg
-            }
-          )
+          CXD.sendMessage(from, file, type, { mimetype: 'audio/mp4', quoted: msg })
         } else {
-          CXD.sendMessage(
-            from,
-            file,
-            type, {
-              mimetype: 'audio/mp4',
-            }
-          )
+          CXD.sendMessage(from, file, type, { mimetype: 'audio/mp4', })
         }
       } else if (type == 'gif') {
         if (replying == true) {
@@ -234,6 +162,11 @@ module.exports = msgMain = (CXD = new conn, msg) => {
             fetch,
             type
           )
+        }
+      } else if (type == 'audio') {
+        var fetch = global.buffer(url)
+        if (replying == true) {
+          CXD.sendMessage(from, fetch,
         }
       }
     }
