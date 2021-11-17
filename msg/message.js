@@ -86,9 +86,8 @@ module.exports = msgMain = (CXD = new conn, msg) => {
             CXD.sendMessage(from, img, image, { caption: captions })
           }
         } catch(e) {
-            console.log(color("[ERROR", "red"), e)
-            CXD.reply(from, "Error!")
-          }
+          console.log(color("[ERROR", "red"), e)
+          CXD.reply(from, "Error!")
         }
       }
     }
