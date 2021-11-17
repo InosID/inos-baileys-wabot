@@ -1,7 +1,6 @@
 let Baileys = require('@adiwajshing/baileys')
 let conn = new Baileys.WAConnection()
 let fs = require('fs')
-let msgMain = require('./msg/message')
 let CFonts = require('cfonts')
 let figlet = require('figlet')
 let { color } = require('./lib/color')
@@ -30,19 +29,18 @@ async function start() {
     console.log(color('[SYSTEM] You have ' + Object.keys(conn.contacts).length + ' contacts', 'brown'))
   })
 }
-  /**
+/**
  * Uncache if there is file change
  * @param {string} module Module name or path
  * @param {function} cb <optional> 
  */
- function nocache(module, cb = () => { }) { 
-   console.log("‣ Module", `'${module}'`, "is now being watched for changes"); 
-   fs.watchFile(require.resolve(module), async () => { 
-     await uncache(require.resolve(module)); 
-     cb(module); 
-   }); 
- }
-
+function nocache(module, cb = () => { }) { 
+  console.log("‣ Module", `'${module}'`, "is now being watched for changes"); 
+  fs.watchFile(require.resolve(module), async () => { 
+    await uncache(require.resolve(module)); 
+    cb(module); 
+  }); 
+}
 
 /**
  * Uncache a module
@@ -53,17 +51,17 @@ function uncache(module = '.') {
     try {
       delete require.cache[require.resolve(module)];
       resolve();
-      } catch (e) {
-        reject(e);
-        }
-        });
-        }
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
 
 require('./msg/message.js');
 nocache('./msg/message.js', module => console.log(color(`message.js is now updated!`)));
 
-  conn.on('chat-update', async (message) => {
-    require('./msg/message.js')(conn, message);
-  })
+conn.on('chat-update', async (message) => {
+  require('./msg/message.js')(conn, message);
+})
 
 start()
