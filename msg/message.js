@@ -79,15 +79,15 @@ module.exports = msgMain = (CXD = new conn, msg) => {
           CXD.reply(from, "Error!")
         }
       } else {
-        if (replying = true) {
-          try {
+        try {
+          if (replying = true) {
             CXD.sendMessage(from, img, image, { caption: captions, quoted: msg })
           } else {
             CXD.sendMessage(from, img, image, { caption: captions })
-          } catch(e) {
-            console.log(color("[ERROR", "red"), e)
-            CXD.reply(from, "Error!")
           }
+        } catch(e) {
+          console.log(color("[ERROR", "red"), e)
+          CXD.reply(from, "Error!")
         }
       }
     }
