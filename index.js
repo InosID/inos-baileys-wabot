@@ -19,6 +19,10 @@ app.get('/favicon.ico',async(req,res)=>{
   res.end(buff,'binary')
 })
 
+let session_connect = [];
+let session_status = {};
+let session_pending = [];
+
 async function start() {
   console.log(color(figlet.textSync(`Cxd9Bot`, 'Larry 3D'), 'cyan'))
   CFonts.say(`Created By : ${package.author} Team!`, {
@@ -29,7 +33,14 @@ async function start() {
   conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
-  qrScan = true
+  conn.connectOptions.logQR = false
+  let qrScan = true
+  let isConnected = false
+  conn.browserDescription = [
+    '@waCloudBot',
+    'ubuntu',
+    '3.0'
+  ]
   conn.on('qr', async (buff) => {
     let buf = await qrcode.toDataURL(buff, { scale: 10 })
     buf = await buf.replace('data:image/png;base64,', "")
