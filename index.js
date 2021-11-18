@@ -8,6 +8,16 @@ let package = JSON.parse(fs.readFileSync('./package.json'))
 let express = require('express')
 let app = new express()
 
+app.get('/', (req, res) => res.status(200).send('CXD Client'))
+let PORT = process.env.PORT || 8080 || 5000 || 3000
+app.listen(PORT, () => {
+  console.log(color('Localhost is running!', 'yellow'))
+}
+app.get('/favicon.ico',async(req,res)=>{
+  buff = fs.readFileSync('./views/favicon.png')
+  res.end(buff,'binary')
+})
+
 async function start() {
   console.log(color(figlet.textSync(`Cxd9Bot`, 'Larry 3D'), 'cyan'))
   CFonts.say(`Created By : ${package.author} Team!`, {
@@ -15,13 +25,6 @@ async function start() {
     align: "center",
     gradient: ['yellow', 'yellow']
   })
-
-  app.get('/', (req, res) => res.status(200).send('CXD Client'))
-  let PORT = process.env.PORT || 8080 || 5000 || 3000
-  app.listen(PORT, () => {
-    console.log(color('Localhost is running!', 'yellow'))
-  }
-
   conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
