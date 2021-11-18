@@ -30,7 +30,7 @@ async function start() {
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
   qrScan = true
-  client.on('qr', async (buff) => {
+  conn.on('qr', async (buff) => {
     let buf = await qrcode.toDataURL(buff, { scale: 10 })
     buf = await buf.replace('data:image/png;base64,', "")
     buf = await new Buffer.from(buf, "base64")
