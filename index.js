@@ -8,7 +8,6 @@ let package = JSON.parse(fs.readFileSync('./package.json'))
 let express = require('express')
 let app = new express()
 let request = require('request')
-let qrcode = require('qrcode')
 
 app.get('/', (req, res) => res.status(200).send('CXD Client'))
 let PORT = process.env.PORT || 8080 || 5000 || 3000
