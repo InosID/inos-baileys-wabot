@@ -13,7 +13,7 @@ app.get('/', (req, res) => res.status(200).send('CXD Client'))
 let PORT = process.env.PORT || 8080 || 5000 || 3000
 app.listen(PORT, () => {
   console.log(color('Localhost is running!', 'yellow'))
-}
+})
 app.get('/favicon.ico',async(req,res)=>{
   buff = fs.readFileSync('./views/favicon.png')
   res.end(buff,'binary')
