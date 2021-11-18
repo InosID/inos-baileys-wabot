@@ -14,8 +14,9 @@
 <a href="https://github.com/CxD9-Teams/cxd9-bot"><img src="https://img.shields.io/github/repo-size/CxD9-Teams/cxd9-bot?label=Repo%20size&style=flat"></a>
 </p>
 
-- [x] **HEROKU APP**
+- [ ] **HEROKU APP**
 
+> Heroku deploy is still under development.
 **First download tools**, Click icon to download !
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/CxD9-Teams/cxd9-bot)
