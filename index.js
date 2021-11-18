@@ -29,8 +29,24 @@ async function start() {
   conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
-  conn.on('qr', () => {
-    console.log(color('[SYSTEM] Scan The QR Code!', 'yellow'))
+  qrScan = true
+  client.on('qr', async (buff) => {
+    let buf = await qrcode.toDataURL(buff, { scale: 10 })
+    buf = await buf.replace('data:image/png;base64,', "")
+    buf = await new Buffer.from(buf, "base64")
+    qr_sess[id_session] = await buf
+    session_status[id_session] = await "waiting scan qr"
+    if (qrScan) {
+      qrScan = false;
+      setTimeout(function() {
+        if (!isConnected) {
+	  conn.close()
+	  session_pending.splice(session_pending.lastIndexOf(id_session), 1)
+	  delete qr_sess[id_session]
+	  console.log('system time out')
+	}
+      }, 27*1000)
+    }
   })
   fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
   await conn.connect({timeoutMs: 30*1000})
