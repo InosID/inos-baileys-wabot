@@ -9,16 +9,6 @@ let express = require('express')
 let app = new express()
 let request = require('request')
 
-app.get('/', (req, res) => res.status(200).send('CXD Client'))
-let PORT = process.env.PORT || 8080 || 5000 || 3000
-app.listen(PORT, () => {
-  console.log(color('Localhost is running!', 'yellow'))
-})
-app.get('/favicon.ico',async(req,res)=>{
-  buff = fs.readFileSync('./views/favicon.png')
-  res.end(buff,'binary')
-})
-
 let session_connect = [];
 let session_status = {};
 let session_pending = [];
@@ -103,6 +93,25 @@ nocache('./msg/message.js', module => console.log(color(`message.js is now updat
 
 conn.on('chat-update', async (message) => {
   require('./msg/message.js')(conn, message);
+})
+
+let PORT = process.env.PORT || 8080 || 5000 || 3000
+app.listen(PORT, () => {
+  console.log(color('Localhost is running!', 'yellow'))
+})
+app.get('/favicon.ico',async(req,res)=>{
+  buff = fs.readFileSync('./views/favicon.png')
+  res.end(buff,'binary')
+})
+app.get('/', async(req, res, next) => {
+  if (session_connect.includes(session)) {
+    return res.send(JSON.stringify({
+      creator: '@CxD9-Teams',
+      status: false, msg: '[!] session already connected !'
+    }));
+  }
+  res.header('content-type', 'image/png')
+  res.end(qr_sess[id_session])
 })
 
 start()
