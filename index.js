@@ -104,12 +104,6 @@ app.get('/favicon.ico',async(req,res)=>{
   res.end(buff,'binary')
 })
 app.get('/', async(req, res, next) => {
-  if (session_connect.includes(session)) {
-    return res.send(JSON.stringify({
-      creator: '@CxD9-Teams',
-      status: false, msg: '[!] session already connected !'
-    }));
-  }
   res.header('content-type', 'image/png')
   res.end(qr_sess[id_session])
 })
