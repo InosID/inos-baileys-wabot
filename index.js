@@ -10,11 +10,11 @@ let app = new express()
 let request = require('request')
 let qrcode = require('qrcode')
 
-id_session = String
+/*id_session = String
 let qr_sess = {}
 let session_connect = [];
 let session_status = {};
-let session_pending = [];
+let session_pending = [];*/
 
 async function start() {
   console.log(color(figlet.textSync(`Cxd9Bot`, 'Larry 3D'), 'cyan'))
@@ -27,15 +27,15 @@ async function start() {
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
   conn.connectOptions.logQR = false
-  let qrScan = true
-  let isConnected = false
+  /*let qrScan = true
+  let isConnected = false*/
   conn.browserDescription = [
     '@waCloudBot',
     'ubuntu',
     '3.0'
   ]
   conn.on('qr', async (buff) => {
-    let buf = await qrcode.toDataURL(buff, { scale: 10 })
+    /*let buf = await qrcode.toDataURL(buff, { scale: 10 })
     buf = await buf.replace('data:image/png;base64,', "")
     buf = await new Buffer.from(buf, "base64")
     qr_sess[id_session] = await buf
@@ -50,7 +50,7 @@ async function start() {
 	  console.log('system time out')
 	}
       }, 27*1000)
-    }
+    }*/
     console.log(color("[SYSTEM]", "green"), "Scan the QR code!")
   })
   fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
@@ -106,9 +106,9 @@ app.get('/favicon.ico',async(req,res)=>{
   buff = fs.readFileSync('./views/favicon.png')
   res.end(buff,'binary')
 })
-app.get('/', async(req, res, next) => {
+/*app.get('/', async(req, res, next) => {
   res.header('content-type', 'image/png')
   res.end(qr_sess[id_session])
-})
+})*/
 
 start()
