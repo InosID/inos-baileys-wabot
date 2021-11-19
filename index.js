@@ -31,7 +31,6 @@ async function start() {
   conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
-  conn.connectOptions.logQR = false
   conn.on('qr', () => {
     console.log(color("[SYSTEM]", "green"), "Scan the QR code!")
   })
