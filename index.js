@@ -10,6 +10,7 @@ let app = new express()
 let request = require('request')
 let qrcode = require('qrcode')
 
+id_session = String
 let qr_sess = {}
 let session_connect = [];
 let session_status = {};
