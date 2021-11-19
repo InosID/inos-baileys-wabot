@@ -8,13 +8,12 @@ let package = JSON.parse(fs.readFileSync('./package.json'))
 let express = require('express')
 let app = new express()
 let request = require('request')
-let qrcode = require('qrcode')
 
-id_session = String
+/*id_session = String
 let qr_sess = {}
 let session_connect = []
 let session_status = {}
-let session_pending = []
+let session_pending = []*/
 
 app.get('/', (req, res) => res.status(200).send('Cxd Client'))
 let PORT = process.env.PORT || 8080 || 5000 || 3000
@@ -33,8 +32,6 @@ async function start() {
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
   conn.connectOptions.logQR = false
-  /*let qrScan = true
-  let isConnected = false*/
   conn.on('qr', () => {
     console.log(color("[SYSTEM]", "green"), "Scan the QR code!")
   })
@@ -68,24 +65,19 @@ function nocache(module, cb = () => { }) {
 function uncache(module = '.') {
   return new Promise((resolve, reject) => {
     try {
-      delete require.cache[require.resolve(module)];
-      resolve();
+      delete require.cache[require.resolve(module)]
+      resolve()
     } catch (e) {
-      reject(e);
+      reject(e)
     }
   });
 }
 
-require('./msg/message.js');
-nocache('./msg/message.js', module => console.log(color(`message.js is now updated!`)));
+start()
+
+require('./msg/message.js')
+nocache('./msg/message.js', module => console.log(color(`message.js is now updated!`)))
 
 conn.on('chat-update', async (message) => {
-  require('./msg/message.js')(conn, message);
+  require('./msg/message.js')(conn, message)
 })
-
-app.get('/favicon.ico',async(req,res)=>{
-  buff = fs.readFileSync('./views/favicon.png')
-  res.end(buff,'binary')
-})
-
-start()
