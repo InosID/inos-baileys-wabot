@@ -10,6 +10,7 @@ let app = new express()
 let request = require('request')
 let qrcode = require('qrcode')
 
+let qr_sess = {}
 let session_connect = [];
 let session_status = {};
 let session_pending = [];
@@ -39,7 +40,7 @@ async function start() {
     qr_sess[id_session] = await buf
     session_status[id_session] = await "waiting scan qr"
     if (qrScan) {
-      qrScan = false;
+      qrScan = false
       setTimeout(function() {
         if (!isConnected) {
 	  conn.close()
