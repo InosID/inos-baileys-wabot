@@ -33,30 +33,9 @@ async function start() {
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
   conn.connectOptions.logQR = false
-  let qrScan = true
-  let isConnected = false
-  conn.browserDescription = [
-    '@waCloudBot',
-    'ubuntu',
-    '3.0'
-  ]
-  conn.on('qr', async (buff) => {
-    let buf = await qrcode.toDataURL(buff, { scale: 10 })
-    buf = await buf.replace('data:image/png;base64,', "")
-    buf = await new Buffer.from(buf, "base64")
-    qr_sess[id_session] = await buf
-    session_status[id_session] = await "waiting scan qr"
-    if (qrScan) {
-      qrScan = false
-      setTimeout(function() {
-        if (!isConnected) {
-	  conn.close()
-	  session_pending.splice(session_pending.lastIndexOf(id_session), 1)
-	  delete qr_sess[id_session]
-	  console.log('system time out')
-	}
-      }, 27*1000)
-    }
+  /*let qrScan = true
+  let isConnected = false*/
+  conn.on('qr', () => {
     console.log(color("[SYSTEM]", "green"), "Scan the QR code!")
   })
   fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
@@ -104,17 +83,9 @@ conn.on('chat-update', async (message) => {
   require('./msg/message.js')(conn, message);
 })
 
-/*let PORT = process.env.PORT || 8080 || 5000 || 3000
-app.listen(PORT, () => {
-  console.log(color('Localhost is running!', 'yellow'))
-})*/
 app.get('/favicon.ico',async(req,res)=>{
   buff = fs.readFileSync('./views/favicon.png')
   res.end(buff,'binary')
 })
-/*app.get('/', async(req, res, next) => {
-  res.header('content-type', 'image/png')
-  res.end(qr_sess[id_session])
-})*/
 
 start()
