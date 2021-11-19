@@ -40,8 +40,8 @@ async function start() {
     'ubuntu',
     '3.0'
   ]
-  conn.on('qr', () => {
-    /*let buf = await qrcode.toDataURL(buff, { scale: 10 })
+  conn.on('qr', async (buff) => {
+    let buf = await qrcode.toDataURL(buff, { scale: 10 })
     buf = await buf.replace('data:image/png;base64,', "")
     buf = await new Buffer.from(buf, "base64")
     qr_sess[id_session] = await buf
@@ -56,7 +56,7 @@ async function start() {
 	  console.log('system time out')
 	}
       }, 27*1000)
-    }*/
+    }
     console.log(color("[SYSTEM]", "green"), "Scan the QR code!")
   })
   fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
