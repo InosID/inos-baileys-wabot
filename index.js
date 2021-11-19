@@ -33,8 +33,8 @@ async function start() {
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
   conn.connectOptions.logQR = false
-  /*let qrScan = true
-  let isConnected = false*/
+  let qrScan = true
+  let isConnected = false
   conn.browserDescription = [
     '@waCloudBot',
     'ubuntu',
