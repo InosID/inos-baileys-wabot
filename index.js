@@ -8,14 +8,11 @@ let package = JSON.parse(fs.readFileSync('./package.json'))
 let express = require('express')
 let app = new express()
 let request = require('request')
+let qrcode = require('qrcode')
 
-/*id_session = String
-let qr_sess = {}
-let session_connect = []
-let session_status = {}
-let session_pending = []*/
+let qrimage = ""
 
-app.get('/', (req, res) => res.status(200).send('Cxd Client'))
+//app.get('/', (req, res) => res.status(200).send('Cxd Client'))
 let PORT = process.env.PORT || 8080 || 5000 || 3000
 app.listen(PORT, () => {
   console.log(color('Localhost is running!', 'yellow'))
@@ -31,7 +28,12 @@ async function start() {
   conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
-  conn.on('qr', () => {
+  conn.on('qr', async (qr) => {
+    let qrweb = await qrcode.toDataUrl(buff, {
+      scale: 20
+    }).replace('data:image/png;base64,', "")
+    qrweb = await new Buffer.from(qrweb, "base64")
+    qrimage = qrweb
     console.log(color("[SYSTEM]", "green"), "Scan the QR code!")
   })
   fs.existsSync('./sessions.json') && conn.loadAuthInfo('./sessions.json')
@@ -71,6 +73,11 @@ function uncache(module = '.') {
     }
   });
 }
+
+app.get("/", async(req, res) => {
+  res.header('content-type', 'image/png')
+  res.end(qrimage)
+})
 
 start()
 
