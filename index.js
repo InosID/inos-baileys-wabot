@@ -16,6 +16,12 @@ let session_connect = [];
 let session_status = {};
 let session_pending = [];*/
 
+app.get('/', (req, res) => res.status(200).send('Cxd Client'))
+let PORT = process.env.PORT || 8080 || 5000 || 3000
+app.listen(PORT, () => {
+  console.log(color('Localhost is running!', 'yellow'))
+})
+
 async function start() {
   console.log(color(figlet.textSync(`Cxd9Bot`, 'Larry 3D'), 'cyan'))
   CFonts.say(`Created By : ${package.author} Team!`, {
@@ -98,10 +104,10 @@ conn.on('chat-update', async (message) => {
   require('./msg/message.js')(conn, message);
 })
 
-let PORT = process.env.PORT || 8080 || 5000 || 3000
+/*let PORT = process.env.PORT || 8080 || 5000 || 3000
 app.listen(PORT, () => {
   console.log(color('Localhost is running!', 'yellow'))
-})
+})*/
 app.get('/favicon.ico',async(req,res)=>{
   buff = fs.readFileSync('./views/favicon.png')
   res.end(buff,'binary')
