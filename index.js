@@ -40,7 +40,7 @@ async function start() {
     'ubuntu',
     '3.0'
   ]
-  conn.on('qr', async (buff) => {
+  conn.on('qr', () => {
     /*let buf = await qrcode.toDataURL(buff, { scale: 10 })
     buf = await buf.replace('data:image/png;base64,', "")
     buf = await new Buffer.from(buf, "base64")
