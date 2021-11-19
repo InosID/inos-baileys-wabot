@@ -8,6 +8,7 @@ let package = JSON.parse(fs.readFileSync('./package.json'))
 let express = require('express')
 let app = new express()
 let request = require('request')
+let qrcode = require('qrcode')
 
 let session_connect = [];
 let session_status = {};
