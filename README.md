@@ -14,13 +14,16 @@
 <a href="https://github.com/CxD9-Teams/cxd9-bot"><img src="https://img.shields.io/github/repo-size/CxD9-Teams/cxd9-bot?label=Repo%20size&style=flat"></a>
 </p>
 
-- [ ] **HEROKU APP**
+- [x] **HEROKU APP**
 
-> Heroku deploy beta.
+> Heroku Deploy Beta
 
 **First download tools**, Click icon to download !
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/CxD9-Teams/cxd9-bot)
+
+Then click view web.
+After that, scan the qr, Done.
 
 - [x] **RDP/VPS USER**
 
@@ -65,7 +68,8 @@ the second step is to just change the number of the owner of the bot and finally
 --------|--------|--------|
 [![Fxc7](https://github.com/fxc7.png)](https://github.com/fxc7) | [![Hadi-Api](https://github.com/hadi-api.png)](https://github.com/hadi-api) | [![Hansalrl](https://github.com/Hansalrl.png)](https://github.com/Hansalrl)
 [![Finox999](https://github.com/Finox999.png)](https://github.com/Finox999) | [![Fauzy-Rahadian](https://github.com/fauzy-rahadian.png)](https://github.com/Fauzy-Rahadian) | [![Arifi Razzaq](https://github.com/arifirazzaq2001.png)](https://github.com/arifirazzaq2001)
-[![Caliph91](https://github.com/Caliph91.png)](https:github.com/caliph) | [![AffisJunianto](https://github.com/affisjunianto.png)](https://github.com/affisjunianto) | [![ManuriosX](https://github.com/ManuriosX.png)](https://github.com/ManuriosX) | [![Ahmadzakix](https://github.com/Ahmadzakix.png)](https://github.com/Ahmadzakix)
+[![Caliph91](https://github.com/Caliph91.png)](https:github.com/caliph) | [![AffisJunianto](https://github.com/affisjunianto.png)](https://github.com/affisjunianto) | [![ManuriosX](https://github.com/ManuriosX.png)](https://github.com/ManuriosX)
+ㅤㅤ| [![Ahmadzakix](https://github.com/Ahmadzakix.png)](https://github.com/Ahmadzakix) |ㅤㅤ
 
 ## Send Message
 
