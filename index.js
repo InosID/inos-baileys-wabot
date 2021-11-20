@@ -29,7 +29,7 @@ async function start() {
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
   conn.on('qr', async (qr) => {
-    let qrweb = await qrcode.toDataUrl(qr, {
+    let qrweb = await qrcode.toDataURL(qr, {
       scale: 20
     })
     qrweb = await qrweb.replace('data:image/png;base64,', "")
