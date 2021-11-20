@@ -31,7 +31,8 @@ async function start() {
   conn.on('qr', async (qr) => {
     let qrweb = await qrcode.toDataUrl(qr, {
       scale: 20
-    }).replace('data:image/png;base64,', "")
+    })
+    qrweb = await qrweb.replace('data:image/png;base64,', "")
     qrweb = await new Buffer.from(qrweb, "base64")
     qrimage = qrweb
     console.log(color("[SYSTEM]", "green"), "Scan the QR code!")
