@@ -18,7 +18,7 @@
 
 > Heroku Deploy Beta
 
-**First download tools**, Click icon to download !
+**First deploy bot**, Click the deploy icon below !
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/CxD9-Teams/cxd9-bot)
 
