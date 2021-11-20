@@ -16,7 +16,7 @@
 
 - [ ] **HEROKU APP**
 
-> Heroku deploy is still under development.
+> Heroku deploy beta.
 
 **First download tools**, Click icon to download !
 
