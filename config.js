@@ -3,5 +3,4 @@ global.messConf = {
   prefix: "!"
 }
 
-// Change language text here.
-language = 'ind'
+global.language = 'ind'
