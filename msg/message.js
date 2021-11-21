@@ -11,6 +11,12 @@ let { gempa } = require('./command/information/gempa')
 
 require('./../config')
 
+if (language == 'ind') {
+  mess = ind
+} else if (language == 'eng') {
+  mess = eng
+}
+
 module.exports = msgMain = (CXD = new conn, msg) => {
   try {
     if (!msg.hasNewMessage) return
