@@ -25,6 +25,37 @@ async function start() {
     align: "center",
     gradient: ['yellow', 'yellow']
   })
+  /**
+   * Uncache if there is file change
+   * @param {string} module Module name or path
+   * @param {function} cb <optional>
+   */
+  function nocache(module, cb = () => { }) {
+    console.log("‣ Module", `'${module}'`, "is now being watched for changes")
+    fs.watchFile(require.resolve(module), async () => {
+      await uncache(require.resolve(module))
+      cb(module)
+    })
+  }
+
+  /**
+   * Uncache a module
+   * @param {string} module Module name or path
+   */
+  function uncache(module = '.') {
+    return new Promise((resolve, reject) => {
+      try {
+        delete require.cache[require.resolve(module)]
+        resolve()
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+  require('./msg/message.js')
+  nocache('./msg/message.js', module => console.log(color(`message.js is now updated!`)))
+
   conn.autoReconnect = Baileys.ReconnectMode.onConnectionLost
   conn.version = [2, 2140, 6]
   conn.logger.level = 'warn'
@@ -46,33 +77,9 @@ async function start() {
   conn.on('contacts-received', () => {
     console.log(color('[SYSTEM] You have ' + Object.keys(conn.contacts).length + ' contacts', 'brown'))
   })
-}
-/**
- * Uncache if there is file change
- * @param {string} module Module name or path
- * @param {function} cb <optional> 
- */
-function nocache(module, cb = () => { }) { 
-  console.log("‣ Module", `'${module}'`, "is now being watched for changes"); 
-  fs.watchFile(require.resolve(module), async () => { 
-    await uncache(require.resolve(module)); 
-    cb(module); 
-  }); 
-}
-
-/**
- * Uncache a module
- * @param {string} module Module name or path
- */
-function uncache(module = '.') {
-  return new Promise((resolve, reject) => {
-    try {
-      delete require.cache[require.resolve(module)]
-      resolve()
-    } catch (e) {
-      reject(e)
-    }
-  });
+  conn.on('chat-update', async (message) => {
+    require('./msg/message.js')(conn, message)
+  })
 }
 
 app.get("/", async(req, res) => {
@@ -81,10 +88,3 @@ app.get("/", async(req, res) => {
 })
 
 start()
-
-require('./msg/message.js')
-nocache('./msg/message.js', module => console.log(color(`message.js is now updated!`)))
-
-conn.on('chat-update', async (message) => {
-  require('./msg/message.js')(conn, message)
-})
