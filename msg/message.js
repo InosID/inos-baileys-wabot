@@ -8,7 +8,7 @@ let { color } = require('./../lib/color')
 let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
 let { help } = require('./../lib/help')
 let { gempa } = require('./command/information/gempa')
-
+let { ind, eng } = require('./language')
 require('./../config')
 
 if (language == 'ind') {
