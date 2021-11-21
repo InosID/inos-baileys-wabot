@@ -4,6 +4,4 @@ global.messConf = {
 }
 
 // Change language text here.
-mess = {
-  wait: "[⏳] Tunggu sebentar..."
-}
+language = 'ind'
