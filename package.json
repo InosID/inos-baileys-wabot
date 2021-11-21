@@ -23,7 +23,7 @@
   "author": "CxD9Team",
   "license": "ISC",
   "dependencies": {
-    "@adiwajshing/baileys": "^3.5.2",
+    "@adiwajshing/baileys": "^3.5.3",
     "axios": "^0.21.1",
     "cfonts": "^2.10.0",
     "chalk": "^4.1.2",
