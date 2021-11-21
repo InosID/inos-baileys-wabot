@@ -69,7 +69,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     CXD.sendText = (from, txt) => {
       CXD.sendMessage(from, txt, text)
     }
-    CXD.sendImage = (from, img, captions, replying) => {
+    CXD.sendImage = async (from, img, captions, replying) => {
       if (img.includes("https://")) {
         try {
           var fetch = await global.buffer(img)
@@ -131,37 +131,37 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         console.log(color("[ERROR] ", "red") + 'File Type ' + type + ' not found.')
       }
     }
-    CXD.sendFileFromUrl = (from, url, type, captions, replying) => {
+    CXD.sendFileFromUrl = async (from, url, type, captions, replying) => {
       if (type == 'document') {
-        var fetch = global.buffer(url)
+        var fetch = await global.buffer(url)
         if (replying == true) {
           CXD.sendMessage(from, fetch, type, { quoted: msg })
         } else {
           CXD.sendMessage(from, fetch, type)
         }
       } else if (type == 'image') {
-        var fetch = global.buffer(url)
+        var fetch = await global.buffer(url)
         if (replying == true) {
           CXD.sendMessage(from, fetch, type, { quoted: msg })
         } else {
           CXD.sendMessage(from, fetch, type)
         }
       } else if (type == 'video') {
-        var fetch = global.buffer(url)
+        var fetch = await global.buffer(url)
         if (replying == true) {
           CXD.sendMessage(from, type, { quoted: msg })
         } else {
           CXD.sendMessage(from, fetch, type)
         }
       } else if (type == 'audio') {
-        var fetch = global.buffer(url)
+        var fetch = await global.buffer(url)
         if (replying == true) {
           CXD.sendMessage(from, fetch, type, { mimetype: 'audio/mp4', quoted: msg })
         } else {
           CXD.sendMessage(from, fetch, type, { mimetype: 'audio/mp4' })
         }
       } else if (type == 'gif') {
-        var fetch = global.buffer(url)
+        var fetch = await global.buffer(url)
         if (replying == true) {
           CXD.sendMessage(from, fetch, video, { mimetype: Baileys.Mimetype.gif, quoted: msg, caption: captions })
         } else {
