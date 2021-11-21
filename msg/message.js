@@ -186,7 +186,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         CXD.reply(from, help(prefix))
       break
       case prefix + 'infogempa':
-        require('./command/gempa')
+        require('./command/information/gempa')
         gempa()
           .then(async (res) => {
             CXD.sendImage(from, res.thumbnail, `╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, true)
