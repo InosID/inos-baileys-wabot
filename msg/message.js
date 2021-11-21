@@ -7,7 +7,7 @@ let fetcher = require('./../lib/fetcher')
 let { color } = require('./../lib/color')
 let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
 let { help } = require('./../lib/help')
-
+let { gempa } = require('./command/information/gempa')
 require('./../config')
 
 module.exports = msgMain = (CXD = new conn, msg) => {
@@ -186,7 +186,6 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         CXD.reply(from, help(prefix))
       break
       case prefix + 'infogempa':
-        require('./command/information/gempa')
         gempa()
           .then(async (res) => {
             CXD.sendImage(from, res.thumbnail, `╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, true)
