@@ -6,6 +6,7 @@ let get = require('got')
 let fetcher = require('./../lib/fetcher')
 let { color } = require('./../lib/color')
 let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
+let { help } = require('./../lib/help')
 
 require('./../config')
 
@@ -59,6 +60,9 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let groupName = isGroupMsg ? groupMetadata.subject : ''
     let groupId = isGroupMsg ? groupMetadata.jid : ''
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
+
+    global.buffer = fetcher.getBuffer
+
     CXD.reply = (from, txt) => {
       CXD.sendMessage(from, txt, text, { quoted: msg })
     }
@@ -68,7 +72,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     CXD.sendImage = (from, img, captions, replying) => {
       if (img.includes("https://")) {
         try {
-          var fetch = global.buffer(url)
+          var fetch = await global.buffer(img)
           if (replying = true) {
             CXD.sendMessage(from, fetch, image, { caption: captions, quoted: msg })
           } else {
@@ -80,10 +84,11 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         }
       } else {
         try {
+          var fetch = await global.buffer(img)
           if (replying = true) {
-            CXD.sendMessage(from, img, image, { caption: captions, quoted: msg })
+            CXD.sendMessage(from, fetch, image, { caption: captions, quoted: msg })
           } else {
-            CXD.sendMessage(from, img, image, { caption: captions })
+            CXD.sendMessage(from, fetch, image, { caption: captions })
           }
         } catch(e) {
           console.log(color("[ERROR", "red"), e)
@@ -177,8 +182,15 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     if (isCmd && isGroupMsg) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     if (!isGroupMsg && isCmd) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     switch(body) {
-      case prefix + 'p':
-        CXD.reply(from, 'Test')
+      case prefix + 'menu':
+        CXD.reply(from, help(prefix))
+      break
+      case prefix + 'infogempa':
+        require('./command/gempa')
+        gempa()
+          .then(async (res) => {
+            //CXD.sendImage(from, res.thumbnail, 
+          })
       break
     }
   } catch(err) {
