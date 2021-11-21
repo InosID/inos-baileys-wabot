@@ -5,5 +5,5 @@ global.messConf = {
 
 // Change language text here.
 mess = {
-  wait: "Tunggu sebentar..."
+  wait: "[⏳] Tunggu ± 1 menit."
 }
