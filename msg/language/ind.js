@@ -19,3 +19,16 @@ exports.needLink = () => {
   return
    `[❕] Parameter link tidak ditemukan.`
 }
+
+// Result
+exports.yt3res = (title, quality, type, size) => {
+  return
+`
+╭﹝🅈🅃🄼🄿③﹞
+├ Judul : ${title}
+├ Kualitas : ${quality}
+├ Tipe : ${type}
+├ Ukuran : ${size}
+╰────────
+`
+}
