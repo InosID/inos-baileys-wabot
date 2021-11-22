@@ -23,6 +23,8 @@ let {
   nsfwanime
 } = require('./command/anime')
 
+let { ytmp3 } = require('./command/downloader')
+
 require('./../config')
 
 if (language == 'ind') {
@@ -246,6 +248,9 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             CXD.sendImage(from, res.image, null, true)
           })
       break
+      /*case 'ytmp3':
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+      break*/
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
