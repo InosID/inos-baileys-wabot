@@ -1,5 +1,5 @@
 /**
- * InfoGempa Scraper By @CxD9-Teams
+ * InfoGempa Scraper By @Fxc7
  */
 let axios = require('axios')
 let cheerio = require('cheerio')
