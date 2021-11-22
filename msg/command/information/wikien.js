@@ -1,3 +1,6 @@
+/**
+ * WikiEN Scraper By @CxD9-Teams
+ */
 let axios = require('axios')
 let cheerio = require('cheerio')
 
