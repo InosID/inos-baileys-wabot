@@ -19,3 +19,14 @@ exports.needLink = () => {
   return
     `[❕] The link parameter was not found.`
 }
+exports.yt3res = (title, quality, type, size) => {
+  return
+`
+╭﹝🅈🅃🄼🄿③﹞
+├ Title : ${title}
+├ Quality : ${quality}
+├ Type : ${type}
+├ Size : ${size}
+╰────────
+`
+}
