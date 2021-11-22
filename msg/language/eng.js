@@ -19,6 +19,8 @@ exports.needLink = () => {
   return
     `[❕] The link parameter was not found.`
 }
+
+// Result
 exports.yt3res = (title, quality, type, size) => {
   return
 `
