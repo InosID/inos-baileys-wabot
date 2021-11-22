@@ -56,6 +56,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let prefix = global.messConf.prefix[0]
     body = type === 'listResponseMessage' && msg.message.listResponseMessage.title ? msg.message.listResponseMessage.title: type == 'buttonsResponseMessage' && msg.message.buttonsResponseMessage.selectedButtonId ? msg.message.buttonsResponseMessage.selectedButtonId: type == "conversation" && msg.message.conversation.startsWith(prefix) ? msg.message.conversation: type == "imageMessage" && msg.message.imageMessage.caption.startsWith(prefix) ? msg.message.imageMessage.caption: type == "videoMessage" && msg.message.videoMessage.caption.startsWith(prefix) ? msg.message.videoMessage.caption: type == "extendedTextMessage" && msg.message.extendedTextMessage.text.startsWith(prefix) ? msg.message.extendedTextMessage.text: ""
     let chats = (type === 'conversation') ? msg.message.conversation: (type === 'extendedTextMessage') ? msg.message.extendedTextMessage.text: ''
+    let command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
     listbut = (type == 'listResponseMessage') ? msg.message.listResponseMessage.title: ''
     let args = body.trim().split(/ +/).slice(1)
     let isCmd = body.startsWith(prefix)
@@ -188,11 +189,11 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let isQuotedSticker = type === "extendedTextMessage" && content.includes("stickerMessage")
     if (isCmd && isGroupMsg) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     if (!isGroupMsg && isCmd) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
-    switch(body) {
-      case prefix + 'menu':
+    switch(command) {
+      case 'menu':
         CXD.reply(from, help(prefix))
       break
-      case prefix + 'infogempa':
+      case 'infogempa':
         CXD.reply(from, mess.wait)
         gempa()
           .then(async (res) => {
