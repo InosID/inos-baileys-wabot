@@ -201,6 +201,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         })
       break
       case 'wiki':
+        if (args.length < 1) return await CXD.reply(from, mess.needQuery())
         CXD.reply(from, mess.wait())
         wikiInd.wikiID(q)
           .then(async (res) {
@@ -208,6 +209,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
           })
       break
       case 'wikien':
+        if (args.length < 1) return await CXD.reply(from, mess.needQuery())
         CXD.reply(from, mess.wait())
         wikiEng.wikiEN(q)
           .then(async (res) {
