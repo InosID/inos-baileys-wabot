@@ -197,6 +197,10 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       }
     }
 
+    let isUrl = (url) => {
+      return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
+    }
+
     global.pushname = CXD.contacts[sender] != undefined ? CXD.contacts[sender].vname || CXD.contacts[sender].notify : undefined
 
     let isMedia = type === "imageMessage" || type === "videoMessage"
@@ -249,7 +253,16 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           })
       break
       /*case 'ytmp3':
-        if (args.length < 1) return CXD.reply(mess.needQuery())
+        if (args.length < 1) return CXD.reply(mess.needLink())
+        if (!isUrl(args[0]) && !args[0].includes('youtu')) return CXD.reply(mess.invalidLink())
+        CXD.reply(mess.wait())
+        ytmp3.ytdl3(q).then(async (res) => {
+          var title = res[0].judul
+          var quality = res[0].quality
+          var type = res[0].tipe
+          var size = res[0].size
+          cxd.sendImage(from, res[0].thumb, mess.yt3res(title, quality, type, size), true)
+        })
       break*/
     }
   } catch(err) {
