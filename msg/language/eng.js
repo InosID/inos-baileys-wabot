@@ -15,3 +15,7 @@ exports.needQuery = () => {
   return
     `[❕] Query parameters not found.`
 }
+exports.needLink = () => {
+  return
+    `[❕] The link parameter was not found.`
+}
