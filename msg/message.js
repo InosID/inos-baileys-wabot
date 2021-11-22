@@ -7,8 +7,18 @@ let fetcher = require('./../lib/fetcher')
 let { color } = require('./../lib/color')
 let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
 let { help } = require('./../lib/help')
-let { gempa, wikiInd, wikiEng } = require('./command/information')
+
+let {
+  gempa,
+  wikiInd,
+  wikiEng
+} = require('./command/information')
 let { ind, eng } = require('./language')
+
+let {
+  nekonime,
+  nsfwanime
+} = require('./command/anime')
 require('./../config')
 
 if (language == 'ind') {
@@ -214,6 +224,12 @@ module.exports = msgMain = (CXD = new conn, msg) => {
         wikiEng.wikiEN(q)
           .then(async (res) {
             CXD.reply(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`)
+          })
+      break
+      case 'nekonime':
+        nekonime.neko()
+          .then(async (res) => {
+            CXD.sendImage(from, res.image, null, true)
           })
       break
     }
