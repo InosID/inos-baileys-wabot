@@ -1,5 +1,5 @@
 /**
- * WikiID scraper by @CxD9-Teams
+ * WikiID scraper by @Fxc7
  */
 let axios = require('axios')
 let cheerio = require('cheerio')
