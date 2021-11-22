@@ -9,3 +9,9 @@ exports.notAllowed = () => {
   return
     `[❕] Perintah ini tidak diizinkan oleh owner.`
 }
+
+// Require
+exports.needQuery = () => {
+  return
+    `[❕] Parameter query tidak ditemukan.`
+}
