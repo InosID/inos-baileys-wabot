@@ -4,3 +4,6 @@ global.messConf = {
 }
 
 global.language = 'ind'
+allow = {
+  nsfw: true
+}
