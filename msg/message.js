@@ -81,7 +81,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
 
     global.buffer = fetcher.getBuffer
 
-    CXD.reply = (from, txt) => {
+    CXD.reply = (txt) => {
       CXD.sendMessage(from, txt, text, { quoted: msg })
     }
     CXD.sendText = (from, txt) => {
@@ -201,37 +201,45 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     if (!isGroupMsg && isCmd) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     switch(command) {
       case 'menu':
-        CXD.reply(from, help(prefix))
+        CXD.reply(help(prefix))
       break
       case 'infogempa':
-        CXD.reply(from, mess.wait)
+        CXD.reply(mess.wait)
         gempa.gempa()
           .then(async (res) => {
             CXD.sendImage(from, res.thumbnail, `╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, true)
         })
       break
       case 'wiki':
-        if (args.length < 1) return await CXD.reply(from, mess.needQuery())
-        CXD.reply(from, mess.wait())
+        if (args.length < 1) return await CXD.reply(mess.needQuery())
+        CXD.reply(mess.wait())
         wikiInd.wikiID(q)
           .then(async (res) {
-            CXD.reply(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Judul : ${res.title}\n├ URL : ${res.url}\n├ Penerbit : ${res.publisher}\n├ Tanggal Diterbitkan : ${res.datePublished}\n├ Konteks : ${res.context}\n╰────────`)
+            CXD.reply(`╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Judul : ${res.title}\n├ URL : ${res.url}\n├ Penerbit : ${res.publisher}\n├ Tanggal Diterbitkan : ${res.datePublished}\n├ Konteks : ${res.context}\n╰────────`)
           })
       break
       case 'wikien':
-        if (args.length < 1) return await CXD.reply(from, mess.needQuery())
-        CXD.reply(from, mess.wait())
+        if (args.length < 1) return await CXD.reply(mess.needQuery())
+        CXD.reply(mess.wait())
         wikiEng.wikiEN(q)
           .then(async (res) {
-            CXD.reply(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`)
+            CXD.reply(`╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`)
           })
       break
       case 'nekonime':
+        CXD.reply(mess.wait())
         nekonime.neko()
           .then(async (res) => {
             CXD.sendImage(from, res.image, null, true)
           })
       break
+      /*case 'nsfwanime':
+        CXD.reply(mess.wait())
+        nsfwanime.nsfwanime()
+          .then(async (res) => {
+            CXD.sendImage(from, res.image, null, true)
+          })
+      break*/
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
