@@ -3,10 +3,13 @@ let fs = require('fs')
 let axios = require('axios')
 let get = require('got')
 
-let fetcher = require('./../lib/fetcher')
-let { color } = require('./../lib/color')
-let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
 let { help } = require('./../lib/help')
+let { color } = require('./../lib/color')
+let fetcher = require('./../lib/fetcher')
+
+let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
+let nsfw = JSON.parse(fs.readFileSync('./database/nsfw.json'))
+let sfw = JSON.parse(fs.readFileSync('./database/sfw.json'))
 
 let {
   gempa,
@@ -19,6 +22,7 @@ let {
   nekonime,
   nsfwanime
 } = require('./command/anime')
+
 require('./../config')
 
 if (language == 'ind') {
@@ -78,6 +82,7 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let groupName = isGroupMsg ? groupMetadata.subject : ''
     let groupId = isGroupMsg ? groupMetadata.jid : ''
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
+    let isNsfw = isGroupMsg ? nsfw.includes(groupId)
 
     global.buffer = fetcher.getBuffer
 
