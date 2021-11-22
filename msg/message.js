@@ -140,9 +140,9 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         }
       } else if (type == 'audio') {
         if (replying == true) {
-          CXD.sendMessage(from, file, type, { mimetype: 'audio/mp4', quoted: msg })
+          CXD.sendMessage(from, file, type, { mimetype: Baileys.Mimetype.mp4Audio, quoted: msg })
         } else {
-          CXD.sendMessage(from, file, type, { mimetype: 'audio/mp4', })
+          CXD.sendMessage(from, file, type, { mimetype: Baileys.Mimetype.mp4Audio, })
         }
       } else if (type == 'gif') {
         if (replying == true) {
@@ -179,9 +179,9 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       } else if (type == 'audio') {
         var fetch = await global.buffer(url)
         if (replying == true) {
-          CXD.sendMessage(from, fetch, type, { mimetype: 'audio/mp4', quoted: msg })
+          CXD.sendMessage(from, fetch, type, { mimetype: Baileys.Mimetype.mp4Audio, quoted: msg })
         } else {
-          CXD.sendMessage(from, fetch, type, { mimetype: 'audio/mp4' })
+          CXD.sendMessage(from, fetch, type, { mimetype: Baileys.Mimetype.mp4Audio })
         }
       } else if (type == 'gif') {
         var fetch = await global.buffer(url)
