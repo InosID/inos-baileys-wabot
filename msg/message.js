@@ -31,7 +31,7 @@ if (language == 'ind') {
   mess = eng
 }
 
-module.exports = msgMain = (CXD = new conn, msg) => {
+module.exports = msgMain = async(CXD = new conn, msg) => {
   try {
     if (!msg.hasNewMessage) return
     msg = msg.messages.all()[0]
@@ -78,9 +78,9 @@ module.exports = msgMain = (CXD = new conn, msg) => {
     let botNumber = CXD.user.jid
     let isGroupMsg = from.endsWith("@g.us")
     let sender = isGroupMsg ? msg.participant : msg.key.remoteJid
-    let groupMetadata = isGroupMsg ? CXD.groupMetadata(from) : ''
+    let groupMetadata = isGroupMsg ? await CXD.groupMetadata(from) : ''
     let groupName = isGroupMsg ? groupMetadata.subject : ''
-    let groupId = isGroupMsg ? groupMetadata.jid : ''
+    let groupId = isGroupMsg ? groupMetadata.id : ''
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
     let isNsfw = isGroupMsg ? nsfw.includes(groupId)
 
@@ -238,13 +238,14 @@ module.exports = msgMain = (CXD = new conn, msg) => {
             CXD.sendImage(from, res.image, null, true)
           })
       break
-      /*case 'nsfwanime':
+      case 'nsfwanime':
+        if (allow.nsfw) return CXD.reply(mess.notAllowed())
         CXD.reply(mess.wait())
         nsfwanime.nsfwanime()
           .then(async (res) => {
             CXD.sendImage(from, res.image, null, true)
           })
-      break*/
+      break
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
