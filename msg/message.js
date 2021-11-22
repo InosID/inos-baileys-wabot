@@ -7,7 +7,7 @@ let fetcher = require('./../lib/fetcher')
 let { color } = require('./../lib/color')
 let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
 let { help } = require('./../lib/help')
-let { gempa } = require('./command/information/gempa')
+let { gempa, wikiInd, wikiEng } = require('./command/information')
 let { ind, eng } = require('./language')
 require('./../config')
 
@@ -195,10 +195,24 @@ module.exports = msgMain = (CXD = new conn, msg) => {
       break
       case 'infogempa':
         CXD.reply(from, mess.wait)
-        gempa()
+        gempa.gempa()
           .then(async (res) => {
             CXD.sendImage(from, res.thumbnail, `╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, true)
         })
+      break
+      case 'wiki':
+        CXD.reply(from, mess.wait())
+        wikiInd.wikiID(q)
+          .then(async (res) {
+            CXD.reply(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Judul : ${res.title}\n├ URL : ${res.url}\n├ Penerbit : ${res.publisher}\n├ Tanggal Diterbitkan : ${res.datePublished}\n├ Konteks : ${res.context}\n╰────────`)
+          })
+      break
+      case 'wikien':
+        CXD.reply(from, mess.wait())
+        wikiEng.wikiEN(q)
+          .then(async (res) {
+            CXD.reply(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`)
+          })
       break
     }
   } catch(err) {
