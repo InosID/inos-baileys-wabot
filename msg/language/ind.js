@@ -15,3 +15,7 @@ exports.needQuery = () => {
   return
     `[❕] Parameter query tidak ditemukan.`
 }
+exports.needLink = () => {
+  return
+   `[❕] Parameter link tidak ditemukan.`
+}
