@@ -4,7 +4,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-async function neko() {
+async function result() {
 return new Promise(async(resolve, reject) => {
   await axios.get("https://nekos.life")
   .then(({ data }) => {
@@ -17,4 +17,4 @@ return new Promise(async(resolve, reject) => {
   })
 }
 
-module.exports = { neko }
+module.exports = { result }
