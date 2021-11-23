@@ -84,7 +84,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
     let groupName = isGroupMsg ? groupMetadata.subject : ''
     let groupId = isGroupMsg ? groupMetadata.id : ''
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
-    let isNsfw = isGroupMsg ? nsfw.includes(groupId)
+    let isNsfw = isGroupMsg ? nsfw.includes(groupId) : false
 
     global.buffer = fetcher.getBuffer
 
