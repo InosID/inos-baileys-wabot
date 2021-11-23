@@ -1,5 +1,5 @@
 /**
- * Tanggal jadian by @Fxc7
+ * Tanggal jadian scrapper by @Fxc7
  */
 let axios = require('axios')
 let cheerio = require('cheerio')
@@ -16,7 +16,7 @@ function Tanggal(tanggal) {
   return result;
 }
 
-async function tanggaljadi(tanggal) {
+async function result(tanggal) {
   return new Promise(async (resolve, reject) => {
     const tgl = Tanggal(tanggal).tanggal;
     const bln = Tanggal(tanggal).bulan;
@@ -30,4 +30,4 @@ async function tanggaljadi(tanggal) {
   });
 };
 
-module.exports = { tanggaljadi }
+module.exports = { result }
