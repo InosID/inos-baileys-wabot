@@ -18,6 +18,9 @@ exports.needQuery = () => {
 exports.needLink = () => {
   return `[❕] Parameter link tidak ditemukan.`
 }
+exports.onlyGroup = () => {
+  return `[❕] Perintah ini hanya bisa di gunakan dalam grup.`
+}
 
 // Result
 exports.yt3res = (title, quality, type, size) => {
