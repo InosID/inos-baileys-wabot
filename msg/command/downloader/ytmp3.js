@@ -1,5 +1,5 @@
 /**
- * Ytmp3 Scrapper By @Fxc7
+ * Ytmp3 Scrapper
  */
 let cheerio = require("cheerio");
 let fetch = require("node-fetch");
