@@ -18,6 +18,9 @@ exports.needQuery = () => {
 exports.needLink = () => {
   return `[❕] The link parameter was not found.`
 }
+exports.onlyGroup = () => {
+  return `[❕] This command can only be used in groups.`
+}
 
 // Result
 exports.yt3res = (title, quality, type, size) => {
