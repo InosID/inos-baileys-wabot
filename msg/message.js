@@ -285,6 +285,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         }
       break
       case 'disable':
+        if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
         switch(args[0]) {
           case 'nsfw':
             nsfw.splice(groupId, 1)
