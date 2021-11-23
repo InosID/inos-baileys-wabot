@@ -1,6 +1,9 @@
 /**
  * Kecocokan nama scrapper by @Fxc7
  */
+let axios = require('axios')
+let cheerio = require('cheerio')
+
 function Tanggal(tanggal) {
   const tgl = tanggal.replace(/-.*/, "");
   const bln = tanggal.replace(/-([^-?]+)(?=(?:$|\?))/, "").replace(/.*?-/, "");
