@@ -241,7 +241,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         CXD.reply(mess.wait())
         nekonime.neko()
           .then(async (res) => {
-            CXD.sendImage(from, res.image, null, true)
+            CXD.sendImage(from, res.image, mess.done(), true)
           })
       break
       case 'nsfwanime':
@@ -249,7 +249,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         CXD.reply(mess.wait())
         nsfwanime.nsfwanime()
           .then(async (res) => {
-            CXD.sendImage(from, res.image, null, true)
+            CXD.sendImage(from, res.image, mess.done(), true)
           })
       break
       case 'ytmp3':
@@ -271,6 +271,16 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             if (isNsfw) return CXD.reply(mess.nsfwHasOn())
             nsfw.push(groupId, 1)
             fs.writeFileSync('./database/nsfw.json', JSON.stringify(nsfw))
+            CXD.reply(mess.done())
+          break
+        }
+      break
+      case 'disable':
+        switch(args[0]) {
+          case 'nsfw':
+            nsfw.splice(groupId, 1)
+            fs.writeFileSync('./database/nsfw.json', JSON.stringify(nsfw))
+            CXD.reply(mess.done())
           break
         }
       break
