@@ -243,13 +243,22 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           })
       break
       case 'nsfwanime':
-        if (!allow.nsfw) return CXD.reply(mess.notAllowed())
-        if (!isNsfw) return CXD.reply(mess.nsfwOff())
-        CXD.reply(mess.wait())
-        nsfwanime.result()
-          .then(async (res) => {
-            CXD.sendImage(from, res.image, mess.done(), true)
-          })
+        if (isGroupMsg) {
+          if (!allow.nsfw) return CXD.reply(mess.notAllowed())
+          if (!isNsfw) return CXD.reply(mess.nsfwOff())
+          CXD.reply(mess.wait())
+          nsfwanime.result()
+            .then(async (res) => {
+              CXD.sendImage(from, res.image, mess.done(), true)
+            })
+        } else {
+          if (!allow.nsfw) return CXD.reply(mess.notAllowed())
+          CXD.reply(mess.wait())
+          nsfwanime.result()
+            .then(async (res) => {
+              CXD.sendImage(from, res.image, mess.done(), true)
+            })
+        }
       break
       case 'ytmp3':
         if (args.length < 1) return CXD.reply(mess.needLink())
@@ -265,6 +274,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         })
       break
       case 'enable':
+        if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
         switch(args[0]) {
           case 'nsfw':
             if (isNsfw) return CXD.reply(mess.nsfwHasOn())
