@@ -1,6 +1,9 @@
+/**
+ * Nsfw anime by @moo-d
+ */
 let axios = require('axios')
 
-async function nsfwanime() {
+async function result() {
   return new Promise(async (resolve, reject) => {
     await axios.get("https://nekos.life/api/v2/img/erok")
       .then((web) => {
@@ -13,4 +16,4 @@ async function nsfwanime() {
   })
 }
 
-module.exports = { nsfwanime }
+module.exports = { result }
