@@ -252,7 +252,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             CXD.sendImage(from, res.image, null, true)
           })
       break
-      /*case 'ytmp3':
+      case 'ytmp3':
         if (args.length < 1) return CXD.reply(mess.needLink())
         if (!isUrl(args[0]) && !args[0].includes('youtu')) return CXD.reply(mess.invalidLink())
         CXD.reply(mess.wait())
@@ -264,7 +264,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           CXD.sendImage(from, res[0].thumb, mess.yt3res(title, quality, type, size), true)
           CXD.sendFileFromUrl(from, res[0].link, 'audio', null, true)
         })
-      break*/
+      break
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
