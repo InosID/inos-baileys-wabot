@@ -1,5 +1,5 @@
 /**
- * Watak artis by @Fxc7
+ * Watak artis scrapper by @Fxc7
  */
 let axios = require('axios')
 let cheerio = require('cheerio')
