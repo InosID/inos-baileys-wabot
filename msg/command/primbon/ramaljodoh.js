@@ -1,5 +1,5 @@
 /**
- * RamalJodoh by @Fxc7
+ * Ramal Jodoh scrapper by @Fxc7
  */
 let axios = require('axios')
 let cheerio = require('cheerio')
