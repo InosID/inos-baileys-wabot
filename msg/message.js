@@ -246,6 +246,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       break
       case 'nsfwanime':
         if (allow.nsfw) return CXD.reply(mess.notAllowed())
+        if (!isNsfw) return CXD.reply(mess.nsfwOff())
         CXD.reply(mess.wait())
         nsfwanime.nsfwanime()
           .then(async (res) => {
