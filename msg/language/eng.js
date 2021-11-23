@@ -35,3 +35,6 @@ exports.yt3res = (title, quality, type, size) => {
 exports.nsfwHasOn = () => {
   return `[❕] Nsfw has been active before.`
 }
+exports.nsfwOff = () => {
+  return `[❕] Nsfw is not enabled.`
+}
