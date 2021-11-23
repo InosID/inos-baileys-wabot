@@ -1,6 +1,18 @@
 /**
  * Kecocokan nama scrapper by @Fxc7
  */
+function Tanggal(tanggal) {
+  const tgl = tanggal.replace(/-.*/, "");
+  const bln = tanggal.replace(/-([^-?]+)(?=(?:$|\?))/, "").replace(/.*?-/, "");
+  const thn = tanggal.replace(/.*\-/, "");
+  const result = {
+    tanggal: tgl,
+    bulan: bln,
+    tahun: thn
+  };
+  return result;
+}
+
 async function result(nama, tanggal) {
   return new Promise(async (resolve, reject) => {
     const tgl = Tanggal(tanggal).tanggal;
