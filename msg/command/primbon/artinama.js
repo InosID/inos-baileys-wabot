@@ -4,7 +4,7 @@
 let axios = require("axios")
 let cheerio = require("cheerio")
 
-async function artiNama(nama) {
+async function result(nama) {
   return new Promise(async (resolve, reject) => {
     await axios.get(`https://www.primbon.com/arti_nama.php?nama1=${nama}&proses=+Submit%21+`)
       .then(({ data }) => {
@@ -16,4 +16,4 @@ async function artiNama(nama) {
   });
 };
 
-module.exports = { artiNama }
+module.exports = { result }
