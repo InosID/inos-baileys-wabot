@@ -3,7 +3,6 @@
  */
 const axios = require("axios");
 const cheerio = require("cheerio");
-const fs = require("fs");
 
 async function neko() {
 return new Promise(async(resolve, reject) => {
