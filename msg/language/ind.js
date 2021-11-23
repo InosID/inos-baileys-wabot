@@ -2,6 +2,9 @@
 exports.wait = () => {
   return `[⏳] Tunggu sebentar...`
 }
+exports.done = () => {
+  return `[☑️] Berhasil!`
+}
 
 // Permission
 exports.notAllowed = () => {
