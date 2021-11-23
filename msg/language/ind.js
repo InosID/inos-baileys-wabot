@@ -32,3 +32,9 @@ exports.yt3res = (title, quality, type, size) => {
 ╰────────
 `
 }
+
+// Feature
+exports.nsfwHasOn = () => {
+  return
+    `[❕] Nsfw telah aktif sebelumnya.`
+}
