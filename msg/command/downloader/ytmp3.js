@@ -1,5 +1,5 @@
 /**
- * Ytmp3 Scrapper
+ * Ytmp3 Scrapper by @Fxc7
  */
 let cheerio = require("cheerio");
 let fetch = require("node-fetch");
@@ -7,7 +7,7 @@ let yts = require("yt-search");
 let yt = require("ytdl-core")
 let ytIdRegex = /(?:http(?:s|):\/\/|)(?:(?:www\.|)youtube(?:\-nocookie|)\.com\/(?:watch\?.*(?:|\&)v=|embed\/|v\/)|youtu\.be\/)([-_0-9A-Za-z]{11})/
 
-let ytdl3 = async (yutub) => {
+let result = async (yutub) => {
   function post(url, formdata) {
     return fetch(url, {
       method: 'POST',
@@ -53,4 +53,4 @@ let ytdl3 = async (yutub) => {
   return hasil
 }
 
-module.exports = { ytdl3 }
+module.exports = { result }
