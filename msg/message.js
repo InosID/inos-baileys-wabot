@@ -11,8 +11,8 @@ let sfw = JSON.parse(read('./database/sfw.json'))
 
 let {
   gempa,
-  wikiInd,
-  wikiEng
+  wikiID,
+  wikiEN
 } = require('./command/information')
 let { ind, eng } = require('./language')
 
@@ -214,7 +214,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       break
       case 'infogempa':
         CXD.reply(mess.wait)
-        gempa.gempa()
+        gempa.result()
           .then(async (res) => {
             CXD.sendImage(from, res.thumbnail, `╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, true)
         })
@@ -222,7 +222,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       case 'wiki':
         if (args.length < 1) return await CXD.reply(mess.needQuery())
         CXD.reply(mess.wait())
-        wikiInd.wikiID(q)
+        wikiID.result(q)
           .then(async (res) => {
             CXD.reply(`╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Judul : ${res.title}\n├ URL : ${res.url}\n├ Penerbit : ${res.publisher}\n├ Tanggal Diterbitkan : ${res.datePublished}\n├ Konteks : ${res.context}\n╰────────`)
           })
@@ -230,14 +230,14 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       case 'wikien':
         if (args.length < 1) return await CXD.reply(mess.needQuery())
         CXD.reply(mess.wait())
-        wikiEng.wikiEN(q)
+        wikiEN.result(q)
           .then(async (res) => {
             CXD.reply(`╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`)
           })
       break
       case 'nekonime':
         CXD.reply(mess.wait())
-        nekonime.neko()
+        nekonime.result()
           .then(async (res) => {
             CXD.sendImage(from, res.image, mess.done(), true)
           })
@@ -246,7 +246,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         if (allow.nsfw) return CXD.reply(mess.notAllowed())
         if (!isNsfw) return CXD.reply(mess.nsfwOff())
         CXD.reply(mess.wait())
-        nsfwanime.nsfwanime()
+        nsfwanime.result()
           .then(async (res) => {
             CXD.sendImage(from, res.image, mess.done(), true)
           })
@@ -255,7 +255,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         if (args.length < 1) return CXD.reply(mess.needLink())
         if (!isUrl(args[0]) && !args[0].includes('youtu')) return CXD.reply(mess.invalidLink())
         CXD.reply(mess.wait())
-        ytmp3.ytdl3(q).then(async (res) => {
+        ytmp3.result(q).then(async (res) => {
           var title = res[0].judul
           var quality = res[0].quality
           var type = res[0].tipe
