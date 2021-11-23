@@ -265,6 +265,15 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           CXD.sendFileFromUrl(from, res[0].link, 'audio', null, true)
         })
       break
+      case 'enable':
+        switch(args[0]) {
+          case 'nsfw':
+            if (isNsfw) return CXD.reply(mess.nsfwHasOn())
+            nsfw.push(groupId, 1)
+            fs.writeFileSync('./database/nsfw.json', JSON.stringify(nsfw))
+          break
+        }
+      break
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
