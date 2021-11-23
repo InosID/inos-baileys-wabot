@@ -1,15 +1,13 @@
-let Baileys = require('@adiwajshing/baileys')
-let fs = require('fs')
-let axios = require('axios')
-let get = require('got')
+let Baileys = require('@adiwajshing/baileys');
+let { readFileSync: read, writeFileSync: write } = require('fs');
 
 let { help } = require('./../lib/help')
 let { color } = require('./../lib/color')
 let fetcher = require('./../lib/fetcher')
 
-let _scommand = JSON.parse(fs.readFileSync("./database/scommand.json"))
-let nsfw = JSON.parse(fs.readFileSync('./database/nsfw.json'))
-let sfw = JSON.parse(fs.readFileSync('./database/sfw.json'))
+let _scommand = JSON.parse(read("./database/scommand.json"))
+let nsfw = JSON.parse(read('./database/nsfw.json'))
+let sfw = JSON.parse(read('./database/sfw.json'))
 
 let {
   gempa,
@@ -271,7 +269,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           case 'nsfw':
             if (isNsfw) return CXD.reply(mess.nsfwHasOn())
             nsfw.push(groupId, 1)
-            fs.writeFileSync('./database/nsfw.json', JSON.stringify(nsfw))
+            write('./database/nsfw.json', JSON.stringify(nsfw))
             CXD.reply(mess.done())
           break
         }
@@ -280,7 +278,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         switch(args[0]) {
           case 'nsfw':
             nsfw.splice(groupId, 1)
-            fs.writeFileSync('./database/nsfw.json', JSON.stringify(nsfw))
+            write('./database/nsfw.json', JSON.stringify(nsfw))
             CXD.reply(mess.done())
           break
         }
