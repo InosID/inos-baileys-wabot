@@ -225,7 +225,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         if (args.length < 1) return await CXD.reply(mess.needQuery())
         CXD.reply(mess.wait())
         wikiInd.wikiID(q)
-          .then(async (res) {
+          .then(async (res) => {
             CXD.reply(`╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Judul : ${res.title}\n├ URL : ${res.url}\n├ Penerbit : ${res.publisher}\n├ Tanggal Diterbitkan : ${res.datePublished}\n├ Konteks : ${res.context}\n╰────────`)
           })
       break
@@ -233,7 +233,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         if (args.length < 1) return await CXD.reply(mess.needQuery())
         CXD.reply(mess.wait())
         wikiEng.wikiEN(q)
-          .then(async (res) {
+          .then(async (res) => {
             CXD.reply(`╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`)
           })
       break
