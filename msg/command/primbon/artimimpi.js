@@ -4,7 +4,7 @@
 let axios = require('axios')
 let cheerio = require('cheerio')
 
-async function artiMimpi(mimpi) {
+async function result(mimpi) {
   return new Promise(async (resolve, reject) => {
     await axios.get(`https://www.primbon.com/tafsir_mimpi.php?mimpi=${mimpi}&submit=+Submit+`)
       .then(({ data }) => {
@@ -22,3 +22,5 @@ async function artiMimpi(mimpi) {
       }).catch(reject);
   });
 };
+
+module.exports = { result }
