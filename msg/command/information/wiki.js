@@ -1,10 +1,10 @@
 /**
- * WikiID scraper by @Fxc7
+ * WikiID scrapper by @Fxc7
  */
 let axios = require('axios')
 let cheerio = require('cheerio')
 
-async function wikiID(query) {
+async function result(query) {
   return new Promise((resolve, reject) => {
     axios.get(`https://id.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=1&srsearch=${encodeURIComponent(query)}`)
       .then(({ data }) => {
@@ -32,4 +32,4 @@ async function wikiID(query) {
   });
 }
 
-module.exports = { wikiID }
+module.exports = { result }
