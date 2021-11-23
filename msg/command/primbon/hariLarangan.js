@@ -1,6 +1,9 @@
 /**
  * Hari larangan by @Fxc7
  */
+let axios = require('axios')
+let cheerio = require('cheerio')
+
 function Tanggal(tanggal) {
   const tgl = tanggal.replace(/-.*/, "");
   const bln = tanggal.replace(/-([^-?]+)(?=(?:$|\?))/, "").replace(/.*?-/, "");
@@ -12,6 +15,7 @@ function Tanggal(tanggal) {
   };
   return result;
 }
+
 async function result(tanggal) {
   return new Promise(async (resolve, reject) => {
     const tgl = Tanggal(tanggal).tanggal;
