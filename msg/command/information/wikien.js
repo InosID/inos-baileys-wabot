@@ -4,7 +4,7 @@
 let axios = require('axios')
 let cheerio = require('cheerio')
 
-async function wikiEN(query) {
+async function result(query) {
   return new Promise((resolve, reject) => {
     axios.get(`https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=1&srsearch=${encodeURIComponent(query)}`)
       .then(({ data }) => {
@@ -32,4 +32,4 @@ async function wikiEN(query) {
   });
 }
 
-module.exports = { wikiEN }
+module.exports = { result }
