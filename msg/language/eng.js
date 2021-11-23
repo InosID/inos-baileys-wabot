@@ -1,29 +1,27 @@
 // Actions
 exports.wait = () => {
-  return
-    `[⏳] Wait a moment...`
+  return `[⏳] Wait a moment...`
+}
+exports.done = () => {
+  return `[☑️] Success!`
 }
 
 // Permission
 exports.notAllowed = () => {
-  return
-    `[❕] This command is not permitted by the owner.`
+  return `[❕] This command is not permitted by the owner.`
 }
 
 // Require
 exports.needQuery = () => {
-  return
-    `[❕] Query parameters not found.`
+  return `[❕] Query parameters not found.`
 }
 exports.needLink = () => {
-  return
-    `[❕] The link parameter was not found.`
+  return `[❕] The link parameter was not found.`
 }
 
 // Result
 exports.yt3res = (title, quality, type, size) => {
-  return
-`
+  return `
 ╭﹝🅈🅃🄼🄿③﹞
 ├ Title : ${title}
 ├ Quality : ${quality}
@@ -35,6 +33,5 @@ exports.yt3res = (title, quality, type, size) => {
 
 // Feature
 exports.nsfwHasOn = () => {
-  return
-    `[❕] Nsfw has been active before.`
+  return `[❕] Nsfw has been active before.`
 }
