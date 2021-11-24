@@ -1,8 +1,12 @@
 /**
- * Arti mimpi by scrapper @Fxc7
+ * Arti mimpi scrapper by @Fxc7
  */
 let axios = require('axios')
 let cheerio = require('cheerio')
+
+function replaceAll(string, find, replace) {
+  return string.replace(new RegExp(find, 'g'), replace);
+}
 
 async function result(mimpi) {
   return new Promise(async (resolve, reject) => {
@@ -14,7 +18,9 @@ async function result(mimpi) {
         if (adaga) {
           const isi = $("#body").text().split(`Hasil pencarian untuk kata kunci: ${mimpi}`)[1].replace(/\n\n\n\n\n\n\n\n\n/gi, "\n");
           const result = isi.replace(/\n/gi, "").replace("       ", "").replace("\"        ", "").replace(/Solusi.*$/, "");
-          const hasil = replaceAll(`${result}`, ".Mimpi", ".\nMimpi");
+          const hasil = {
+            result: replaceAll(`${result}`, ".Mimpi", ".\nMimpi")
+          }
           resolve(hasil);
         } else {
           resolve(`Tidak ditemukan tafsir mimpi ${mimpi}. Cari dengan kata kunci yang lain..`);
