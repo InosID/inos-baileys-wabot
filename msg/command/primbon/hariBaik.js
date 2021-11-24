@@ -36,7 +36,9 @@ async function result(tanggal) {
     };
     await axios(options).then(({ data }) => {
       const $ = cheerio.load(data)
-      const result = $('#body').text().replace(/^\s*\n/gm, "").replace("Watak", "\nWatak").replace("Kamarokam", "Kamarokam\n").replace(thn, `${thn}\n`).replace(/< Hitung Kembali.*$/s, "")
+      const result = {
+        result: $('#body').text().replace(/^\s*\n/gm, "").replace("Watak", "\nWatak").replace("Kamarokam", "Kamarokam\n").replace(thn, `${thn}\n`).replace(/< Hitung Kembali.*$/s, "")
+      }
       resolve(result)
     }).catch(reject);
   })
