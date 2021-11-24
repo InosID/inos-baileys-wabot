@@ -37,7 +37,9 @@ async function result(nama, tanggal) {
     };
     await axios(options).then(({ data }) => {
       const $ = cheerio.load(data);
-      const result = $('#body').text().replace(/^\s*\n/gm, "").replace("Tgl. Lahir:", "\nTanggal Lahir:").replace(/< Hitung Kembali.*$/s, "")
+      const result = {
+        result: $('#body').text().replace(/^\s*\n/gm, "").replace("Tgl. Lahir:", "\nTanggal Lahir:").replace(/< Hitung Kembali.*$/s, "")
+      }
       resolve(result)
     }).catch(reject);
   })
