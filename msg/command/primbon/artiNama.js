@@ -10,7 +10,9 @@ async function result(nama) {
       .then(({ data }) => {
         const $ = cheerio.load(data)
         const isi = $("#body").text().split("Nama:")[0]
-        const result = isi.replace(/\n/gi, "").replace("ARTI NAMA", "").replace("                                ", "");
+        const result = {
+          result: isi.replace(/\n/gi, "").replace("ARTI NAMA", "").replace("                                ", "")
+        }
         resolve(result)
       }).catch(reject)
   });
