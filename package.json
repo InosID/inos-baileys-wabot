@@ -32,7 +32,9 @@
     "figlet": "^1.5.2",
     "node-fetch": "^2.6.1",
     "qrcode": "^1.4.4",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "yt-search": "^2.10.2",
+    "ytdl-core": "^4.9.1"
   },
   "bugs": {
     "url": "https://github.com/CxD9-Teams/cxd9-bot/issues"
