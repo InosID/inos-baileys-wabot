@@ -213,7 +213,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         CXD.reply(help(prefix))
       break
       case 'infogempa':
-        CXD.reply(mess.wait)
+        CXD.reply(mess.wait())
         gempa.result()
           .then(async (res) => {
             CXD.sendImage(from, res.thumbnail, `╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, true)
