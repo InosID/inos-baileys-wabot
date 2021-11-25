@@ -140,3 +140,6 @@ CXD.sendFile(from, locationFile, 'this is caption', true)
  * If you wan't without reply, change the true to false.
  */
 ```
+
+# Note
+> If this script has an error, you can report it via issue.
