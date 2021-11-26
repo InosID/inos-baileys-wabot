@@ -349,6 +349,52 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             CXD.reply(res.result)
           })
       break
+      case 'ramaljodoh':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|Aksa`)
+        var rj = body.slice(12)
+        var nama1 = rj.split('|')[0]
+        var nama2 = rj.split('|')[1]
+        ramalJodoh.result(nama1, nama2)
+          .then(async (res) => {
+            CXD.sendImage(from, res.thumbnail, `*Nama anda* : ${res.namaAnda}\n*Nama Pasangan* : ${res.namaPasangan}\n\n*Positif* : ${res.positif}\n\n*Negatif* : ${res.negatif}`, true)
+          })
+      break
+      case 'ramalanjodoh':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|14-4-2004|Aksa|14-4-2008`)
+        var rj = body.slice(14)
+        var nama1 = rj.split('|')[0]
+        var tgl1 = rj.split('|')[1]
+        var nama2 = rj.split('|')[2]
+        var tgl2 = rj.split('|')[3]
+        ramalanJodoh.result(nama1, tgl1, nama2, tgl2)
+          .then(async (res) => {
+            CXD.reply(res.result)
+          })
+      break
+      case 'rejekiweton':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|14-4-2004`)
+        rejekiWeton.result(q)
+          .then(async (res) => {
+            CXD.sendImage(from, res.statistik, `Penjelasan: ${res.penjelasan}`, true)
+          })
+      break
+      case 'tanggaljadian':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} 14-4-2004`)
+        tanggalJadian.result(q)
+          .then(async (res) => {
+            CXD.reply(res.result)
+          })
+      break
+      case 'watakartis':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|14-4-2004`)
+        var wa = body.slice(12)
+        var nama = wa.split('|')[0]
+        var tgl = wa.split('|')[1]
+        watakArtis.result(nama, tgl)
+          .then(async (res) => {
+            CXD.reply(res.result)
+          })
+      break
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
