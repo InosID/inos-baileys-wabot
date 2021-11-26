@@ -1,6 +1,7 @@
 global.owner = ["123@s.whatsapp.net"]
 global.messConf = {
-  prefix: "!"
+  prefix: "!",
+  maxFileSize: 30.0
 }
 
 global.language = 'ind'
