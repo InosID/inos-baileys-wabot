@@ -21,6 +21,19 @@ let {
   nsfwanime
 } = require('./command/anime')
 
+let {
+  artiMimpi,
+  artiNama,
+  hariBaik,
+  hariLarangan,
+  kecocokanNama,
+  ramalJodoh,
+  ramalanJodoh,
+  rejekiWeton,
+  tanggalJadian,
+  watakArtis
+} = require('./command/primbon')
+
 let { ytmp3 } = require('./command/downloader')
 
 require('./../config')
@@ -293,6 +306,48 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             CXD.reply(mess.done())
           break
         }
+      break
+      case 'artinama':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa`)
+        artiNama.result(q)
+          .then(async (res) => {
+            CXD.reply(res.result)
+          })
+      break
+      case 'artimimpi':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} jatuh`)
+        artiMimpi.result(q)
+          .then(async (res) => {
+            if (res.result == undefined) {
+              CXD.reply(res.result)
+            } else {
+              CXD.reply(`${q} not found.`)
+            }
+          })
+      break
+      case 'haribaik':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} 14-4-2004`)
+        hariBaik.result(q)
+          .then(async (res) => {
+            CXD.reply(res.result)
+          })
+      break
+      case 'harilarangan':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} 14-4-2004`)
+        hariLarangan.result(q)
+          .then(async (res) => {
+            CXD.reply(res.result)
+          })
+      break
+      case 'kecocokannama':
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|14-4-2004`)
+        var kn = body.slice(15)
+        var nama = kn.split('|')[0]
+        var tgl = kn.split('|')[1]
+        kecocokanNama.result(nama, tgl)
+          .then(async (res) => {
+            CXD.reply(res.result)
+          })
       break
     }
   } catch(err) {
