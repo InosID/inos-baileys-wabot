@@ -59,7 +59,7 @@ the second step is to just change the number of the owner of the bot and finally
 **Powered By**
 <p align="center">
   <a href="https://github.com/CxD9-Teams">
-    <img src="https://github.com/cxd9-Teams.png?size=100">
+    <img src="https://github.com/CxD-Teams.png?size=100">
   </a>
 </p>
 
