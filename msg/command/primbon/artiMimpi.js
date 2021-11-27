@@ -1,12 +1,10 @@
 /**
  * Arti mimpi scrapper by @Fxc7
+ * #Jangan Lupa Titik Koma;
  */
-let axios = require('axios')
-let cheerio = require('cheerio')
-
-function replaceAll(string, find, replace) {
-  return string.replace(new RegExp(find, 'g'), replace);
-}
+let axios = require('axios');
+let cheerio = require('cheerio');
+let { replaceAll } = require('./functions');
 
 async function result(mimpi) {
   return new Promise(async (resolve, reject) => {
@@ -29,4 +27,4 @@ async function result(mimpi) {
   });
 };
 
-module.exports = { result }
+module.exports = { result };
