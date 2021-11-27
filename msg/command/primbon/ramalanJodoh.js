@@ -1,20 +1,10 @@
 /**
  * Ramalan jodoh scrapper by @Fxc7
+ * #Jangan Lupa Titik Koma;
  */
-let axios = require('axios')
-let cheerio = require('cheerio')
-
-function Tanggal(tanggal) {
-  const tgl = tanggal.replace(/-.*/, "");
-  const bln = tanggal.replace(/-([^-?]+)(?=(?:$|\?))/, "").replace(/.*?-/, "");
-  const thn = tanggal.replace(/.*\-/, "");
-  const result = {
-    tanggal: tgl,
-    bulan: bln,
-    tahun: thn
-  };
-  return result;
-}
+let axios = require('axios');
+let cheerio = require('cheerio');
+let { Tanggal } = require('./functions');
 
 async function result(nama1, tanggal1, nama2, tanggal2) {
   return new Promise(async (resolve, reject) => {
@@ -52,4 +42,4 @@ async function result(nama1, tanggal1, nama2, tanggal2) {
   });
 }
 
-module.exports = { result }
+module.exports = { result };
