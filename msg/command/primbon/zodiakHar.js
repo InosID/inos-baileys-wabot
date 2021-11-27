@@ -1,5 +1,5 @@
 /*
- * Zodiak hari ini (keknya) by @Fxc7
+ * Zodiak hari ini (keknya);
  */
 let axios = require('axios');
 let cheerio = require('cheerio');
