@@ -1,20 +1,10 @@
 /**
  * Hari baik scrapper by @Fxc7
+ * #Jangan Lupa Titik Koma;
  */
-let axios = require('axios')
-let cheerio = require('cheerio')
-
-function Tanggal(tanggal) {
-  const tgl = tanggal.replace(/-.*/, "");
-  const bln = tanggal.replace(/-([^-?]+)(?=(?:$|\?))/, "").replace(/.*?-/, "");
-  const thn = tanggal.replace(/.*\-/, "");
-  const result = {
-    tanggal: tgl,
-    bulan: bln,
-    tahun: thn
-  };
-  return result;
-}
+let axios = require('axios');
+let cheerio = require('cheerio');
+let { Tanggal } = require('./functions');
 
 async function result(tanggal) {
   return new Promise(async (resolve, reject) => {
@@ -35,13 +25,13 @@ async function result(tanggal) {
       },
     };
     await axios(options).then(({ data }) => {
-      const $ = cheerio.load(data)
+      const $ = cheerio.load(data);
       const result = {
         result: $('#body').text().replace(/^\s*\n/gm, "").replace("Watak", "\nWatak").replace("Kamarokam", "Kamarokam\n").replace(thn, `${thn}\n`).replace(/< Hitung Kembali.*$/s, "")
-      }
-      resolve(result)
+      };
+      resolve(result);
     }).catch(reject);
-  })
+  });
 }
 
-module.exports = { result }
+module.exports = { result };
