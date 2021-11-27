@@ -1,8 +1,9 @@
 /**
  * Ramal Jodoh scrapper by @Fxc7
+ * #Jangan Lupa Titik Koma;
  */
-let axios = require('axios')
-let cheerio = require('cheerio')
+let axios = require('axios');
+let cheerio = require('cheerio');
 
 async function result(nama1, nama2) {
   return new Promise(async (resolve, reject) => {
@@ -22,4 +23,4 @@ async function result(nama1, nama2) {
   });
 }
 
-module.exports = { result }
+module.exports = { result };
