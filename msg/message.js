@@ -282,8 +282,13 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           var quality = res[0].quality
           var type = res[0].tipe
           var size = res[0].size
-          CXD.sendImage(from, res[0].thumb, mess.yt3res(title, quality, type, size), true)
-          CXD.sendFileFromUrl(from, res[0].link, 'audio', null, true)
+          if (size < global.messConf.maxFileSize) {
+            CXD.sendImage(from, res[0].thumb, mess.yt3res(title, quality, type, size), true)
+            CXD.sendFileFromUrl(from, res[0].link, 'audio', null, true)
+          } else {
+            var link = res[0].link
+            CXD.reply(mess.sizeMax(link))
+          }
         })
       break
       case 'enable':
