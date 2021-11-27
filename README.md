@@ -40,18 +40,17 @@ Make sure everything is in good condition
 
 First, install
 ```bash
-• pkg install git
-• pkg install ffmpeg
-• pkg install nodejs
+• pkg install git -y
+• pkg install ffmpeg -y
+• pkg install nodejs -y
 ```
-For all questions in installation just select y
 
 If everything has been confirmed to be safe and installed, continue with the clone repo
 ```bash
 • git clone https://github.com/CxD9-Teams/cxd9-bot
 • cd cxd9-bot
 • npm i
-• npm start
+• npm run start
 ```
 For all questions in the installation just select y 
 the second step is to just change the number of the owner of the bot and finally scan the qr code
