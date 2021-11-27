@@ -33,6 +33,9 @@ exports.yt3res = (title, quality, type, size) => {
 ╰────────
 `
 }
+exports.sizeMax = (url) => {
+  `The file size is too large. Download the manual file in this link.\n*Link:* ${url}`
+}
 
 // Feature
 exports.nsfwHasOn = () => {
