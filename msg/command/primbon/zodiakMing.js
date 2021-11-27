@@ -1,12 +1,12 @@
 /**
  * Zodiak minggu ini
  */
-let axios = require('axios')
-let cheerio = require('cheerio')
+let axios = require('axios');
+let cheerio = require('cheerio');
 
 async function result(querry) {
   const link = await axios.get(`https://www.fimela.com/zodiak/${querry}/minggu-ini`)
-  const $ = cheerio.load(link.data)
+  const $ = cheerio.load(link.data);
   let thumb = $('body > div > div > div').find('div > div > a > img').attr('src')
   let judul = $('body > div > div > div').find('div > div > div.zodiak--content-header__text > h5').text().trim()
   let date = $('body > div > div > div').find('div> div.zodiak--content-header__text > span').text().trim()
@@ -26,8 +26,8 @@ async function result(querry) {
         keuangan: keuangan
       }
     }
-  }
-  return result
+  };
+  return result;
 }
 
-module.exports = { result }
+module.exports = { result };
