@@ -7,7 +7,6 @@ let { color } = require('./lib/color')
 let package = JSON.parse(fs.readFileSync('./package.json'))
 let express = require('express')
 let app = new express()
-let request = require('request')
 let qrcode = require('qrcode')
 
 let QR;
