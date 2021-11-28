@@ -97,6 +97,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
     let isNsfw = isGroupMsg ? nsfw.includes(groupId) : false
 
+    global.buffer = fetcher.getBuffer
     data = {
       msg: msg,
       type: type,
@@ -126,8 +127,17 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         CXD.reply(mess.wait())
         gempa.result()
           .then(async (res) => {
-            CXD.sendImage(from, res.thumbnail, `╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, true)
-        })
+            buf = await buffer(res.thumbnail)
+            CXD.sendButtonImg(from, buf,`╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, "© Bot", [
+              {
+                buttonId: `${prefix}menu`,
+                buttonText: {
+                  displayText: '🔙 Back to menu',
+                },
+                type: 1,
+              },
+            ], { quoted: msg })
+          })
       break
       case 'wiki':
         if (args.length < 1) return await CXD.reply(mess.needQuery())
