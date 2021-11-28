@@ -207,7 +207,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           ], { quoted: msg })
           if (!isNsfw) return CXD.sendButton(from, mess.nsfwOff(), "© Bot", [
             {
-              buttonId: `${prefix}enable nsfe`,
+              buttonId: `${prefix}enable nsfw`,
               buttonText: {
                 displayText: '🔛 Enable nsfw',
               },
@@ -236,11 +236,28 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
               ], { quoted: msg })
             })
         } else {
-          if (!allow.nsfw) return CXD.reply(mess.notAllowed())
+          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+            {
+              buttonId: `${prefix}menu`,
+              buttonText: {
+                displayText: '🔙 Back to menu',
+              },
+              type: 1,
+            },
+          ], { quoted: msg })
           CXD.reply(mess.wait())
           nsfwanime.result()
             .then(async (res) => {
-              CXD.sendImage(from, res.image, mess.done(), true)
+              buf = await buffer(res.image)
+              CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
+                {
+                  buttonId: `${prefix}nsfwanime`,
+                  buttonText: {
+                    displayText: '🔙 Back to menu',
+                  },
+                  type: 1,
+                },
+              ], { quoted: msg })
             })
         }
       break
@@ -264,6 +281,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       break
       case 'enable':
         if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
+        if (args.length < 1) return CXD.reply(mess.needQuery())
         switch(args[0]) {
           case 'nsfw':
             if (isNsfw) return CXD.reply(mess.nsfwHasOn())
@@ -275,6 +293,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       break
       case 'disable':
         if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
+        if (args.length < 1) return CXD.reply(mess.needQuery())
         switch(args[0]) {
           case 'nsfw':
             nsfw.splice(groupId, 1)
