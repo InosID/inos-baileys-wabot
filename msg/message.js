@@ -144,7 +144,15 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         CXD.reply(mess.wait())
         wikiID.result(q)
           .then(async (res) => {
-            CXD.reply(`╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Judul : ${res.title}\n├ URL : ${res.url}\n├ Penerbit : ${res.publisher}\n├ Tanggal Diterbitkan : ${res.datePublished}\n├ Konteks : ${res.context}\n╰────────`)
+            CXD.sendButton(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Judul : ${res.title}\n├ URL : ${res.url}\n├ Penerbit : ${res.publisher}\n├ Tanggal Diterbitkan : ${res.datePublished}\n├ Konteks : ${res.context}\n╰────────`, "© Bot", [
+              {
+                buttonId: `${prefix}menu`,
+                buttonText: {
+                  displayText: '🔙 Back to menu',
+                },
+                type: 1,
+              },
+            ], { quoted: msg })
           })
       break
       case 'wikien':
@@ -152,14 +160,38 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         CXD.reply(mess.wait())
         wikiEN.result(q)
           .then(async (res) => {
-            CXD.reply(`╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`)
+            CXD.sendButton(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`, "© Bot", [
+              {
+                buttonId: `${prefix}menu`,
+                buttonText: {
+                  displayText: '🔙 Back to menu',
+                },
+                type: 1,
+              },
+            ], { quoted: msg })
           })
       break
       case 'nekonime':
         CXD.reply(mess.wait())
         nekonime.result()
           .then(async (res) => {
-            CXD.sendImage(from, res.image, mess.done(), true)
+            buf = await buffer(res.image)
+            CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
+              {
+                buttonId: `${prefix}nekonime`,
+                buttonText: {
+                  displayText: '➡️ Next',
+                },
+                type: 1,
+              },
+              {
+                buttonId: `${prefix}menu`,
+                buttonText: {
+                  displayText: '🔙 Back to menu',
+                },
+                type: 1,
+              },
+            ], { quoted: msg })
           })
       break
       case 'nsfwanime':
