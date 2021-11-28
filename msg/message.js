@@ -128,7 +128,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         gempa.result()
           .then(async (res) => {
             buf = await buffer(res.thumbnail)
-            CXD.sendButtonImg(from, buf,`╭﹝🄶🄴🄼🄿🄰🄱🅄🄼🄸 🅃🄴🅁🄺🄸🄽🄸﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, "© Bot", [
+            CXD.sendButtonImg(from, buf,`╭﹝🄸🄽🄵🄾🄶🄴🄼🄿🄰﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, "© Bot", [
               {
                 buttonId: `${prefix}menu`,
                 buttonText: {
