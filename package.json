@@ -30,6 +30,7 @@
     "chalk": "^4.1.2",
     "express": "^4.17.1",
     "figlet": "^1.5.2",
+    "form-data": "^4.0.0",
     "node-fetch": "^2.6.1",
     "qrcode": "^1.4.4",
     "request": "^2.88.2",
