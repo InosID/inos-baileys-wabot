@@ -132,11 +132,50 @@ let {
 // Location file
 let locationFile = './views/favicon.png'
 
-// Send file with reply
+// Send file
 CXD.sendFile(from, locationFile, 'this is caption', true)
 /**
  * If you wan't without reply, change the true to false.
  */
+```
+
+#### Send File From Url Message
+
+```js
+let Baileys = require('@adiwajshing/baileys')
+
+// Get message type from Baileys
+let {
+  text,
+  image,
+  document,
+  audio,
+  video
+} = Baileys.MessageType
+
+// Url
+urls = 'https://website.com'
+
+// Send file from url
+CXD.sendFileFromUrl(from, urls, 'image', "This is caption", true)
+/**
+ * If you wan't without reply, change the true to false.
+ * If the file type is document, change 'image' to 'document' etc.
+ */
+```
+
+#### Send Button Message
+
+```
+CXD.sendButton(from, "content", "footer", [
+  {
+    buttonId: `row`
+    buttonText: {
+      displayText: 'button',
+    },
+    type: 1,
+  },
+], { quoted: msg })
 ```
 
 # Note
