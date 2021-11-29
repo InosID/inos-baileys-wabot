@@ -166,7 +166,7 @@ CXD.sendFileFromUrl(from, urls, 'image', "This is caption", true)
 
 #### Send Button Message
 
-```
+```js
 CXD.sendButton(from, "content", "footer", [
   {
     buttonId: `row`
