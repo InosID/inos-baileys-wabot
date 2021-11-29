@@ -102,16 +102,17 @@ let locationImg = fs.readFileSync('./lib/emror.jpeg')
 
 // Send image
 CXD.sendImage(from, locationImg, "This is caption.", false)
-// False means without reply
-
-// Send image with reply
-CXD.sendImage(from, locationImg, "This is caption.", true)
-// True means with reply
+/**
+ * If you wan't without reply, change the true to false.
+ */
 
 // Send image in website
 let website = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKTvqbVbQdjSx7J6IvfQpk-8iNopG_Ox7UCg&usqp=CAU"
 
-CXD.sendImage(from, website, "This is caption.", false)
+CXD.sendImage(from, website, "This is caption.", true)
+/**
+ * If you wan't without reply, change the true to false.
+ */
 ```
 
 #### Send File Message
