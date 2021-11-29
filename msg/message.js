@@ -34,7 +34,10 @@ let {
   watakArtis
 } = require('./command/primbon')
 
-let { ytmp3 } = require('./command/downloader')
+let {
+  ytmp3,
+  tiktok
+} = require('./command/downloader')
 
 require('./../config')
 
@@ -388,6 +391,14 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         watakArtis.result(nama, tgl)
           .then(async (res) => {
             CXD.reply(res.result)
+          })
+      break
+      case 'tiktok':
+        if (args.length < 1) return CXD.reply(mess.needLink())
+        CXD.reply(mess.wait())
+        tiktok.musically(q)
+          .then(async (res) => {
+            CXD.sendFileFromUrl(from, res.url_wm, 'video', mess.done(), true)
           })
       break
     }
