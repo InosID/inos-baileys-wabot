@@ -71,9 +71,7 @@ the second step is to just change the number of the owner of the bot and finally
 
 ## Send Message
 
-Example
-
-Send message
+#### Send Text Message
 
 ```js
 let Baileys = require('@adiwajshing/baileys')
@@ -85,10 +83,10 @@ let { text } = Baileys.MessageType
 CXD.sendText(from, "Hello World!")
 
 // Send text with reply
-CXD.reply(from, "Hello World!")
+CXD.reply("Hello World!")
 ```
 
-Send image
+#### Send Image Message
 
 ```js
 let Baileys = require('@adiwajshing/baileys')
@@ -116,7 +114,7 @@ let website = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKTvqbVbQdj
 CXD.sendImage(from, website, "This is caption.", false)
 ```
 
-Send file from folder
+#### Send File Message
 
 ```js
 let Baileys = require('@adiwajshing/baileys')
