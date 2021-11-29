@@ -35,14 +35,14 @@ src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoCo
 <a href="https://ffmpeg.org/download.html"><img src="http://img.shields.io/badge/-Ffmpeg-000000?style=flat&logo=ffmpeg&logoColor=green"></a>
 <a href="https://notepad-plus-plus.org/downloads/v8.1.9"><img src="http://img.shields.io/badge/-Notepad++-orange?style=flat"></a>
 
-## Termux User
+## Termux/Ubuntu/Linux User
 Make sure everything is in good condition
 
 First, install
 ```bash
-• pkg install git -y
-• pkg install ffmpeg -y
-• pkg install nodejs -y
+• apt install git -y
+• apt install ffmpeg -y
+• apt install nodejs -y
 ```
 
 If everything has been confirmed to be safe and installed, continue with the clone repo
