@@ -233,6 +233,13 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
                 {
                   buttonId: `${prefix}nsfwanime`,
                   buttonText: {
+                    displayText: '➡️ Next',
+                  },
+                  type: 1,
+                },
+                {
+                  buttonId: `${prefix}menu`,
+                  buttonText: {
                     displayText: '🔙 Back to menu',
                   },
                   type: 1,
@@ -241,6 +248,13 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             })
         } else {
           if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+            {
+              buttonId: `${prefix}enable nsfw`,
+              buttonText: {
+                displayText: '🔛 Enable nsfw',
+              },
+              type: 1,
+            },
             {
               buttonId: `${prefix}menu`,
               buttonText: {
@@ -256,6 +270,13 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
                   buttonId: `${prefix}nsfwanime`,
+                  buttonText: {
+                    displayText: '➡️ Next',
+                  },
+                  type: 1,
+                },
+                {
+                  buttonId: `${prefix}menu`,
                   buttonText: {
                     displayText: '🔙 Back to menu',
                   },
@@ -406,6 +427,13 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         if (isGroupMsg) {
           if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
             {
+              buttonId: `${prefix}hentai`,
+              buttonText: {
+                displayText: '➡️ Next',
+              },
+              type: 1,
+            },
+            {
               buttonId: `${prefix}menu`,
               buttonText: {
                 displayText: '🔙 Back to menu',
@@ -437,6 +465,13 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
                 {
                   buttonId: `${prefix}hentai`,
                   buttonText: {
+                    displayText: '➡️ Next',
+                  },
+                  type: 1,
+                },
+                {
+                  buttonId: `${prefix}menu`,
+                  buttonText: {
                     displayText: '🔙 Back to menu',
                   },
                   type: 1,
@@ -460,6 +495,13 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
                   buttonId: `${prefix}hentai`,
+                  buttonText: {
+                    displayText: '➡️ Next',
+                  },
+                  type: 1,
+                },
+                {
+                  buttonId: `${prefix}menu`,
                   buttonText: {
                     displayText: '🔙 Back to menu',
                   },
