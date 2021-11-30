@@ -31,7 +31,7 @@
     "express": "^4.17.1",
     "figlet": "^1.5.2",
     "form-data": "^4.0.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.0",
     "qrcode": "^1.4.4",
     "request": "^2.88.2",
     "yt-search": "^2.10.2",
