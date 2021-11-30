@@ -18,7 +18,8 @@ let { ind, eng } = require('./language')
 
 let {
   nekonime,
-  nsfwanime
+  nsfwanime,
+  hentai
 } = require('./command/anime')
 
 let {
@@ -400,6 +401,73 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           .then(async (res) => {
             CXD.sendFileFromUrl(from, res.url_wm, 'video', mess.done(), true)
           })
+      break
+      case 'hentai':
+        if (isGroupMsg) {
+          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+            {
+              buttonId: `${prefix}menu`,
+              buttonText: {
+                displayText: '🔙 Back to menu',
+              },
+              type: 1,
+            },
+          ], { quoted: msg })
+          if (!isNsfw) return CXD.sendButton(from, mess.nsfwOff(), "© Bot", [
+            {
+              buttonId: `${prefix}enable nsfw`,
+              buttonText: {
+                displayText: '🔛 Enable nsfw',
+              },
+              type: 1,
+            },
+            {
+              buttonId: `${prefix}menu`,
+              buttonText: {
+                displayText: '🔙 Back to menu',
+              },
+              type: 1,
+            },
+          ], { quoted: msg })
+          CXD.reply(mess.wait())
+          hentai.result()
+            .then(async (res) => {
+              buf = await buffer(res.image)
+              CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
+                {
+                  buttonId: `${prefix}hentai`,
+                  buttonText: {
+                    displayText: '🔙 Back to menu',
+                  },
+                  type: 1,
+                },
+              ], { quoted: msg })
+            })
+        } else {
+          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+            {
+              buttonId: `${prefix}menu`,
+              buttonText: {
+                displayText: '🔙 Back to menu',
+              },
+              type: 1,
+            },
+          ], { quoted: msg })
+          CXD.reply(mess.wait())
+          hentai.result()
+            .then(async (res) => {
+              buf = await buffer(res.image)
+              CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
+                {
+                  buttonId: `${prefix}hentai`,
+                  buttonText: {
+                    displayText: '🔙 Back to menu',
+                  },
+                  type: 1,
+                },
+              ], { quoted: msg })
+            })
+        }
       break
     }
   } catch(err) {
