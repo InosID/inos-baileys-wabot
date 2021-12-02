@@ -1,3 +1,6 @@
+/**
+ * Random yuri Scrapper By @moo-d
+ */
 let axios = require('axios')
 
 async function result() {
