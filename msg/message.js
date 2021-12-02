@@ -126,6 +126,8 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
     if (!isGroupMsg && isCmd) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     switch(command) {
       case 'menu':
+      case 'help':
+      case '?':
         CXD.reply(help(prefix))
       break
       case 'infogempa':
