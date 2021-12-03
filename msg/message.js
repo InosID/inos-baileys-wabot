@@ -341,11 +341,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} jatuh`)
         artiMimpi.result(q)
           .then(async (res) => {
-            if (res.result == undefined) {
-              CXD.reply(res.result)
-            } else {
-              CXD.reply(`${q} not found.`)
-            }
+            CXD.reply(res.result)
           })
       break
       case 'haribaik':
