@@ -2,7 +2,7 @@
 > WhatsApp Bot Using Baileys Library By CxD9-Team!
 
 <p align="center">
-<img src="https://gpvc.arturio.dev/CxD9-Teams" />
+<img src="https://gpvc.arturio.dev/InoxID" />
 <p/>
 <p align="center">
 <a href="https://github.com/CxD9-Teams/cxd9-bot/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/CxD9-Teams/cxd9-bot?&style=flat-square"></a>
@@ -47,18 +47,19 @@ First, install
 
 If everything has been confirmed to be safe and installed, continue with the clone repo
 ```bash
-• git clone https://github.com/CxD9-Teams/cxd9-bot
-• cd cxd9-bot
+• git clone https://github.com/InosID/inos-baileys-wabot
+• mv inos-baileys-wabot inosbot
+• cd inosbot
 • npm i
-• npm run start
+• npm start
 ```
 For all questions in the installation just select y 
 the second step is to just change the number of the owner of the bot and finally scan the qr code
 
 **Powered By**
 <p align="center">
-  <a href="https://github.com/CxD9-Teams">
-    <img src="https://github.com/CxD-Teams.png?size=100">
+  <a href="https://github.com/InosID">
+    <img src="https://github.com/InosID.png?size=100">
   </a>
 </p>
 
