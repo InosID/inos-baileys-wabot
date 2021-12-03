@@ -1,5 +1,5 @@
 # inos-baileys-wabot
-> WhatsApp Bot Using Baileys Library By CxD9-Team!
+> WhatsApp Bot Using Baileys Library By InosID!
 
 <p align="center">
 <img src="https://gpvc.arturio.dev/InoxID" />
