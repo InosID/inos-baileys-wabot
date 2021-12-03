@@ -1,4 +1,4 @@
-# cxd9-bot
+# inos-baileys-wabot
 > WhatsApp Bot Using Baileys Library By CxD9-Team!
 
 <p align="center">
