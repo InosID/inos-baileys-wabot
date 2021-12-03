@@ -21,7 +21,7 @@
     "Baileys"
   ],
   "author": "CxD9Team",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.3",
     "axios": "^0.24.0",
