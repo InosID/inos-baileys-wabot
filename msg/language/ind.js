@@ -33,6 +33,18 @@ exports.needLink = () => {
 exports.onlyGroup = () => {
   return `[❕] Perintah ini hanya bisa di gunakan dalam grup.`
 }
+exports.onlyAdmin = () => {
+  return `[❕] Perintah ini hanya bisa di gunakan oleh admin grup.`
+}
+exports.onlyBotAdmin = () => {
+  return `[❕] Perintah ini hanya bisa di gunakan jika bot telah menjadi admin grup.`
+}
+exports.needTag = () => {
+  return `[❕] Tag orangnya!`
+}
+exports.useCountryNum = () => {
+  return `[❕] Gunakan kode negara!`
+}
 
 // Result
 exports.yt3res = (title, quality, type, size) => {
