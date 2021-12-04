@@ -44,3 +44,6 @@ exports.nsfwHasOn = () => {
 exports.nsfwOff = () => {
   return `[❕] Nsfw belum diaktifkan.`
 }
+exports.kicking = () => {
+  return `Mengeluarkan : `
+}
