@@ -5,6 +5,18 @@ exports.wait = () => {
 exports.done = () => {
   return `[☑️] Berhasil!`
 }
+exports.kicking = () => {
+  return `Mengeluarkan : `
+}
+exports.adding = () => {
+  return `Menambahkan : `
+}
+exports.demoting = () => {
+  return `Menurunkan jabatan : `
+}
+exports.promoting = () => {
+  return `Menaikan jabatan : `
+}
 
 // Permission
 exports.notAllowed = () => {
@@ -43,7 +55,4 @@ exports.nsfwHasOn = () => {
 }
 exports.nsfwOff = () => {
   return `[❕] Nsfw belum diaktifkan.`
-}
-exports.kicking = () => {
-  return `Mengeluarkan : `
 }
