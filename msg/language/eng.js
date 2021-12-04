@@ -5,6 +5,18 @@ exports.wait = () => {
 exports.done = () => {
   return `[☑️] Success!`
 }
+exports.kicking = () => {
+  return `Kicking : `
+}
+exports.adding = () => {
+  return `Adding : `
+}
+exports.demoting = () => {
+  return `Demoting : `
+}
+exports.promoting = () => {
+  return `Promoting : `
+}
 
 // Permission
 exports.notAllowed = () => {
@@ -43,7 +55,4 @@ exports.nsfwHasOn = () => {
 }
 exports.nsfwOff = () => {
   return `[❕] Nsfw is not enabled.`
-}
-exports.kicking = () => {
-  return `Kicking : `
 }
