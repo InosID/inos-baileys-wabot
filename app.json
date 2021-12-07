@@ -1,7 +1,7 @@
 {
-  "name": "cxd9-bot",
+  "name": "inos-baileys-wabot",
   "description": "WhatsApp Bot Heroku",
-  "repository": "https://github.com/CxD9-Teams/cxd9-bot",
+  "repository": "https://github.com/InosID/inos-baileys-wabot",
   "logo": "https://node-js-sample.herokuapp.com/node.png",
   "keywords": ["bot"]
 }
