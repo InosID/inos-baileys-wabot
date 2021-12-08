@@ -33,6 +33,18 @@ exports.needLink = () => {
 exports.onlyGroup = () => {
   return `[❕] This command can only be used in groups.`
 }
+exports.onlyAdmin = () => {
+  return `[❕] This command can only be used by group admins.`
+}
+exports.onlyBotAdmin = () => {
+  return `[❕] This command can only be used if the bot has become a group admin.`
+}
+exports.needTag = () => {
+  return `[❕] Tag the person!`
+}
+exports.useCountryNum = () => {
+  return `[❕] Use country code!`
+}
 
 // Result
 exports.yt3res = (title, quality, type, size) => {
