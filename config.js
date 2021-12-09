@@ -1,4 +1,5 @@
 global.owner = ["123@s.whatsapp.net"]
+global.multiPrefix = false
 global.messConf = {
   prefix: "!",
   maxFileSize: 30.0
