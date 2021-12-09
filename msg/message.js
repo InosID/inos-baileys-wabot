@@ -106,6 +106,16 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
     let groupName = isGroupMsg ? groupMetadata.subject : ''
     let groupId = isGroupMsg ? groupMetadata.id : ''
     let groupMembers = isGroupMsg ? groupMetadata.participants : ''
+    let getGroupAdmins = (participants) => {
+      admins = []
+      for (let i of participants) {
+        i.isAdmin ? admins.push(i.jid) : ''
+      }
+      return admins
+    }
+    let groupAdmins = isGroupMsg ? getGroupAdmins(groupMembers) : ''
+    let isBotGroupAdmins = groupAdmins.includes(botNumber) || false
+    let isGroupAdmins = groupAdmins.includes(sender) || false
     let isNsfw = isGroupMsg ? nsfw.includes(groupId) : false
 
     global.buffer = fetcher.getBuffer
@@ -602,6 +612,43 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
                 },
               ], { quoted: msg })
             })
+        }
+      break
+      case 'promote':
+        if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
+        if (!isBotGroupAdmins) return CXD.reply(mess.onlyBotAdmin())
+        if (msg.message.extendedTextMessage === undefined || msg.message.extendedTextMessage === null) return CXD.reply(mess.needTag())
+        mentioned = msg.message.extendedTextMessage.contextInfo.mentionedJid
+        if (mentioned.length > 1) {
+          txtacc = mess.promoting() + `\n`
+          for (let _ of mentioned) {
+            teks += `@${_.split('@')[0]}\n`
+          }
+          CXD.SendTextWithMentions(teks, mentioned)
+          CXD.groupMakeAdmin(from, mentioned)
+        } else {
+          CXD.SendTextWithMentions(`${mess.promoting()} @${mentioned[0].split('@')[0]}`, mentioned)
+          CXD.groupMakeAdmin(from, mentioned)
+        }
+      break
+      case 'demote':
+        if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
+        if (!isBotGroupAdmins) return CXD.reply(mess.onlyBotAdmin())
+        if (msg.message.extendedTextMessage === undefined || msg.message.extendedTextMessage === null) return CXD.reply(mess.needTag())
+        mentioned = msg.message.extendedTextMessage.contextInfo.mentionedJid
+        if (mentioned.length > 1) {
+          teks = ''
+          for (let _ of mentioned) {
+            teks += mess.demoting()
+            teks += `@_.split('@')[0]`
+          }
+          CXD.SendTextWithMentions(teks, mentioned)
+          CXD.groupDemoteAdmin(from, mentioned)
+        } else {
+          CXD.SendTextWithMentions(`${mess.demoting()} @${mentioned[0].split('@')[0]}`, mentioned)
+          CXD.groupDemoteAdmin(from, mentioned)
         }
       break
     }
