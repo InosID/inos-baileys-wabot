@@ -68,3 +68,8 @@ exports.nsfwHasOn = () => {
 exports.nsfwOff = () => {
   return `[❕] Nsfw belum diaktifkan.`
 }
+
+// Invalid
+exports.invalidLink = () => {
+  return `[❕] Link salah!`
+}
