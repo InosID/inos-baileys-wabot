@@ -49,6 +49,12 @@ if (language == 'ind') {
   mess = eng
 }
 
+let Presence = Baileys.Presence
+    online = Presence.available
+    typing = Presence.composing
+    recording = Presence.recording
+    paused = Presence.paused
+
 module.exports = msgMain = async(CXD = new conn, msg) => {
   try {
     if (!msg.hasNewMessage) return
@@ -651,6 +657,8 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           CXD.groupDemoteAdmin(from, mentioned)
         }
       break
+      default:
+        CXD.setPresence(online)
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
