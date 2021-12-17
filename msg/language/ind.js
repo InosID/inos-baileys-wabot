@@ -57,6 +57,22 @@ exports.yt3res = (title, quality, type, size) => {
 ╰────────
 `
 }
+exports.ghstalk = (user, bio, company, email, twit, pr, pg, follower, following, loc) => {
+  return `
+╭﹝🄶🄷 🅂🅃🄰🄻🄺﹞
+├ Pengguna : ${user}
+├ Bio : ${bio}
+├ Perusahaan : ${company}
+├ Email : ${email}
+├ Nama Pengguna Twitter : ${twit}
+├ Repo Publik : ${pr}
+├ Gists Publik : ${pg}
+├ Pengikut : ${follower}
+├ Mengikuti : ${following}
+├ Lokasi : ${loc}
+╰─────────────
+`
+}
 exports.sizeMax = (url) => {
   return `Ukuran file terlalu besar. Download manual file di dalam link ini.\n*Link:* ${url}`
 }
