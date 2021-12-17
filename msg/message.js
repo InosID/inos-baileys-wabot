@@ -41,6 +41,8 @@ let {
   tiktok
 } = require('./command/downloader')
 
+let { githubstalk } = require('./command/stalker')
+
 require('./../config')
 
 if (language == 'ind') {
@@ -656,6 +658,41 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           CXD.SendTextWithMentions(`${mess.demoting()} @${mentioned[0].split('@')[0]}`, mentioned)
           CXD.groupDemoteAdmin(from, mentioned)
         }
+      break
+      case 'githubstalk':
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+        githubstalk.result(q)
+          .then((res) => {
+            nones = '_none_'
+            if (res.bio == null || res.bio == undefined) {
+              var bio = nones
+            } else {
+              bio = res.bio
+            }
+            if (res.company == null) {
+              var company = nones
+            } else {
+              company = res.company
+            }
+            if (res.email == null) {
+              var email = nones
+            } else {
+              email = res.email
+            }
+            if (res.twitter_username == null) {
+              var twitter = nones
+            } else {
+              twitter = res.twitter_username
+            }
+            if (res.location == null || res.bio == undefined) {
+              var locs = nones
+            } else {
+              locs = res.location
+            }
+            var fls = res.follower
+            var flg = res.following
+            CXD.sendImage(from, res.avatar, mess.ghstalk(q, bio, company, email, twitter, fls, flg, locs), true)
+          })
       break
       default:
         CXD.setPresence(online)
