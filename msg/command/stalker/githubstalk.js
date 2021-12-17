@@ -32,7 +32,7 @@ async function result(user) {
         }
         resolve(result)
       }).catch(reject)
-  }).catch(reject)
+  })
 }
 
 module.exports = { result }
