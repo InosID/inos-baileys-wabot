@@ -6,3 +6,4 @@ updates:
       interval: "daily"
     ignore:
       - dependency-name: "node-fetch"
+      - dependency-name: "chalk"
