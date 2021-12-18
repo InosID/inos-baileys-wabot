@@ -52,10 +52,10 @@ if (language == 'ind') {
 }
 
 let Presence = Baileys.Presence
-    online = Presence.available
-    typing = Presence.composing
-    recording = Presence.recording
-    paused = Presence.paused
+  global.online = Presence.available
+    global.typing = Presence.composing
+      global.recording = Presence.recording
+        global.paused = Presence.paused
 
 module.exports = msgMain = async(CXD = new conn, msg) => {
   try {
