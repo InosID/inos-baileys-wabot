@@ -696,6 +696,9 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       break
       default:
         CXD.setPresence(online)
+        if (autoRead == true) {
+          CXD.chatRead(from)
+        }
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
