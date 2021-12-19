@@ -20,7 +20,7 @@
     "Bot",
     "Baileys"
   ],
-  "author": "CxD9Team",
+  "author": "InosID",
   "license": "GPL-3.0",
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.3",
