@@ -82,9 +82,11 @@ exports.photofuniaHelp = (v) => {
 ├ Gunakan perintah :
 ├ ${v}photofunia [type] (text)
 ├ Ubah [type] menjadi salah satu tipe di bawah ini.
+╰────────────────
+╭﹝🅃🅈🄿🄴﹞
 ├ light
 ├ snow
-╰────────────────`
+╰────────`
 }
 
 // Feature
