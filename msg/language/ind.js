@@ -76,12 +76,15 @@ exports.ghstalk = (user, bio, company, email, twit, pr, pg, follower, following,
 exports.sizeMax = (url) => {
   return `Ukuran file terlalu besar. Download manual file di dalam link ini.\n*Link:* ${url}`
 }
-exports.photofuniaHelp = () => {
+exports.photofuniaHelp = (v) => {
   return `
 ╭﹝🄿🄷🄾🅃🄾🄵🅄🄽🄸🄰﹞
+├ Gunakan perintah :
+├ ${v}photofunia [type] (text)
+├ Ubah [type] menjadi salah satu tipe di bawah ini.
 ├ light
 ├ snow
-╰────────────────
+╰────────────────`
 }
 
 // Feature
