@@ -711,7 +711,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
               })
           break
           case 'help':
-            CXD.reply(mess.photofuniaHelp())
+            CXD.reply(mess.photofuniaHelp(prefix))
           break
         }
       break
