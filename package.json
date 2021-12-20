@@ -34,6 +34,7 @@
     "form-data": "^4.0.0",
     "node-fetch": "^2.6.1",
     "qrcode": "^1.4.4",
+    "qs": "^6.10.2",
     "request": "^2.88.2",
     "yt-search": "^2.10.2",
     "ytdl-core": "^4.9.1"
