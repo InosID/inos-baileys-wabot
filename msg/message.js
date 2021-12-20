@@ -228,7 +228,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       break
       case 'nsfwanime':
         if (isGroupMsg) {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
             {
               buttonId: `${prefix}menu`,
               buttonText: {
@@ -275,7 +275,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
               ], { quoted: msg })
             })
         } else {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
             {
               buttonId: `${prefix}enable nsfw`,
               buttonText: {
@@ -449,7 +449,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       break
       case 'hentai':
         if (isGroupMsg) {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
             {
               buttonId: `${prefix}hentai`,
               buttonText: {
@@ -537,7 +537,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       break
       case 'yuri':
         if (isGroupMsg) {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
             {
               buttonId: `${prefix}hentai`,
               buttonText: {
