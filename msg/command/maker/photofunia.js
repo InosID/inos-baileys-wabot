@@ -11,7 +11,7 @@ const cheerio = __importDefault(require("cheerio"));
 const fakeUa = __importDefault(require("fake-useragent"));
 const qs = __importDefault(require("qs"));
 
-async function photofunia_text(url, text) {
+async function result(url, text) {
   return new Promise(async (resolve, reject) => {
     await axios.default({
       method: "POST",
