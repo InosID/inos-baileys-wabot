@@ -42,6 +42,7 @@ let {
 } = require('./command/downloader')
 
 let { githubstalk } = require('./command/stalker')
+let { photofunia } = require('./command/maker')
 
 require('./../config')
 
@@ -693,6 +694,23 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             var flg = res.following
             CXD.sendImage(from, res.avatar, mess.ghstalk(q, bio, company, email, twitter, fls, flg, locs), true)
           })
+      break
+      case 'photofunia':
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+        switch(args[0]) {
+          case 'light':
+            photofunia.result("https://m.photofunia.com/categories/all_effects/light-writing?server=1", args[1])
+              .then(async (res) => {
+                CXD.sendImage(from, res.result, mess.done(), true)
+              })
+          break
+          case 'snow':
+            photofunia.result("https://m.photofunia.com/categories/all_effects/snow-sign?server=1", args[1])
+              .then(async (res) => {
+                CXD.sendImage(from, res.result, mess.done(), true)
+              })
+          break
+        }
       break
       default:
         CXD.setPresence(online)
