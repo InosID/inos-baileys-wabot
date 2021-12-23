@@ -710,9 +710,6 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
                 CXD.sendImage(from, res.result, mess.done(), true)
               })
           break
-          case 'help':
-            CXD.reply(mess.photofuniaHelp(prefix))
-          break
         }
       break
       default:
