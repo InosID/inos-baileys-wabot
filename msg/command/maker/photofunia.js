@@ -29,3 +29,5 @@ async function result(url, text) {
     }).catch(reject);
   });
 }
+
+module.exports = { result }
