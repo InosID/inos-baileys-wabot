@@ -17,7 +17,7 @@ app.listen(PORT, () => {
 })
 
 async function start() {
-  console.log(color(figlet.textSync(`Cxd9Bot`, 'Larry 3D'), 'cyan'))
+  console.log(color(figlet.textSync(`Inos Baileys\nWaBot`, 'Larry 3D'), 'cyan'))
   CFonts.say(`Created By : ${package.author} Team!`, {
     font: 'console',
     align: "center",
