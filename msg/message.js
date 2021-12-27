@@ -712,6 +712,11 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           break
         }
       break
+      case 'sticker':
+      case 'stiker':
+      case 's':
+        await CXD.sendImageAsSticker(from)
+      break
       default:
         CXD.setPresence(online)
         if (autoRead == true) {
