@@ -11,10 +11,10 @@ let qrcode = require('qrcode')
 
 let QR;
 
-let PORT = process.env.PORT || 8080 || 5000 || 3000
+/*let PORT = process.env.PORT || 8080 || 5000 || 3000
 app.listen(PORT, () => {
   console.log(color('Localhost is running!', 'yellow'))
-})
+})*/
 
 async function start() {
   console.log(color(figlet.textSync(`Inos Baileys\nWaBot`, 'Larry 3D'), 'cyan'))
