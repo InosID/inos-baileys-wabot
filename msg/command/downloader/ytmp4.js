@@ -52,3 +52,5 @@ async function result(yutub) => {
   hasil.push({ thumb, judul, quality, tipe, size, output, link})
   return hasil
 }
+
+module.exports = { result }
