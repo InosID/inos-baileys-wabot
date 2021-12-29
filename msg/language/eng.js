@@ -76,17 +76,15 @@ exports.ghstalk = (user, bio, company, email, twit, pr, pg, follower, following,
 exports.sizeMax = (url) => {
   return `The file size is too large. Download the manual file in this link.\n*Link:* ${url}`
 }
-exports.photofuniaHelp = (v) => {
+exports.yt4res = (res) => {
   return `
-╭﹝🄿🄷🄾🅃🄾🄵🅄🄽🄸🄰﹞
-├ Use command :
-├ ${v}photofunia [type] (text)
-├ Change [type] be one of the types below.
-╰────────────────
-╭﹝🅃🅈🄿🄴﹞
-├ light
-├ snow
-╰────────`
+╭﹝🅈🅃🄼🄿④﹞
+├ Title : ${res[0].judul}
+├ Quality : ${res[0].quality}
+├ Size : ${res[0].size}
+├ Type : ${res[0].tipe}
+╰─────────
+`
 }
 
 // Feature
