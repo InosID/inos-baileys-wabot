@@ -44,6 +44,11 @@ let {
 let { githubstalk } = require('./command/stalker')
 let { photofunia } = require('./command/maker')
 
+let {
+  halah,
+  hilih
+} = require('./command/other')
+
 require('./../config')
 
 if (language == 'ind') {
@@ -725,6 +730,20 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           .then(async (res) => {
             CXD.sendImage(from, res[0].thumb, mess.yt4res(res), true)
             CXD.sendFileFromUrl(from, res[0].link, 'video', mess.done(), true)
+          })
+      break
+      case 'halah':
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+        halah.result(q)
+          .then(async (res) => {
+            CXD.reply(res.result)
+          })
+      break
+      case 'hilih':
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+        hilih.result(q)
+          .then(async (res) => {
+            CXD.reply(res.result)
           })
       break
       default:
