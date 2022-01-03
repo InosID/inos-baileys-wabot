@@ -1,6 +1,4 @@
-let fs = require("fs")
-
-async function result(teks){
+async function result(teks) {
   teks = teks.replace(/[e]/g,"a")
   teks = teks.replace(/[o]/g,"a")
   teks = teks.replace(/[u]/g,"a")
@@ -9,3 +7,5 @@ async function result(teks){
   teks = teks.replace(/[U]/g,"A")
   return { result: teks }
 }
+
+module.exports = { result }
