@@ -1,12 +1,13 @@
 const fs = require("fs")
 
 async function resut(teks){
-        if(teks==undefined||teks==""||teks==" ") return {Error: "Masukkan parameter teks"}
-        teks = teks.replace(/[e]/g,"a")
-        teks = teks.replace(/[o]/g,"a")
-        teks = teks.replace(/[u]/g,"a")
-        teks = teks.replace(/[E]/g,"A")
-        teks = teks.replace(/[O]/g,"A")
-        teks = teks.replace(/[U]/g,"A")
+        teks = teks.replace(/[a]/g,"i")
+        teks = teks.replace(/[e]/g,"i")
+        teks = teks.replace(/[o]/g,"i")
+        teks = teks.replace(/[u]/g,"i")
+        teks = teks.replace(/[A]/g,"I")
+        teks = teks.replace(/[E]/g,"I")
+        teks = teks.replace(/[O]/g,"I")
+        teks = teks.replace(/[U]/g,"I")
 return {result: teks}
 }
