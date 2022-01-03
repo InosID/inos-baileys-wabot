@@ -1,6 +1,6 @@
 let fs = require("fs")
 
-async function resut(teks){
+async function result(teks){
   teks = teks.replace(/[e]/g,"a")
   teks = teks.replace(/[o]/g,"a")
   teks = teks.replace(/[u]/g,"a")
