@@ -7,7 +7,7 @@ const yts = require("yt-search");
 const yt = require("ytdl-core")
 const ytIdRegex = /(?:http(?:s|):\/\/|)(?:(?:www\.|)youtube(?:\-nocookie|)\.com\/(?:watch\?.*(?:|\&)v=|embed\/|v\/)|youtu\.be\/)([-_0-9A-Za-z]{11})/
 
-async function result(yutub) => {
+async function result(yutub) {
   function post(url, formdata) {
     return fetch(url, {
       method: 'POST',
