@@ -24,7 +24,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.3",
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "cfonts": "^2.10.0",
     "cheerio": "^1.0.0-rc.10",
     "chalk": "^4.1.2",
