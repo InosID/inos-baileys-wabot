@@ -1,4 +1,4 @@
-let Baileys = require('@adiwajshing/baileys');
+let Baileys = require('@adiwajshing/baileys')
 let { readFileSync: read, writeFileSync: write } = require('fs');
 
 let { help } = require('./../lib/help')
@@ -15,7 +15,6 @@ let {
   wikiEN
 } = require('./command/information')
 let { ind, eng } = require('./language')
-
 let {
   nekonime,
   nsfwanime,
@@ -137,8 +136,11 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       msg: msg,
       type: type,
       from,
-      CXD
+      CXD: CXD,
+      content,
+      args
     }
+
     require('./../lib/attr')(data)
 
     let isUrl = (url) => {
@@ -146,12 +148,12 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
     }
 
     global.pushname = CXD.contacts[sender] != undefined ? CXD.contacts[sender].vname || CXD.contacts[sender].notify : undefined
-
+/*
     let isMedia = type === "imageMessage" || type === "videoMessage"
     let isQuotedImage = type === "extendedTextMessage" && content.includes("imageMessage")
     let isQuotedVideo = type === "extendedTextMessage" && content.includes("videoMessage")
     let isQuotedAudio = type === "extendedTextMessage" && content.includes("audioMessage")
-    let isQuotedSticker = type === "extendedTextMessage" && content.includes("stickerMessage")
+    let isQuotedSticker = type === "extendedTextMessage" && content.includes("stickerMessage")*/
     if (isCmd && isGroupMsg) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     if (!isGroupMsg && isCmd) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
     switch(command) {
@@ -747,7 +749,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           })
       break
       default:
-        CXD.setPresence(online)
+        CXD.updatePresence(from, online)
         if (autoRead == true) {
           CXD.chatRead(from)
         }
