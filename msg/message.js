@@ -138,7 +138,8 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       from,
       CXD: CXD,
       content,
-      args
+      args,
+      text
     }
 
     require('./../lib/attr')(data)
