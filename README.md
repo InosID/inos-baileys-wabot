@@ -72,7 +72,7 @@ the second step is to just change the number of the owner of the bot and finally
 
 ## Group WhatsApp
 
-[Click Here](https://chat.whatsapp.com/FjcLMOgcCXlDNIn6toqgo0)
+[Click Here](https://chat.whatsapp.com/KXxyPFoIpRDCbyQWRYVu8G)
 
 ## Send Message
 
