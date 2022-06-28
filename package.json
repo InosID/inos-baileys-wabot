@@ -38,7 +38,8 @@
     "qs": "^6.10.2",
     "request": "^2.88.2",
     "yt-search": "^2.10.2",
-    "ytdl-core": "^4.9.1"
+    "ytdl-core": "^4.9.1",
+    "hmfull": "^2.2.1"
   },
   "bugs": {
     "url": "https://github.com/CxD9-Teams/cxd9-bot/issues"
