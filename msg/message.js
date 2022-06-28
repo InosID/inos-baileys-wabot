@@ -18,8 +18,7 @@ let { ind, eng } = require('./language')
 let {
   nekonime,
   nsfwanime,
-  hentai,
-  yuri
+  hentai
 } = require('./command/anime')
 
 let {
@@ -527,94 +526,6 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
                   buttonId: `${prefix}hentai`,
-                  buttonText: {
-                    displayText: '➡️ Next',
-                  },
-                  type: 1,
-                },
-                {
-                  buttonId: `${prefix}menu`,
-                  buttonText: {
-                    displayText: '🔙 Back to menu',
-                  },
-                  type: 1,
-                },
-              ], { quoted: msg })
-            })
-        }
-      break
-      case 'yuri':
-        if (isGroupMsg) {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
-            {
-              buttonId: `${prefix}hentai`,
-              buttonText: {
-                displayText: '➡️ Next',
-              },
-              type: 1,
-            },
-            {
-              buttonId: `${prefix}menu`,
-              buttonText: {
-                displayText: '🔙 Back to menu',
-              },
-              type: 1,
-            },
-          ], { quoted: msg })
-          if (!isNsfw) return CXD.sendButton(from, mess.nsfwOff(), "© Bot", [
-            {
-              buttonId: `${prefix}enable nsfw`,
-              buttonText: {
-                displayText: '🔛 Enable nsfw',
-              },
-              type: 1,
-            },
-            {
-              buttonId: `${prefix}menu`,
-              buttonText: {
-                displayText: '🔙 Back to menu',
-              },
-              type: 1,
-            },
-          ], { quoted: msg })
-          CXD.reply(mess.wait())
-          yuri.result()
-            .then(async (res) => {
-              buf = await buffer(res.image)
-              CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
-                {
-                  buttonId: `${prefix}yuri`,
-                  buttonText: {
-                    displayText: '➡️ Next',
-                  },
-                  type: 1,
-                },
-                {
-                  buttonId: `${prefix}menu`,
-                  buttonText: {
-                    displayText: '🔙 Back to menu',
-                  },
-                  type: 1,
-                },
-              ], { quoted: msg })
-            })
-        } else {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
-            {
-              buttonId: `${prefix}menu`,
-              buttonText: {
-                displayText: '🔙 Back to menu',
-              },
-              type: 1,
-            },
-          ], { quoted: msg })
-          CXD.reply(mess.wait())
-          yuri.result()
-            .then(async (res) => {
-              buf = await buffer(res.image)
-              CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
-                {
-                  buttonId: `${prefix}yuri`,
                   buttonText: {
                     displayText: '➡️ Next',
                   },
