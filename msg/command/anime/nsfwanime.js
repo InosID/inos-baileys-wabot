@@ -1,18 +1,12 @@
 /**
- * Nsfw anime by @moo-d
+ * Nsfw anime
  */
-let axios = require('axios')
+let HMfull = require('hmfull')
 
 async function result() {
   return new Promise(async (resolve, reject) => {
-    await axios.get("https://nekos.life/api/v2/img/erok")
-      .then((web) => {
-        img = web.data.url
-        result = {
-          image: img
-        }
-        resolve(result)
-      }).catch(reject)
+    let res = await HMfull.HMtai.nsfw.nsfwNeko()
+    resolve(res.url)
   })
 }
 
