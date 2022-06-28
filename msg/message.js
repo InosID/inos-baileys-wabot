@@ -551,7 +551,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             CXD.sendButtonImg(from, buf, mess.done(), "© Bot",
               [
                 {
-                  buttonId: `${prefix}hentai`,
+                  buttonId: `${prefix}wallpaper`,
                   buttonText: {
                     displayText: '➡️ Next',
                   },
