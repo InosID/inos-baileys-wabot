@@ -1,18 +1,12 @@
 /**
- * Random hentai scraper by @moo-d
+ * Random hentai
  */
-let axios = require('axios')
+const HMfull = require('hmfull')
 
 async function result() {
-  return new Promise(async (resolve, reject) => {
-    await axios.get("https://nekos.life/api/v2/img/hentai")
-      .then((web) => {
-        img = web.data.url
-        result = {
-          image: img
-        }
-        resolve(result)
-      }).catch(reject)
+  return new Promise(async(resolve, reject) => {
+    let res = await HMfull.Nekos.nsfw.hentai()
+    resolve(res.url);
   })
 }
 
