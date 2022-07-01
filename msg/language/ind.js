@@ -99,3 +99,6 @@ exports.nsfwOff = () => {
 exports.invalidLink = () => {
   return `[❕] Link salah!`
 }
+exports.invalidFileType = () => {
+  return `[❕] Tipe File Salah!`
+}
