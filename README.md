@@ -68,7 +68,7 @@ the second step is to just change the number of the owner of the bot and finally
 --------|--------|--------|
 [![Fxc7](https://github.com/fxc7.png)](https://github.com/fxc7) | [![Hadi-Api](https://github.com/hadi-api.png)](https://github.com/hadi-api) | [![Ahmadzakix](https://github.com/Ahmadzakix.png)](https://github.com/Ahmadzakix)
 [![Finox999](https://github.com/Finox999.png)](https://github.com/Finox999) | [![Fauzy-Rahadian](https://github.com/fauzy-rahadian.png)](https://github.com/Fauzy-Rahadian) | [![Arifi Razzaq](https://github.com/arifirazzaq2001.png)](https://github.com/arifirazzaq2001)
-[![Caliph91](https://github.com/Caliph91.png)](https:github.com/caliph) | [![AffisJunianto](https://github.com/affisjunianto.png)](https://github.com/affisjunianto) | [![Monxnl](https://github.com/Monxnl.png)](https://github.com/Monxnl)
+[![Caliph Dev](https://github.com/caliphdev.png)](https://github.com/caliphdev) | [![AffisJunianto](https://github.com/affisjunianto.png)](https://github.com/affisjunianto) | [![Monxnl](https://github.com/Monxnl.png)](https://github.com/Monxnl)
 
 ## Group WhatsApp
 
