@@ -45,11 +45,11 @@ exports.needTag = () => {
 exports.useCountryNum = () => {
   return `[❕] Use country code!`
 }
-exports.needReplyImg = () => {
-  return `[❕] Reply the picture!`
+exports.needReplyOrSendImg = () => {
+  return `[❕] Send a picture or reply to an image with a caption !sticker [packname]|[authorname]`
 }
-exports.needReplyVid = () => {
-  return `[❕] Reply the video!`
+exports.needReplyOrSendVid = () => {
+  return `[❕] Send a video or reply to an video with a caption !sticker [packname]|[authorname]`
 }
 
 // Result
