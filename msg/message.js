@@ -687,6 +687,8 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
 	}
       break
       case 'stickergif':
+      case 'stikergif':
+      case 'sgif':
         if ((isVideo || isQuotedImage)) {
           var anu = args.join(' ').split('|')
           var satu = anu[0] !== '' ? anu[0] : stickerInfo.pack
