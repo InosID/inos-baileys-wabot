@@ -1,5 +1,19 @@
-let Baileys = require('@adiwajshing/baileys')
-let { readFileSync: read, writeFileSync: write } = require('fs');
+const {
+  default: makeWASocket,
+  DisconnectReason,
+  useSingleFileAuthState,
+  fetchLatestBaileysVersion,
+  AnyMessageContent,
+  delay,
+  generateForwardMessageContent,
+  prepareWAMessageMedia,
+  generateWAMessageFromContent,
+  generateMessageID,
+  downloadContentFromMessage,
+  makeInMemoryStore,
+} = require('@adiwajshing/baileys')
+
+let { readFileSync: read, writeFileSync: write, unlinkSync: remove } = require('fs');
 
 let { help } = require('./../lib/help')
 let { color } = require('./../lib/color')
@@ -43,6 +57,8 @@ let {
 let { githubstalk } = require('./command/stalker')
 let { photofunia } = require('./command/maker')
 
+let { moduleWA } = require('./../lib/simple')
+
 let {
   halah,
   hilih
@@ -56,35 +72,15 @@ if (language == 'ind') {
   mess = eng
 }
 
-let Presence = Baileys.Presence
-  global.online = Presence.available
-    global.typing = Presence.composing
-      global.recording = Presence.recording
-        global.paused = Presence.paused
-
-module.exports = msgMain = async(CXD = new conn, msg) => {
+module.exports = msgMain = async(CXD, chatUpdate, store) => {
   try {
-    if (!msg.hasNewMessage) return
-    msg = msg.messages.all()[0]
+    msg = chatUpdate.messages[0]
     if (!msg.message) return
     if (msg.key && msg.key.remoteJid == 'status@broadcast') return
     msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message: msg.message
+    m = moduleWA(CXD, msg, store)
+    m.isBaileys = m.key.id.startsWith('BAE5') || m.key.id.startsWith('3EB0')
     let content = JSON.stringify(msg.message)
-    let from = msg.key.remoteJid
-    let {
-      text,
-      extendedText,
-      contact,
-      location,
-      liveLocation,
-      image,
-      video,
-      sticker,
-      document,
-      audio,
-      product,
-      buttonsMessage
-    } = Baileys.MessageType
     type = Object.keys(msg.message)[0]
     cmd = type === "conversation" && msg.message.conversation ? msg.message.conversation: type == "imageMessage" && msg.message.imageMessage.caption ? msg.message.imageMessage.caption: type == "videoMessage" && msg.message.videoMessage.caption ? msg.message.videoMessage.caption: type == "extendedTextMessage" && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text: type == "buttonsResponseMessage" && msg.message[type].selectedButtonId ? msg.message[type].selectedButtonId: ""
     let getCmd = (id) => { let position = null
@@ -103,22 +99,24 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
     } else if (multiPrefix == true) {
       var prefix = /^[°•π÷×¶∆£¢€¥®™✓=|~zZ+×_*!#%^&./\\©^]/.test(cmd) ? cmd.match(/^[°•π÷×¶∆£¢€¥®™✓=|~xzZ+×_*!#,|÷?;:%^&./\\©^]/gi) : '-'
     } else {
-      console.log('[Multi Err] ' + multi + ' is a wrong boolean.')
+      console.log('[Multi Err] ' + multiPrefix + ' is a wrong boolean.')
     }
-    body = type === 'listResponseMessage' && msg.message.listResponseMessage.title ? msg.message.listResponseMessage.title: type == 'buttonsResponseMessage' && msg.message.buttonsResponseMessage.selectedButtonId ? msg.message.buttonsResponseMessage.selectedButtonId: type == "conversation" && msg.message.conversation.startsWith(prefix) ? msg.message.conversation: type == "imageMessage" && msg.message.imageMessage.caption.startsWith(prefix) ? msg.message.imageMessage.caption: type == "videoMessage" && msg.message.videoMessage.caption.startsWith(prefix) ? msg.message.videoMessage.caption: type == "extendedTextMessage" && msg.message.extendedTextMessage.text.startsWith(prefix) ? msg.message.extendedTextMessage.text: ""
-    let chats = (type === 'conversation') ? msg.message.conversation: (type === 'extendedTextMessage') ? msg.message.extendedTextMessage.text: ''
+    var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
+    let chats = (typeof m.text == 'string' ? m.text : '')
     let command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
     listbut = (type == 'listResponseMessage') ? msg.message.listResponseMessage.title: ''
-    let args = body.trim().split(/ +/).slice(1)
-    let isCmd = body.startsWith(prefix)
+    let args = chats.trim().split(/ +/).slice(1)
+    const isCmd = chats.startsWith(prefix)
     let q = args.join(' ')
     let botNumber = CXD.user.jid
-    let isGroupMsg = from.endsWith("@g.us")
-    let sender = isGroupMsg ? msg.participant : msg.key.remoteJid
-    let groupMetadata = isGroupMsg ? await CXD.groupMetadata(from) : ''
-    let groupName = isGroupMsg ? groupMetadata.subject : ''
-    let groupId = isGroupMsg ? groupMetadata.id : ''
-    let groupMembers = isGroupMsg ? groupMetadata.participants : ''
+    let quoted = m.quoted ? m.quoted : m
+    let from = m.key.remoteJid
+    let isGroup = msg.key.remoteJid.endsWith('@g.us')
+    let sender = isGroup ? (m.key.participant ? m.key.participant : m.participant) : m.key.remoteJid
+    let groupMetadata = isGroup ? await CXD.groupMetadata(from) : ''
+    let groupName = isGroup ? groupMetadata.subject : ''
+    let groupId = isGroup ? groupMetadata.id : ''
+    let groupMembers = isGroup ? groupMetadata.participants : ''
     let getGroupAdmins = (participants) => {
       admins = []
       for (let i of participants) {
@@ -126,10 +124,10 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       }
       return admins
     }
-    let groupAdmins = isGroupMsg ? getGroupAdmins(groupMembers) : ''
+    let groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
     let isBotGroupAdmins = groupAdmins.includes(botNumber) || false
     let isGroupAdmins = groupAdmins.includes(sender) || false
-    let isNsfw = isGroupMsg ? nsfw.includes(groupId) : false
+    let isNsfw = isGroup ? nsfw.includes(groupId) : false
 
     global.buffer = fetcher.getBuffer
     data = {
@@ -139,7 +137,8 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       CXD: CXD,
       content,
       args,
-      text
+      sender,
+      m
     }
 
     require('./../lib/attr')(data)
@@ -148,15 +147,21 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
     }
 
-    global.pushname = CXD.contacts[sender] != undefined ? CXD.contacts[sender].vname || CXD.contacts[sender].notify : undefined
-/*
-    let isMedia = type === "imageMessage" || type === "videoMessage"
-    let isQuotedImage = type === "extendedTextMessage" && content.includes("imageMessage")
-    let isQuotedVideo = type === "extendedTextMessage" && content.includes("videoMessage")
-    let isQuotedAudio = type === "extendedTextMessage" && content.includes("audioMessage")
-    let isQuotedSticker = type === "extendedTextMessage" && content.includes("stickerMessage")*/
-    if (isCmd && isGroupMsg) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
-    if (!isGroupMsg && isCmd) console.log('[CXD]', body, 'from', sender.split('@')[0], 'args :', args.length)
+    global.pushname = m.pushname
+
+    const isImage = (type == 'imageMessage')
+    const isVideo = (type == 'videoMessage')
+    const isSticker = (type == 'stickerMessage')
+    const isQuotedMsg = (type == 'extendedTextMessage')
+
+    const isQuotedImage = isQuotedMsg ? content.includes('imageMessage') ? true : false : false
+    const isQuotedAudio = isQuotedMsg ? content.includes('audioMessage') ? true : false : false
+    const isQuotedDocument = isQuotedMsg ? content.includes('documentMessage') ? true : false : false
+    const isQuotedVideo = isQuotedMsg ? content.includes('videoMessage') ? true : false : false
+    const isQuotedSticker = isQuotedMsg ? content.includes('stickerMessage') ? true : false : false
+
+    if (isCmd && isGroup) console.log('[CXD]', 'from', body, sender.split('@')[0], 'args :', args.length)
+    if (!isGroup && isCmd) console.log('[CXD]', 'from', body, sender.split('@')[0], 'args :', args.length)
     switch(command) {
       case 'menu':
       case 'help':
@@ -167,7 +172,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         CXD.reply(mess.wait())
         gempa.result()
           .then(async (res) => {
-            buf = await buffer(res.thumbnail)
+            buf = res.thumbnail
             CXD.sendButtonImg(from, buf,`╭﹝🄸🄽🄵🄾🄶🄴🄼🄿🄰﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, "© Bot", [
               {
                 buttonId: `${prefix}menu`,
@@ -215,7 +220,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         CXD.reply(mess.wait())
         nekonime.result()
           .then(async (res) => {
-            buf = await buffer(res.image)
+            buf = res.image
             CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
               {
                 buttonId: `${prefix}nekonime`,
@@ -235,8 +240,8 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           })
       break
       case 'nsfwanime':
-        if (isGroupMsg) {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+        if (isGroup) {
+          if (!allow.nsfw) return CXD.sendButtonImg(from, './lib/fbi.jpg', mess.notAllowed(), "© Bot", [
             {
               buttonId: `${prefix}menu`,
               buttonText: {
@@ -264,7 +269,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           CXD.reply(mess.wait())
           nsfwanime.result()
             .then(async (res) => {
-              buf = await buffer(res)
+              buf = res
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
                   buttonId: `${prefix}nsfwanime`,
@@ -283,7 +288,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
               ], { quoted: msg })
             })
         } else {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+          if (!allow.nsfw) return CXD.sendButtonImg(from, './lib/fbi.jpg', mess.notAllowed(), "© Bot", [
             {
               buttonId: `${prefix}enable nsfw`,
               buttonText: {
@@ -302,7 +307,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           CXD.reply(mess.wait())
           nsfwanime.result()
             .then(async (res) => {
-              buf = await buffer(res)
+              buf = res
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
                   buttonId: `${prefix}nsfwanime`,
@@ -341,7 +346,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         })
       break
       case 'enable':
-        if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
         if (args.length < 1) return CXD.reply(mess.needQuery())
         switch(args[0]) {
           case 'nsfw':
@@ -353,7 +358,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         }
       break
       case 'disable':
-        if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
         if (args.length < 1) return CXD.reply(mess.needQuery())
         switch(args[0]) {
           case 'nsfw':
@@ -456,8 +461,8 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           })
       break
       case 'hentai':
-        if (isGroupMsg) {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+        if (isGroup) {
+          if (!allow.nsfw) return CXD.sendButtonImg(from, './lib/fbi.jpg', mess.notAllowed(), "© Bot", [
             {
               buttonId: `${prefix}hentai`,
               buttonText: {
@@ -492,7 +497,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           CXD.reply(mess.wait())
           hentai.result()
             .then(async (res) => {
-              buf = await buffer(res)
+              buf = res
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
                   buttonId: `${prefix}hentai`,
@@ -511,7 +516,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
               ], { quoted: msg })
             })
         } else {
-          if (!allow.nsfw) return CXD.sendButtonLoc(from, read('./../lib/fbi.jpg'), mess.notAllowed(), "© Bot", [
+          if (!allow.nsfw) return CXD.sendButtonImg(from, './lib/fbi.jpg', mess.notAllowed(), "© Bot", [
             {
               buttonId: `${prefix}menu`,
               buttonText: {
@@ -523,7 +528,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           CXD.reply(mess.wait())
           hentai.result()
             .then(async (res) => {
-              buf = await buffer(res)
+              buf = res
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot",
                 [
                   {
@@ -547,7 +552,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       case 'wallpaper':
         wallpaper.result()
           .then(async (res) => {
-            buf = await buffer(res)
+            buf = res
             CXD.sendButtonImg(from, buf, mess.done(), "© Bot",
               [
                 {
@@ -568,7 +573,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
           })
       break
       case 'promote':
-        if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
         if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
         if (!isBotGroupAdmins) return CXD.reply(mess.onlyBotAdmin())
         if (msg.message.extendedTextMessage === undefined || msg.message.extendedTextMessage === null) return CXD.reply(mess.needTag())
@@ -586,7 +591,7 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
         }
       break
       case 'demote':
-        if (!isGroupMsg) return CXD.reply(mess.onlyGroup())
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
         if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
         if (!isBotGroupAdmins) return CXD.reply(mess.onlyBotAdmin())
         if (msg.message.extendedTextMessage === undefined || msg.message.extendedTextMessage === null) return CXD.reply(mess.needTag())
@@ -659,7 +664,31 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
       case 'sticker':
       case 'stiker':
       case 's':
-        await CXD.sendImageAsSticker(from)
+	if ((isImage || isQuotedImage)) {
+	  var stickerInfo = {
+	    author: "© Bot",
+	    pack: ""
+	  }
+	  var anu = args.join(' ').split('|')
+	  var satu = anu[0] !== '' ? anu[0] : stickerInfo.pack
+	  var dua = typeof anu[1] !== 'undefined' ? anu[1] : stickerInfo.author
+	  var mime = (quoted.msg || quoted).mimetype || ''
+
+	  if (/image/.test(mime)) {
+	    var media = await quoted.download()
+	    var encmedia;
+	    encmedia = await CXD.sendImageAsSticker(from, media, m, {
+	      packname: satu,
+	      author: dua
+	    }, { quoted: msg })
+	    remove(encmedia)
+	  } else {
+	    CXD.reply(mess.needReplyOrSendImg())
+	  }
+	} else {
+	  console.log(color("[STICKER]", "cyan"), `Users don't post pictures/videos/with captions!`)
+	  CXD.reply(mess.needReplyOrSendImg())
+	}
       break
       case 'ytmp4':
         if (args.length < 1) return CXD.reply(mess.needLink())
@@ -685,11 +714,6 @@ module.exports = msgMain = async(CXD = new conn, msg) => {
             CXD.reply(res.result)
           })
       break
-      default:
-        CXD.updatePresence(from, online)
-        if (autoRead == true) {
-          CXD.chatRead(from)
-        }
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
