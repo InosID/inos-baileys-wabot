@@ -665,10 +665,6 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
       case 'stiker':
       case 's':
 	if ((isImage || isQuotedImage)) {
-	  var stickerInfo = {
-	    author: "© Bot",
-	    pack: ""
-	  }
 	  var anu = args.join(' ').split('|')
 	  var satu = anu[0] !== '' ? anu[0] : stickerInfo.pack
 	  var dua = typeof anu[1] !== 'undefined' ? anu[1] : stickerInfo.author
@@ -692,10 +688,6 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
       break
       case 'stickergif':
         if ((isVideo || isQuotedImage)) {
-	  var stickerInfo = {
-            author: "© Bot",
-            pack: ""
-          }
           var anu = args.join(' ').split('|')
           var satu = anu[0] !== '' ? anu[0] : stickerInfo.pack
           var dua = typeof anu[1] !== 'undefined' ? anu[1] : stickerInfo.author
