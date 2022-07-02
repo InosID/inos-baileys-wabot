@@ -45,6 +45,12 @@ exports.needTag = () => {
 exports.useCountryNum = () => {
   return `[❕] Gunakan kode negara!`
 }
+exports.needReplyImg = () => {
+  return `[❕] Balas gambar!`
+}
+exports.needReplyVid = () => {
+  return `[❕] Balas video!`
+}
 
 // Result
 exports.yt3res = (title, quality, type, size) => {
