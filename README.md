@@ -16,7 +16,7 @@
 
 - [x] **HEROKU APP**
 
-> Heroku Deploy **Beta**
+<!--> Heroku Deploy **Beta**
 
 **First deploy bot**, Click the deploy icon below !
 
@@ -24,7 +24,7 @@
 
 Then click view web.
 After that, scan the qr, Done.
-
+-->
 - [x] **RDP/VPS USER**
 
 **First download tools**, Click icon to download !
@@ -74,50 +74,27 @@ the second step is to just change the number of the owner of the bot and finally
 
 [Click Here](https://chat.whatsapp.com/KXxyPFoIpRDCbyQWRYVu8G)
 
-## Send Message
+<!--## Send Message
 
 #### Send Text Message
 
 ```js
-let Baileys = require('@adiwajshing/baileys')
+// Text message
+CXD.sendText(from, 'Hello World!')
 
-// Get message type from Baileys
-let { text } = Baileys.MessageType
-
-// Send text
-CXD.sendText(from, "Hello World!")
-
-// Send text with reply
-CXD.reply("Hello World!")
+// Reply message
+CXD.reply('Hello World!')
 ```
 
 #### Send Image Message
 
 ```js
-let Baileys = require('@adiwajshing/baileys')
-let fs = require('fs')
+// If you want no reply, change "true" to "false"
+CXD.sendImage(from, '../lib/fbi.jpg', "This is caption.", false)
 
-// Get type from Baileys
-let {
-  text,
-  image
-} = Baileys.MessageType
+var url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKTvqbVbQdjSx7J6IvfQpk-8iNopG_Ox7UCg&usqp=CAU"
 
-let locationImg = fs.readFileSync('./lib/emror.jpeg')
-
-// Send image
-CXD.sendImage(from, locationImg, "This is caption.", false)
-/**
- * If you wan't without reply, change the true to false.
- */
-
-// Send image in website
-let website = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKTvqbVbQdjSx7J6IvfQpk-8iNopG_Ox7UCg&usqp=CAU"
-
-CXD.sendImage(from, website, "This is caption.", true)
-/**
- * If you wan't without reply, change the true to false.
- */
+CXD.sendImage(from, url, "This is caption.", true)
 ```
 
 #### Send File Message
@@ -181,7 +158,7 @@ CXD.sendButton(from, "content", "footer", [
     type: 1,
   },
 ], { quoted: msg })
-```
+```-->
 
 # Note
 > If this script has an error, you can report it via issue.
