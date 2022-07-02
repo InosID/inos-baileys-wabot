@@ -16,7 +16,7 @@
 
 - [x] **HEROKU APP**
 
-<!--> Heroku Deploy **Beta**
+<!-- Heroku Deploy **Beta**
 
 **First deploy bot**, Click the deploy icon below !
 
