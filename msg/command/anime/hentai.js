@@ -16,7 +16,7 @@ async function result() {
     // } else {
     //   res = await HMfull.HMtai.nsfw.hentai()
     // }
-    let res = HMfull.HMtai.nsfw.hentai()
+    let res = await HMfull.HMtai.nsfw.hentai()
     resolve(res.url);
   })
 }
