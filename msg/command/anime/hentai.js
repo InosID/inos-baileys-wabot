@@ -9,13 +9,6 @@ async function getRandomPick(list) {
 
 async function result() {
   return new Promise(async(resolve, reject) => {
-    // let res;
-    // let arr = ['a', 'b']
-    // if (random == 'a') {
-    //   res = await HMfull.Nekos.nsfw.hentai()
-    // } else {
-    //   res = await HMfull.HMtai.nsfw.hentai()
-    // }
     let res = await HMfull.HMtai.nsfw.hentai()
     resolve(res.url);
   })
