@@ -113,7 +113,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
     let from = m.key.remoteJid
     let isGroup = msg.key.remoteJid.endsWith('@g.us')
     let sender = isGroup ? (m.key.participant ? m.key.participant : m.participant) : m.key.remoteJid
-    let groupMetadata = isGroup ? await CXD.groupMetadata(from) : ''
+    let groupMetadata = isGroup ? await CXD.groupMetadata(from) : null
     let groupName = isGroup ? groupMetadata.subject : ''
     let groupId = isGroup ? groupMetadata.id : ''
     let groupMembers = isGroup ? groupMetadata.participants : ''
