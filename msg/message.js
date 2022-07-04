@@ -12,7 +12,6 @@ const {
   downloadContentFromMessage,
   makeInMemoryStore,
 } = require('@adiwajshing/baileys')
-let { math } = require('../sf')
 let { readFileSync: read, writeFileSync: write, unlinkSync: remove } = require('fs');
 
 let { help } = require('./../lib/help')
@@ -737,15 +736,6 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
           .then(async (res) => {
             CXD.reply(res.result)
           })
-      break
-      case 'math':
-	if (args.length < 1) return CXD.reply(mess.needQuery())
-	var mode = args[0]
-	math(from, mode, 60).then(console.log)
-      break
-      case 'test':
-	// CXD.sendMessage(from, { text: 'test' }, { quoted: '6BE51C427DF528872AC9EEFB4DE2939A' })
-	console.info(m.chat)
       break
     }
   } catch(err) {
