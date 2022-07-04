@@ -56,6 +56,27 @@ If everything has been confirmed to be safe and installed, continue with the clo
 For all questions in the installation just select y 
 the second step is to just change the number of the owner of the bot and finally scan the qr code
 
+## Editing <a href="https://github.com/InosID/inos-baileys-wabot/blob/master/config.js">config.js</a>
+
+```js
+global.owner = ["123@s.whatsapp.net"] // You can change this to your phone number.
+global.botNumber = "123@s.whatsapp.net" // You can change this to bot phone number.
+global.multiPrefix = false // You can change this to `true` or `false`
+// global.autoRead = true
+global.messConf = {
+  prefix: "!", // You can change this to another prefix.
+  maxFileSize: 30.0
+}
+global.language = 'ind'
+global.allow = {
+  nsfw: true // You can change this to `true` or `false`
+}
+global.stickerInfo = {
+  author: "© Bot", // You can change this to whatever you want.
+  pack: "" // You can change this to whatever you want.
+}
+```
+
 **Powered By**
 <p align="center">
   <a href="https://github.com/InosID">
