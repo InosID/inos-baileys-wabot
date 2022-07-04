@@ -50,6 +50,7 @@ let {
 
 let {
   ytmp3,
+  ytmp4,
   tiktok
 } = require('./command/downloader')
 
@@ -705,16 +706,16 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
 	  }
         }
       break
-      // case 'ytmp4':
-      //   if (args.length < 1) return CXD.reply(mess.needLink())
-      //   if (!isUrl(args[0]) && !args[0].includes('youtu')) return CXD.reply(mess.invalidLink())
-      //   CXD.reply(mess.wait())
-      //   ytmp4.result(args[0])
-      //     .then(async (res) => {
-      //       CXD.sendImage(from, res[0].thumb, mess.yt4res(res), true)
-      //       CXD.sendFileFromUrl(from, res[0].link, 'video', mess.done(), true)
-      //     })
-      // break
+      case 'ytmp4':
+        if (args.length < 1) return CXD.reply(mess.needLink())
+        if (!isUrl(args[0]) && !args[0].includes('youtu')) return CXD.reply(mess.invalidLink())
+        CXD.reply(mess.wait())
+        ytmp4.result(args[0])
+          .then(async (res) => {
+            CXD.sendImage(from, res[0].thumb, mess.yt4res(res), true)
+            CXD.sendFileFromUrl(from, res[0].link, 'video', mess.done(), true)
+          })
+      break
       case 'halah':
         if (args.length < 1) return CXD.reply(mess.needQuery())
         halah.result(q)
