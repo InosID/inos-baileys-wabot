@@ -12,7 +12,7 @@ const {
   downloadContentFromMessage,
   makeInMemoryStore,
 } = require('@adiwajshing/baileys')
-
+let { math } = require('../sf')
 let { readFileSync: read, writeFileSync: write, unlinkSync: remove } = require('fs');
 
 let { help } = require('./../lib/help')
@@ -665,6 +665,10 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
       case 'stiker':
       case 's':
 	if ((isImage || isQuotedImage)) {
+	  var stickerInfo = {
+	    author: "© Bot",
+	    pack: ""
+	  }
 	  var anu = args.join(' ').split('|')
 	  var satu = anu[0] !== '' ? anu[0] : stickerInfo.pack
 	  var dua = typeof anu[1] !== 'undefined' ? anu[1] : stickerInfo.author
@@ -687,9 +691,11 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
 	}
       break
       case 'stickergif':
-      case 'stikergif':
-      case 'sgif':
         if ((isVideo || isQuotedImage)) {
+	  var stickerInfo = {
+            author: "© Bot",
+            pack: ""
+          }
           var anu = args.join(' ').split('|')
           var satu = anu[0] !== '' ? anu[0] : stickerInfo.pack
           var dua = typeof anu[1] !== 'undefined' ? anu[1] : stickerInfo.author
@@ -708,16 +714,16 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
 	  }
         }
       break
-      case 'ytmp4':
-        if (args.length < 1) return CXD.reply(mess.needLink())
-        if (!isUrl(args[0]) && !args[0].includes('youtu')) return CXD.reply(mess.invalidLink())
-        CXD.reply(mess.wait())
-        ytmp4.result(args[0])
-          .then(async (res) => {
-            CXD.sendImage(from, res[0].thumb, mess.yt4res(res), true)
-            CXD.sendFileFromUrl(from, res[0].link, 'video', mess.done(), true)
-          })
-      break
+      // case 'ytmp4':
+      //   if (args.length < 1) return CXD.reply(mess.needLink())
+      //   if (!isUrl(args[0]) && !args[0].includes('youtu')) return CXD.reply(mess.invalidLink())
+      //   CXD.reply(mess.wait())
+      //   ytmp4.result(args[0])
+      //     .then(async (res) => {
+      //       CXD.sendImage(from, res[0].thumb, mess.yt4res(res), true)
+      //       CXD.sendFileFromUrl(from, res[0].link, 'video', mess.done(), true)
+      //     })
+      // break
       case 'halah':
         if (args.length < 1) return CXD.reply(mess.needQuery())
         halah.result(q)
@@ -731,6 +737,15 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
           .then(async (res) => {
             CXD.reply(res.result)
           })
+      break
+      case 'math':
+	if (args.length < 1) return CXD.reply(mess.needQuery())
+	var mode = args[0]
+	math(from, mode, 60).then(console.log)
+      break
+      case 'test':
+	// CXD.sendMessage(from, { text: 'test' }, { quoted: '6BE51C427DF528872AC9EEFB4DE2939A' })
+	console.info(m.chat)
       break
     }
   } catch(err) {
