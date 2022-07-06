@@ -17,19 +17,19 @@ let CFonts = require('cfonts')
 let figlet = require('figlet')
 let { color } = require('./lib/color')
 let package = JSON.parse(fs.readFileSync('./package.json'))
-let express = require('express')
 let pino = require("pino")
 let { Boom } = require("@hapi/boom")
 let path = require("path").join;
-let app = new express()
-let qrcode = require('qrcode')
+// let qrcode = require('qrcode')
+// let express = require('express')
+// let app = new express()
 
-let QR;
+// let QR;
 
-let PORT = process.env.PORT || 8080 || 5000 || 3000
-app.listen(PORT, () => {
-  console.log(color('Localhost is running!', 'yellow'))
-})
+// let PORT = process.env.PORT || 8080 || 5000 || 3000
+// app.listen(PORT, () => {
+//   console.log(color('Localhost is running!', 'yellow'))
+// })
 
 let store = makeInMemoryStore({
   logger: pino().child({
@@ -138,9 +138,9 @@ async function start() {
   connect()
 }
 
-app.get("/", async(req, res) => {
-  res.header('content-type', 'image/png')
-  res.end(QR)
-})
+// app.get("/", async(req, res) => {
+//   res.header('content-type', 'image/png')
+//   res.end(QR)
+// })
 
 start()
