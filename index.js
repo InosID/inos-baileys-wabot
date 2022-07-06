@@ -47,8 +47,6 @@ async function start() {
     gradient: ['yellow', 'yellow']
   })
 
-
-
   /** Uncache if there is file change
    * @param {string} module Module name or path
    * @param {function} cb <optional>
@@ -75,7 +73,9 @@ async function start() {
     })
   }
 
-
+  // nocache
+  require('./msg/message.js')
+  nocache('./msg/message.js', module => console.log(color(`message.js is now updated!`)))
 
   // connect to whatsapp
   async function connect() {
