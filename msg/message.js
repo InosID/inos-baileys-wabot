@@ -751,6 +751,17 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
             CXD.reply(res.result)
           })
       break
+      case 'tekateki':
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (isGame(from, gameArray.tekateki)) return CXD.reply(mess.unsolvedQuestion())
+        var data = read('./msg/command/game/database/tekateki.json')
+        var list = JSON.parse(data)
+        var random = Math.floor(Math.random() * list.length);
+        var p = list[random]
+        CXD.reply(mess.gameQuestion())
+        var anh = p.jawaban.toLowerCase();
+        addGame(from, anh, gameTime, gameArray.tekateki)
+      break
     }
   } catch(err) {
     console.log(color("Error:", "red"), err)
