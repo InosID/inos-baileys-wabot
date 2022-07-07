@@ -14,3 +14,4 @@ global.stickerInfo = {
   author: "© Bot",
   pack: ""
 }
+global.gameTime = 60
