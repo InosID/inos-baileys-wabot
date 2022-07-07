@@ -758,7 +758,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
         var list = JSON.parse(data)
         var random = Math.floor(Math.random() * list.length);
         var p = list[random]
-        CXD.reply(mess.gameQuestion())
+        CXD.reply(mess.gameQuestion(p, gameTime))
         var anh = p.jawaban.toLowerCase();
         addGame(from, anh, gameTime, gameArray.tekateki)
       break
