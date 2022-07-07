@@ -92,6 +92,17 @@ exports.yt4res = (res) => {
 ╰─────────
 `
 }
+exports.gameQuestion = (p, gameTime) => {
+  return `
+╭﹝🅃🄴🄺🄰 🅃🄴🄺🄸﹞
+├ *Question :* ${p.soal}
+├ *Time :* ${gameTime}s
+├ *Note* : Reply to this question to answer.
+╰──────────────`
+}
+exports.unsolvedQuestion = () {
+  return `There are still unsolved questions!`
+}
 exports.gameCorrectAnswer = () => {
   return `✅ Correct answer!`
 }
