@@ -13,15 +13,9 @@ const {
   makeInMemoryStore,
 } = require('@adiwajshing/baileys')
 let { readFileSync: read, writeFileSync: write, unlinkSync: remove } = require('fs');
-
 let { help } = require('./../lib/help')
 let { color } = require('./../lib/color')
 let fetcher = require('./../lib/fetcher')
-
-let _scommand = JSON.parse(read("./database/scommand.json"))
-let nsfw = JSON.parse(read('./database/nsfw.json'))
-//let sfw = JSON.parse(read('./database/sfw.json'))
-
 let {
   gempa,
   wikiID,
@@ -34,7 +28,6 @@ let {
   hentai,
   wallpaper
 } = require('./command/anime')
-
 let {
   artiMimpi,
   artiNama,
@@ -47,22 +40,29 @@ let {
   tanggalJadian,
   watakArtis
 } = require('./command/primbon')
-
 let {
   ytmp3,
   ytmp4,
   tiktok
 } = require('./command/downloader')
-
-let { githubstalk } = require('./command/stalker')
-let { photofunia } = require('./command/maker')
-
-let { moduleWA } = require('./../lib/simple')
-
 let {
   halah,
   hilih
 } = require('./command/other')
+let {
+  addGame,
+  getGameAnswer,
+  isGame,
+  checkGameTime,
+  getGamePosi
+} = require('./command/game')
+let { githubstalk } = require('./command/stalker')
+let { photofunia } = require('./command/maker')
+let { moduleWA } = require('./../lib/simple')
+
+let _scommand = JSON.parse(read("./database/scommand.json"))
+let nsfw = JSON.parse(read('./database/nsfw.json'))
+//let sfw = JSON.parse(read('./database/sfw.json'))
 
 require('./../config')
 
@@ -70,6 +70,10 @@ if (language == 'ind') {
   mess = ind
 } else if (language == 'eng') {
   mess = eng
+}
+
+var gameArray = {
+  tekateki: []
 }
 
 module.exports = msgMain = async(CXD, chatUpdate, store) => {
