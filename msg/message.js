@@ -112,7 +112,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
     let args = chats.trim().split(/ +/).slice(1)
     const isCmd = chats.startsWith(prefix)
     let q = args.join(' ')
-    let botNumber = CXD.user.jid
+    let botNumber = CXD.user.id
     let quoted = m.quoted ? m.quoted : m
     let from = m.key.remoteJid
     let isGroup = msg.key.remoteJid.endsWith('@g.us')
