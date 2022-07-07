@@ -75,6 +75,7 @@ global.stickerInfo = {
   author: "© Bot", // You can change this to whatever you want.
   pack: "" // You can change this to whatever you want.
 }
+global.gameTime = 60 // Second
 ```
 
 **Powered By**
