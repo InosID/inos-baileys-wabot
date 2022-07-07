@@ -92,6 +92,12 @@ exports.yt4res = (res) => {
 ╰─────────
 `
 }
+exports.gameCorrectAnswer = () => {
+  return `✅ Correct answer!`
+}
+exports.gameWrongAnswer = () => {
+  return `❎ Wrong answer!`
+}
 
 // Feature
 exports.nsfwHasOn = () => {
