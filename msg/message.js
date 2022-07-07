@@ -164,6 +164,23 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
     const isQuotedVideo = isQuotedMsg ? content.includes('videoMessage') ? true : false : false
     const isQuotedSticker = isQuotedMsg ? content.includes('stickerMessage') ? true : false : false
 
+    // Game function
+    checkGameTime(CXD, gameArray.tekateki)
+    try {
+      if (quoted && m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
+        if (chats.toLowerCase().includes(getGameAnswer(from, gameArray.tekateki))) {
+          CXD.reply(mess.gameCorrectAnswer())
+          gameArray.tekateki.splice(getGamePosi(from, gameArray.tekateki), 1)
+        } else {
+          CXD.reply(mess.gameWrongAnswer())
+        }
+      } else {
+        console.log('[GAME] User does not reply to bot messages')
+      }
+    } catch {
+      return
+    }
+
     if (isCmd && isGroup) console.log('[CXD]', 'from', body, sender.split('@')[0], 'args :', args.length)
     if (!isGroup && isCmd) console.log('[CXD]', 'from', body, sender.split('@')[0], 'args :', args.length)
     switch(command) {
