@@ -94,11 +94,11 @@ exports.yt4res = (res) => {
 }
 exports.gameQuestion = (p, gameTime) => {
   return `
-*Soal :*
-${p.soal}
-
-*Waktu :* ${gameTime}s
-*Note* : Reply pertanyaan ini untuk menjawab.`
+╭﹝🅃🄴🄺🄰 🅃🄴🄺🄸﹞
+├ *Soal :* ${p.soal}
+├ *Waktu :* ${gameTime}s
+├ *Note* : Reply pertanyaan ini untuk menjawab.
+╰──────────────`
 }
 exports.unsolvedQuestion = () {
   return `Masih ada pertanyaan yang belum diselesaikan!`
