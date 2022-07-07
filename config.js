@@ -1,5 +1,4 @@
 global.owner = ["123@s.whatsapp.net"]
-global.botNumber = "123@s.whatsapp.net"
 global.multiPrefix = false
 global.autoRead = true
 global.messConf = {
