@@ -60,7 +60,6 @@ the second step is to just change the number of the owner of the bot and finally
 
 ```js
 global.owner = ["123@s.whatsapp.net"] // You can change this to your phone number.
-global.botNumber = "123@s.whatsapp.net" // You can change this to bot phone number.
 global.multiPrefix = false // You can change this to `true` or `false`
 // global.autoRead = true
 global.messConf = {
