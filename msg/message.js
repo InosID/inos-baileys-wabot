@@ -170,7 +170,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
       if (quoted && m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
         if (chats.toLowerCase().includes(getGameAnswer(from, gameArray.tekateki))) {
           CXD.reply(mess.gameCorrectAnswer())
-          gameArray.tekateki.slice(getGamePosi(from, gameArray.tekateki), 1)
+          gameArray.tekateki.splice(getGamePosi(from, gameArray.tekateki), 1)
         } else {
           CXD.reply(mess.gameWrongAnswer())
         }
