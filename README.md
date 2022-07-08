@@ -5,13 +5,13 @@
 <img src="https://gpvc.arturio.dev/InoxID" />
 <p/>
 <p align="center">
-<a href="https://github.com/CxD9-Teams/cxd9-bot/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/CxD9-Teams/cxd9-bot?&style=flat-square"></a>
-<a href="https://github.com/CxD9-Teams/cxd9-bot/network/members"><img title="Fork" src="https://img.shields.io/github/forks/CxD9-Teams/cxd9-bot?style=flat-square"></a>
-<a href="https://github.com/CxD9-Teams/cxd9-bot/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/CxD9-Teams/cxd9-bot?label=Watching&style=flat-square"></a>
-<a href="https://github.com/CxD9-Teams/cxd9-bot/watchers"><img title="Contributor" src="https://img.shields.io/github/contributors/CxD9-Teams/cxd9-bot?logo=github&style=flat-square"></a>
+<a href="https://github.com/inosid/inos-baileys-wabot/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/CxD9-Teams/cxd9-bot?&style=flat-square"></a>
+<a href="https://github.com/inosid/inos-baileys-wabot/network/members"><img title="Fork" src="https://img.shields.io/github/forks/CxD9-Teams/cxd9-bot?style=flat-square"></a>
+<a href="https://github.com/inos-baileys-wabot/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/CxD9-Teams/cxd9-bot?label=Watching&style=flat-square"></a>
+<a href="https://github.com/InosID/inos-baileys-wabot/graphs/contributors"><img title="Contributor" src="https://img.shields.io/github/contributors/inosid/inos-baileys-wabot?logo=github&style=flat-square"></a>
 </p>
 <p align="center">
-<a href="https://github.com/CxD9-Teams/cxd9-bot"><img src="https://img.shields.io/github/repo-size/CxD9-Teams/cxd9-bot?label=Repo%20size&style=flat-square"></a>
+<a href="https://github.com/inosid/inos-baileys-wabot"><img src="https://img.shields.io/github/repo-size/inosid/inos-baileys-wabot?label=Repo%20size&style=flat-square"></a>
 </p>
 
 - [x] **HEROKU APP**
@@ -93,7 +93,7 @@ global.gameTime = 60 // Second
 
 ## Group WhatsApp
 
-[Click Here](https://chat.whatsapp.com/K0w1BggUAzr7AWJNka3Y81)
+[![WhatsApp Group](https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/K0w1BggUAzr7AWJNka3Y81)
 
 <!--## Send Message
 
