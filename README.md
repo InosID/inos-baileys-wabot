@@ -93,7 +93,7 @@ global.gameTime = 60 // Second
 
 ## Group WhatsApp
 
-[Click Here](https://chat.whatsapp.com/KXxyPFoIpRDCbyQWRYVu8G)
+[Click Here](https://chat.whatsapp.com/K0w1BggUAzr7AWJNka3Y81)
 
 <!--## Send Message
 
