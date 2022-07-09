@@ -43,11 +43,13 @@ let {
 let {
   ytmp3,
   ytmp4,
-  tiktok
+  tiktok,
+  igstory
 } = require('./command/downloader')
 let {
   halah,
-  hilih
+  hilih,
+  shortlink
 } = require('./command/other')
 let {
   addGame,
@@ -761,6 +763,27 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
         CXD.reply(mess.gameQuestion(p, gameTime))
         var anh = p.jawaban.toLowerCase();
         addGame(from, anh, gameTime, gameArray.tekateki)
+      break
+      case 'igstory':
+        if (args.length < 1) return CXD.reply(mess.needLink())
+        try {
+          var igUser = args[0]
+          // Scraper by @piyoxz
+          await igstory.getstoryvideo(igUser)
+            .then(async (res) => {
+              data = res.data
+              teks = `Username: ${igUser}\nFound: ${data.length}\n\nOther:\n`
+              for (let i of data) {
+                await shortlink.result(i)
+                  .then(async (res) => {
+                    teks += `*#* ${res}\n`
+                  })
+              }
+              await CXD.sendFileFromUrl(from, res.data[0], teks, true)
+            })
+        } catch {
+          CXD.reply('Error')
+        }
       break
     }
   } catch(err) {
