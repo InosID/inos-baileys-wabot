@@ -109,6 +109,13 @@ exports.gameCorrectAnswer = () => {
 exports.gameWrongAnswer = () => {
   return `❎ Wrong answer!`
 }
+exports.igstory = (username, data) => {
+  return `
+╭🄸🄶 🅂🅃🄾🅁🅈﹞
+├ Username : ${username}
+├ Found : ${data.length}
+├ Other :`
+}
 
 // Feature
 exports.nsfwHasOn = () => {
