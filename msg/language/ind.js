@@ -109,6 +109,12 @@ exports.gameCorrectAnswer = () => {
 exports.gameWrongAnswer = () => {
   return `❎ Jawaban salah!`
 }
+exports.igstory = (username, data) => {
+  return `Nama : ${username}
+Ditemukan : ${data.length}
+
+Lainnya:`
+}
 
 // Feature
 exports.nsfwHasOn = () => {
