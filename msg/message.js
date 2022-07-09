@@ -772,14 +772,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
           await igstory.getstoryvideo(igUser)
             .then(async (res) => {
               data = res.data
-              teks = `Username: ${igUser}\nFound: ${data.length}\n\nOther:\n`
+              teks = mess.igstory(igUser, data) + `\n`
               for (let i of data) {
                 await shortlink.result(i)
                   .then(async (res) => {
                     teks += `*#* ${res}\n`
                   })
               }
-              await CXD.sendFileFromUrl(from, res.data[0], teks, true)
+              await CXD.sendFileFromUrl(from, res.data[0] + '╰───────────', teks, true)
             })
         } catch {
           CXD.reply('Error')
