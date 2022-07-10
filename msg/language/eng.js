@@ -139,5 +139,5 @@ exports.invalidFileType = () => {
   return `[❕] Wrong File Type!`
 }
 exports.invalidQuery = () => {
-  return `[❕] Could not find this query`
+  return `[❕] Could not find this query!`
 }
