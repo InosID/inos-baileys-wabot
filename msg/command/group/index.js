@@ -1,0 +1,1 @@
+exports.welcome = require('./welcome')
