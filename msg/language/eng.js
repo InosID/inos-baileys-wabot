@@ -124,6 +124,12 @@ exports.nsfwHasOn = () => {
 exports.nsfwOff = () => {
   return `[❕] Nsfw is not enabled.`
 }
+exports.welcomeHasOn = () => {
+  return `[❕] Welcome telah aktif sebelumnya.`
+}
+exports.welcomeOff = () => {
+  return `[❕] Welcome belum diaktifkan.`
+}
 
 // Invalid
 exports.invalidLink = () => {
