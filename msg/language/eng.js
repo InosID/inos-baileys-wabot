@@ -125,10 +125,10 @@ exports.nsfwOff = () => {
   return `[❕] Nsfw is not enabled.`
 }
 exports.welcomeHasOn = () => {
-  return `[❕] Welcome telah aktif sebelumnya.`
+  return `[❕] Welcome has been active before.`
 }
 exports.welcomeOff = () => {
-  return `[❕] Welcome belum diaktifkan.`
+  return `[❕] Welcome is not enabled.`
 }
 
 // Invalid
@@ -137,4 +137,7 @@ exports.invalidLink = () => {
 }
 exports.invalidFileType = () => {
   return `[❕] Wrong File Type!`
+}
+exports.invalidQuery = () => {
+  return `[❕] Could not find this query`
 }
