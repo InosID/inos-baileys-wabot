@@ -75,6 +75,9 @@ global.stickerInfo = {
   pack: "" // You can change this to whatever you want.
 }
 global.gameTime = 60 // Second
+// Welcome option:
+// @user = tag user
+global.initialWelcome = `Welcome @user >///<` // You can change this to whatever you want.
 ```
 
 **Powered By**
