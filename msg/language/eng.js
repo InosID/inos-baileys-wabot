@@ -100,7 +100,7 @@ exports.gameQuestion = (p, gameTime) => {
 ├ *Note* : Reply to this question to answer.
 ╰──────────────`
 }
-exports.unsolvedQuestion = () {
+exports.unsolvedQuestion = () => {
   return `There are still unsolved questions!`
 }
 exports.gameCorrectAnswer = () => {
