@@ -1,4 +1,4 @@
-const {
+let {
   default: makeWASocket,
   DisconnectReason,
   useSingleFileAuthState,
@@ -58,13 +58,14 @@ let {
   checkGameTime,
   getGamePosi
 } = require('./command/game')
+let { welcome } = require('./command/group')
 let { githubstalk } = require('./command/stalker')
 let { photofunia } = require('./command/maker')
 let { moduleWA } = require('./../lib/simple')
 
 let _scommand = JSON.parse(read("./database/scommand.json"))
 let nsfw = JSON.parse(read('./database/nsfw.json'))
-//let sfw = JSON.parse(read('./database/sfw.json'))
+let _welcome = JSON.parse(read('./database/welcome.json'))
 
 require('./../config')
 
@@ -134,6 +135,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
     let isBotGroupAdmins = groupAdmins.includes(botNumber) || false
     let isGroupAdmins = groupAdmins.includes(sender) || false
     let isNsfw = isGroup ? nsfw.includes(groupId) : false
+    let isWelcome = isGroup ? _welcome.includes(groupId) : false
 
     global.buffer = fetcher.getBuffer
     data = {
@@ -370,6 +372,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
       break
       case 'enable':
         if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
         if (args.length < 1) return CXD.reply(mess.needQuery())
         switch(args[0]) {
           case 'nsfw':
@@ -378,15 +381,25 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
             write('./database/nsfw.json', JSON.stringify(nsfw))
             CXD.reply(mess.done())
           break
+          case 'welcome':
+            if (isWelcome) return CXD.reply(mess.welcomeHasOn())
+            welcome.addWelcome(groupId, initialWelcome)
+            CXD.reply(mess.done())
+          break
         }
       break
       case 'disable':
         if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
         if (args.length < 1) return CXD.reply(mess.needQuery())
         switch(args[0]) {
           case 'nsfw':
             nsfw.splice(groupId, 1)
             write('./database/nsfw.json', JSON.stringify(nsfw))
+            CXD.reply(mess.done())
+          break
+          case 'welcome':
+            _welcome.splice(welcome.getWelcomePosi(from), 1)
             CXD.reply(mess.done())
           break
         }
@@ -783,6 +796,69 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
             })
         } catch {
           CXD.reply('Error')
+        }
+      break
+      case 'setwelcome':
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
+        if (!isWelcome) return CXD.reply(mess.welcomeOff())
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+        switch(args[0]) {
+          case 'text':
+            await welcome.setWelcome(groupId, body.slice(16))
+            CXD.reply(mess.done())
+          break
+          case 'useprofile':
+            switch(args[1]) {
+              case 'true':
+                await welcome.setUseProfileImage(groupId, true)
+                CXD.reply(mess.done())
+              case 'false':
+                await welcome.setUseProfileImage(groupId, false)
+                CXD.reply(mess.done())
+              break
+              default:
+                CXD.reply(mess.invalidQuery())
+            }
+          break
+          default:
+            CXD.reply(mess.invalidQuery())
+        }
+      break
+      case 'simulation':
+      case 'simulasi':
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
+        if (!isWelcome) return CXD.reply(mess.welcomeOff())
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+        switch(args[0]) {
+          case 'welcome':
+            switch(welcome.getUseProfileImage(from)) {
+              case true:
+                var welcomeText = welcome.getWelcomeText(groupId)
+                try {
+                  var imgUrl = await CXD.profilePictureUrl(`${sender.split('@')[0]}@c.us`)
+                } catch {
+                  imgUrl = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+                }
+                if (welcomeText.includes('@user')) {
+                  welcomeText = welcomeText.replace("@user", `@${sender.split("@")[0]}`)
+                }
+                CXD.sendFileFromUrl(from, imgUrl, welcomeText, true, { mentions: [sender] })
+              break
+              case false:
+                var welcomeText = welcome.getWelcomeText(groupId)
+                if (welcomeText.includes('@user')) {
+                  welcomeText = welcomeText.replace("@user", `@${sender.split("@")[0]}`)
+                }
+                CXD.SendTextWithMentions(welcomeText, `${sender.split('@')[0]}@s.whatsapp.net`, {
+                  quoted: msg
+                })
+              break
+            }
+          break
+          default:
+            CXD.reply(mess.invalidQuery())
         }
       break
     }
