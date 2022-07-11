@@ -1,6 +1,8 @@
 let fs = require('fs')
 let toMs = require('ms')
-let { tekateki } = require('./database')
+let tbkanime = require('./anime')
+
+// Game function
 
 /** Add game to array
  * @param {String} chatId
@@ -111,5 +113,6 @@ module.exports = {
   isGame,
   checkGameTime,
   getGamePosi,
-  getGameMultiAnswer
+  getGameMultiAnswer,
+  tbkanime
 }
