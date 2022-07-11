@@ -171,15 +171,17 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
     // Game function
     checkGameTime(CXD, gameArray.tekateki)
     try {
-      if (quoted && m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
-        if (chats.toLowerCase().includes(getGameAnswer(from, gameArray.tekateki))) {
-          CXD.reply(mess.gameCorrectAnswer())
-          gameArray.tekateki.splice(getGamePosi(from, gameArray.tekateki), 1)
+      if (isGame(from, gameArray.tekateki)) {
+        if (quoted && m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
+          if (chats.toLowerCase().includes(getGameAnswer(from, gameArray.tekateki))) {
+            CXD.reply(mess.gameCorrectAnswer())
+            gameArray.tekateki.splice(getGamePosi(from, gameArray.tekateki), 1)
+          } else {
+            CXD.reply(mess.gameWrongAnswer())
+          }
         } else {
-          CXD.reply(mess.gameWrongAnswer())
+          console.log('[GAME] User does not reply to bot messages')
         }
-      } else {
-        console.log('[GAME] User does not reply to bot messages')
       }
     } catch {
       return
