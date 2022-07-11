@@ -20,6 +20,8 @@ let package = JSON.parse(fs.readFileSync('./package.json'))
 let pino = require("pino")
 let { Boom } = require("@hapi/boom")
 let path = require("path").join;
+let { welcome } = require('./msg/command/group')
+let _welcome = JSON.parse(fs.readFileSync('./database/welcome.json'))
 // let qrcode = require('qrcode')
 // let express = require('express')
 // let app = new express()
@@ -133,6 +135,42 @@ async function start() {
     })
     conn.ev.on('messages.upsert', async chatUpdate => {
       require('./msg/message')(conn, chatUpdate)
+    })
+    conn.ev.on('group-participants.update', async (chat) => {
+      try {
+        let mdata = await conn.groupMetadata(chat.id)
+        switch(chat.action) {
+          case 'add':
+            if (_welcome.includes(chat.id)) return
+            var num = chat.participants[0]
+            var welcomeText = welcome.getWelcomeText(chat.id)
+            if (welcomeText.includes('@user')) {
+              welcomeText.replace('@user', `@${num.split('@')[0]}`)
+            }
+            try {
+              var imgUrl = await CXD.profilePictureUrl(`${num.split('@')[0]}@c.us`)
+            } catch {
+              imgUrl = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+            }
+            if (welcome.getUseProfileImage(mdata.id) == true) {
+              conn.sendMessage(mdata.id,  {
+                image: {
+                  url: imgUrl
+                },
+                caption: welcomeText,
+                mentions: [num]
+              })
+            } else {
+              conn.sendMessage(mdata.id, {
+                text: welcomeText,
+                mentions: [num]
+              })
+            }
+          break
+        }
+      } catch (err) {
+        console.log("Error:", err)
+      }
     })
   }
   connect()
