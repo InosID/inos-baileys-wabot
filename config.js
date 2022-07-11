@@ -14,3 +14,6 @@ global.stickerInfo = {
   pack: ""
 }
 global.gameTime = 60
+// Welcome option:
+// @user = tag user
+global.initialWelcome = `Welcome @user >///<`
