@@ -13,7 +13,7 @@ let {
   makeInMemoryStore,
 } = require('@adiwajshing/baileys')
 let { readFileSync: read, writeFileSync: write, unlinkSync: remove } = require('fs');
-let { help } = require('./../lib/help')
+let { help, welcomeOpt } = require('./../lib/help')
 let { color } = require('./../lib/color')
 let fetcher = require('./../lib/fetcher')
 let {
@@ -820,6 +820,9 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
               default:
                 CXD.reply(mess.invalidQuery())
             }
+          break
+          case 'opt':
+            CXD.reply(welcomeOpt())
           break
           default:
             CXD.reply(mess.invalidQuery())
