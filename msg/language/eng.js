@@ -92,13 +92,19 @@ exports.yt4res = (res) => {
 ╰─────────
 `
 }
-exports.gameQuestion = (p, gameTime) => {
+exports.gameQuestion = (p, gameTime, noteType) => {
+  let noteText;
+  if (noteType == undefined || noteType == null) {
+    noteText = 'Reply to this question to answer.'
+  } else if (noteType == 'uppercase') {
+    noteText = 'Reply to this question to answer.\nUse capital letters at the beginning of words. Example:\nNaruto Uzumaki'
+  } else console.log('Invalid type')
   return `
-╭﹝🅃🄴🄺🄰 🅃🄴🄺🄸﹞
+╭﹝🄶🄰🄼🄴﹞
 ├ *Question :* ${p.soal}
 ├ *Time :* ${gameTime}s
-├ *Note* : Reply to this question to answer.
-╰──────────────`
+├ *Note* : ${noteText}
+╰────────`
 }
 exports.unsolvedQuestion = () => {
   return `There are still unsolved questions!`
