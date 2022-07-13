@@ -92,13 +92,19 @@ exports.yt4res = (res) => {
 ╰─────────
 `
 }
-exports.gameQuestion = (p, gameTime) => {
+exports.gameQuestion = (p, gameTime, noteType) => {
+  let noteText;
+  if (noteType == undefined || noteType == null) {
+    noteText = 'Reply pertanyaan ini untuk menjawab.'
+  } else if (noteType == 'uppercase') {
+    noteText = 'Reply pertanyaan ini untuk menjawab.\nGunakan huruf besar pada awal kata. Contoh:\nNaruto Uzumaki'
+  } else console.log('Invalid type')
   return `
-╭﹝🅃🄴🄺🄰 🅃🄴🄺🄸﹞
+╭﹝🄶🄰🄼🄴﹞
 ├ *Soal :* ${p.soal}
 ├ *Waktu :* ${gameTime}s
-├ *Note* : Reply pertanyaan ini untuk menjawab.
-╰──────────────`
+├ *Note* : ${noteText}
+╰────────`
 }
 exports.unsolvedQuestion = () => {
   return `Masih ada pertanyaan yang belum diselesaikan!`
