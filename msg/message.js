@@ -56,7 +56,8 @@ let {
   getGameAnswer,
   isGame,
   checkGameTime,
-  getGamePosi
+  getGamePosi,
+  tbkanime
 } = require('./command/game')
 let { welcome } = require('./command/group')
 let { githubstalk } = require('./command/stalker')
@@ -76,7 +77,8 @@ if (language == 'ind') {
 }
 
 var gameArray = {
-  tekateki: []
+  tekateki: [],
+  tebakanime: []
 }
 
 module.exports = msgMain = async(CXD, chatUpdate, store) => {
@@ -170,17 +172,34 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
 
     // Game function
     checkGameTime(CXD, gameArray.tekateki)
+    checkGameTime(CXD, gameArray.tebakanime)
+
     try {
       if (isGame(from, gameArray.tekateki)) {
-        if (quoted && m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
-          if (chats.toLowerCase().includes(getGameAnswer(from, gameArray.tekateki))) {
+        if (!quoted) return
+        if (m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
+          if (chats.includes(getGameAnswer(from, gameArray.tekateki))) {
             CXD.reply(mess.gameCorrectAnswer())
-            gameArray.tekateki.splice(getGamePosi(from, gameArray.tekateki), 1)
+            return gameArray.tekateki.splice(getGamePosi(from, gameArray.tekateki), 1)
           } else {
-            CXD.reply(mess.gameWrongAnswer())
+            return CXD.reply(mess.gameWrongAnswer())
           }
         } else {
-          console.log('[GAME] User does not reply to bot messages')
+          return console.log('[GAME] User does not reply to bot messages')
+        }
+      }
+
+      if (isGame(from, gameArray.tebakanime)) {
+        if (!quoted) return
+        if (m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
+          if (chats.includes(getGameAnswer(from, gameArray.tebakanime))) {
+            CXD.reply(mess.gameCorrectAnswer())
+            return gameArray.tebakanime.splice(getGamePosi(from, gameArray.tebakanime), 1)
+          } else {
+            return CXD.reply(mess.gameWrongAnswer())
+          }
+        } else {
+          return console.log('[GAME] User does not reply to bot messages')
         }
       }
     } catch {
@@ -865,6 +884,17 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
           default:
             CXD.reply(mess.invalidQuery())
         }
+      break
+      case 'tebakanime':
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (isGame(from, gameArray.tebakanime)) return CXD.reply(mess.unsolvedQuestion())
+        var data = read('./msg/command/game/database/tebakanime.json')
+        var list = JSON.parse(data)
+        tbkanime.createQuiz(list).then((res) => {
+          CXD.sendFileFromUrl(from, res.image, res.question, true)
+          var anw = res.correctAnswer
+          addGame(from, anw, gameTime, gameArray.tebakanime)
+        })
       break
     }
   } catch(err) {
