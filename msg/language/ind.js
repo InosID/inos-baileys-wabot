@@ -109,6 +109,9 @@ exports.gameCorrectAnswer = () => {
 exports.gameWrongAnswer = () => {
   return `❎ Jawaban salah!`
 }
+exports.gameWrongAnswerEnd = (answer) => {
+  return `❎ Jawaban salah!\nJawabannya adalah : ${answer}`
+}
 exports.gameTimeout = (answer) => {
   return `
 ╭﹝🄶🄰🄼🄴﹞
