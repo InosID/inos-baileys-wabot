@@ -891,9 +891,34 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
         var data = read('./msg/command/game/database/tebakanime.json')
         var list = JSON.parse(data)
         tbkanime.createQuiz(list).then((res) => {
-          CXD.sendFileFromUrl(from, res.image, res.question, true)
           var anw = res.correctAnswer
           addGame(from, anw, gameTime, gameArray.tebakanime)
+          CXD.sendButtonImg(from, res.image, res.question, "© Bot",
+            [
+              {
+                buttonId: res.answers[0],
+                buttonText: {
+                  displayText: res.answers[0]
+                },
+                type: 1
+                },
+              {
+                buttonId: res.answers[1],
+                buttonText: {
+                  displayText: res.answers[1]
+                },
+                type: 1
+              },
+              {
+                buttonId: res.answers[2],
+                buttonText: {
+                  displayText: res.answers[2]
+                },
+                type: 1
+              }
+            ],
+          { quoted: msg })
+          console.log(anw)
         })
       break
     }
