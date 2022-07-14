@@ -1,4 +1,4 @@
-const {
+let {
   default: makeWASocket,
   DisconnectReason,
   useSingleFileAuthState,
@@ -11,20 +11,11 @@ const {
   generateMessageID,
   downloadContentFromMessage,
   makeInMemoryStore,
-  jidNormalizedUser
 } = require('@adiwajshing/baileys')
-//let { math } = require('../sf')
 let { readFileSync: read, writeFileSync: write, unlinkSync: remove } = require('fs');
-
-let { help } = require('./../lib/help')
+let { help, welcomeOpt } = require('./../lib/help')
 let { color } = require('./../lib/color')
 let fetcher = require('./../lib/fetcher')
-let { spawn } = require('child_process')
-let _scommand = JSON.parse(read("./database/scommand.json"))
-let nsfw = JSON.parse(read('./database/nsfw.json'))
-let _welcome = JSON.parse(read('./database/welcome.json'))
-//let sfw = JSON.parse(read('./database/sfw.json'))
-
 let {
   gempa,
   wikiID,
@@ -37,7 +28,6 @@ let {
   hentai,
   wallpaper
 } = require('./command/anime')
-
 let {
   artiMimpi,
   artiNama,
@@ -50,43 +40,33 @@ let {
   tanggalJadian,
   watakArtis
 } = require('./command/primbon')
-
 let {
   ytmp3,
   ytmp4,
   tiktok,
   igstory
 } = require('./command/downloader')
-
-let {
-  addGame,
-  getGameAnswer,
-  isGame,
-  checkGameTime,
-  getGamePosi
-} = require('./command/game')
-
-let {
-  addWalletDB,
-  getWalletUser,
-  addWalletUser,
-  delWalletUser
-} = require('./command/wallet')
-
-let { githubstalk } = require('./command/stalker')
-let { photofunia } = require('./command/maker')
-
-let { moduleWA } = require('./../lib/simple')
-
-let {
-  welcome
-} = require('./command/group')
-
 let {
   halah,
   hilih,
   shortlink
 } = require('./command/other')
+let {
+  addGame,
+  getGameAnswer,
+  isGame,
+  checkGameTime,
+  getGamePosi,
+  tbkanime
+} = require('./command/game')
+let { welcome } = require('./command/group')
+let { githubstalk } = require('./command/stalker')
+let { photofunia } = require('./command/maker')
+let { moduleWA } = require('./../lib/simple')
+
+let _scommand = JSON.parse(read("./database/scommand.json"))
+let nsfw = JSON.parse(read('./database/nsfw.json'))
+let _welcome = JSON.parse(read('./database/welcome.json'))
 
 require('./../config')
 
@@ -96,12 +76,13 @@ if (language == 'ind') {
   mess = eng
 }
 
-gameTime = 60
 var gameArray = {
-  tekateki: []
+  tekateki: [],
+  tebakanime: []
 }
 
-module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
+module.exports = msgMain = async(CXD, chatUpdate, store) => {
+  try {
     msg = chatUpdate.messages[0]
     if (!msg.message) return
     if (msg.key && msg.key.remoteJid == 'status@broadcast') return
@@ -122,6 +103,8 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
       }
     }
 
+    let cmPrefix = global.messConf.prefix[0]
+
     if (multiPrefix == false) {
       var prefix = global.messConf.prefix[0]
     } else if (multiPrefix == true) {
@@ -130,16 +113,16 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
       console.log('[Multi Err] ' + multiPrefix + ' is a wrong boolean.')
     }
     var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
-    var chats = (typeof m.text == 'string' ? m.text : '')
+    let chats = (typeof m.text == 'string' ? m.text : '')
     let command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
-    listbut = (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.title: ''
+    listbut = (type == 'listResponseMessage') ? msg.message.listResponseMessage.title: ''
     let args = chats.trim().split(/ +/).slice(1)
     const isCmd = chats.startsWith(prefix)
     let q = args.join(' ')
     let botNumber = CXD.user.id
     let quoted = m.quoted ? m.quoted : m
     let from = m.key.remoteJid
-    let isGroup = m.key.remoteJid.endsWith('@g.us')
+    let isGroup = msg.key.remoteJid.endsWith('@g.us')
     let sender = isGroup ? (m.key.participant ? m.key.participant : m.participant) : m.key.remoteJid
     let groupMetadata = isGroup ? await CXD.groupMetadata(from) : null
     let groupName = isGroup ? groupMetadata.subject : ''
@@ -156,11 +139,9 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
     let isBotGroupAdmins = groupAdmins.includes(botNumber) || false
     let isGroupAdmins = groupAdmins.includes(sender) || false
     let isNsfw = isGroup ? nsfw.includes(groupId) : false
-    let isOwner = owner.includes(sender)
-    let isWelcome = isGroup ? welcome.getWelcomePosi(groupId) : false
+    let isWelcome = isGroup ? _welcome.includes(groupId) : false
 
     global.buffer = fetcher.getBuffer
-
     data = {
       msg: msg,
       type: type,
@@ -191,30 +172,48 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
     const isQuotedVideo = isQuotedMsg ? content.includes('videoMessage') ? true : false : false
     const isQuotedSticker = isQuotedMsg ? content.includes('stickerMessage') ? true : false : false
 
-    checkGameTime(CXD, gameArray.tekateki)
-    if (isGame(from, gameArray.tekateki)) {
-      try {
-        if (quoted && m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
-	  if (chats.toLowerCase().includes(getGameAnswer(from, gameArray.tekateki))) {
-	    CXD.reply('Jawaban mu banar!')
-	    gameArray.tekateki.splice(getGamePosi(from, gameArray.tekateki), 1)
-	  } else {
-	    CXD.reply('Jawaban mu salah!')
-	  }
-        } else {
-          console.log('Not replying bot')
-        }
-      } catch {
-	return
-      }
-    }
+    // Game function
+    checkGameTime(CXD, mess.gameTimeout(getGameAnswer(from, gameArray.tekateki)), gameArray.tekateki)
+    checkGameTime(CXD, mess.gameTimeout(getGameAnswer(from, gameArray.tebakanime)), gameArray.tebakanime)
 
-    // Update wallet database
-    const checkWallet = getWalletUser(sender)
     try {
-      if (checkWallet == undefined) addWalletDB(sender)
-    } catch(err) {
-      console.log('Error:', err)
+      if (isGame(from, gameArray.tekateki)) {
+        if (!quoted) return
+        if (m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
+          if (chats.includes(getGameAnswer(from, gameArray.tekateki))) {
+            CXD.reply(mess.gameCorrectAnswer())
+            return gameArray.tekateki.splice(getGamePosi(from, gameArray.tekateki), 1)
+          } else {
+            return CXD.reply(mess.gameWrongAnswer())
+          }
+        } else {
+          return console.log('[GAME] User does not reply to bot messages')
+        }
+      }
+
+      if (isGame(from, gameArray.tebakanime)) {
+        if (!quoted) return
+        if (m.msg.contextInfo.participant.includes(botNumber.split(':')[0])) {
+          if (chats.includes(getGameAnswer(from, gameArray.tebakanime))) {
+            CXD.reply(mess.gameCorrectAnswer())
+            return gameArray.tebakanime.splice(getGamePosi(from, gameArray.tebakanime), 1)
+          } else {
+            return CXD.sendButton(from, "Jawaban salah, jawaban yang benar: " + getGameAnswer(from, gameArray.tebakanime), "© Bot", [
+	      {
+	        buttonId: `${cmPrefix}tebakanime`,
+	        buttonText: {
+		  displayText: '➡️ Next'
+	        }
+	      }
+	    ], { quoted: msg })
+	    return gameArray.tebakanime.splice(getGamePosi(from, gameArray.tebakanime), 1)
+          }
+        } else {
+          return console.log('[GAME] User does not reply to bot messages')
+        }
+      }
+    } catch {
+      return
     }
 
     if (isCmd && isGroup) console.log('[CXD]', 'from', body, sender.split('@')[0], 'args :', args.length)
@@ -223,7 +222,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
       case 'menu':
       case 'help':
       case '?':
-        CXD.reply(help(prefix))
+        CXD.reply(help(cmPrefix))
       break
       case 'infogempa':
         CXD.reply(mess.wait())
@@ -232,7 +231,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
             buf = res.thumbnail
             CXD.sendButtonImg(from, buf,`╭﹝🄸🄽🄵🄾🄶🄴🄼🄿🄰﹞\n├ Waktu : ${res.waktu}\n├ Magnitude : ${res.magnitude}\n├ Koordinat : ${res.koordinat}\n├ Lokasi : ${res.lokasi}\n├ Dirasakan : ${res.dirasakan}\n╰────────`, "© Bot", [
               {
-                buttonId: `${prefix}menu`,
+                buttonId: `${cmPrefix}menu`,
                 buttonText: {
                   displayText: '🔙 Back to menu',
                 },
@@ -248,7 +247,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
           .then(async (res) => {
             CXD.sendButton(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Judul : ${res.title}\n├ URL : ${res.url}\n├ Penerbit : ${res.publisher}\n├ Tanggal Diterbitkan : ${res.datePublished}\n├ Konteks : ${res.context}\n╰────────`, "© Bot", [
               {
-                buttonId: `${prefix}menu`,
+                buttonId: `${cmPrefix}menu`,
                 buttonText: {
                   displayText: '🔙 Back to menu',
                 },
@@ -264,7 +263,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
           .then(async (res) => {
             CXD.sendButton(from, `╭﹝🅆🄸🄺🄸🄿🄴🄳🄸🄰﹞\n├ Title : ${res.title}\n├ URL : ${res.url}\n├ Publisher : ${res.publisher}\n├ Date Published : ${res.datePublished}\n├ Context : ${res.context}\n╰────────`, "© Bot", [
               {
-                buttonId: `${prefix}menu`,
+                buttonId: `${cmPrefix}menu`,
                 buttonText: {
                   displayText: '🔙 Back to menu',
                 },
@@ -280,14 +279,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
             buf = res.image
             CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
               {
-                buttonId: `${prefix}nekonime`,
+                buttonId: `${cmPrefix}nekonime`,
                 buttonText: {
                   displayText: '➡️ Next',
                 },
                 type: 1,
               },
               {
-                buttonId: `${prefix}menu`,
+                buttonId: `${cmPrefix}menu`,
                 buttonText: {
                   displayText: '🔙 Back to menu',
                 },
@@ -300,7 +299,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
         if (isGroup) {
           if (!allow.nsfw) return CXD.sendButtonImg(from, './lib/fbi.jpg', mess.notAllowed(), "© Bot", [
             {
-              buttonId: `${prefix}menu`,
+              buttonId: `${cmPrefix}menu`,
               buttonText: {
                 displayText: '🔙 Back to menu',
               },
@@ -309,14 +308,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
           ], { quoted: msg })
           if (!isNsfw) return CXD.sendButton(from, mess.nsfwOff(), "© Bot", [
             {
-              buttonId: `${prefix}enable nsfw`,
+              buttonId: `${cmPrefix}enable nsfw`,
               buttonText: {
                 displayText: '🔛 Enable nsfw',
               },
               type: 1,
             },
             {
-              buttonId: `${prefix}menu`,
+              buttonId: `${cmPrefix}menu`,
               buttonText: {
                 displayText: '🔙 Back to menu',
               },
@@ -329,14 +328,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
               buf = res
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
-                  buttonId: `${prefix}nsfwanime`,
+                  buttonId: `${cmPrefix}nsfwanime`,
                   buttonText: {
                     displayText: '➡️ Next',
                   },
                   type: 1,
                 },
                 {
-                  buttonId: `${prefix}menu`,
+                  buttonId: `${cmPrefix}menu`,
                   buttonText: {
                     displayText: '🔙 Back to menu',
                   },
@@ -347,14 +346,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
         } else {
           if (!allow.nsfw) return CXD.sendButtonImg(from, './lib/fbi.jpg', mess.notAllowed(), "© Bot", [
             {
-              buttonId: `${prefix}enable nsfw`,
+              buttonId: `${cmPrefix}enable nsfw`,
               buttonText: {
                 displayText: '🔛 Enable nsfw',
               },
               type: 1,
             },
             {
-              buttonId: `${prefix}menu`,
+              buttonId: `${cmPrefix}menu`,
               buttonText: {
                 displayText: '🔙 Back to menu',
               },
@@ -367,14 +366,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
               buf = res
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
-                  buttonId: `${prefix}nsfwanime`,
+                  buttonId: `${cmPrefix}nsfwanime`,
                   buttonText: {
                     displayText: '➡️ Next',
                   },
                   type: 1,
                 },
                 {
-                  buttonId: `${prefix}menu`,
+                  buttonId: `${cmPrefix}menu`,
                   buttonText: {
                     displayText: '🔙 Back to menu',
                   },
@@ -404,6 +403,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
       break
       case 'enable':
         if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
         if (args.length < 1) return CXD.reply(mess.needQuery())
         switch(args[0]) {
           case 'nsfw':
@@ -412,16 +412,16 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
             write('./database/nsfw.json', JSON.stringify(nsfw))
             CXD.reply(mess.done())
           break
-	  case 'welcome':
-	    if (isWelcome) return CXD.reply('Welcome has active before!')
-	    initialWelcome = 'Hello @user >///<'
-	    welcome.addWelcome(groupId, initialWelcome)
-	    CXD.reply(mess.done())
-	  break
+          case 'welcome':
+            if (isWelcome) return CXD.reply(mess.welcomeHasOn())
+            welcome.addWelcome(groupId, initialWelcome)
+            CXD.reply(mess.done())
+          break
         }
       break
       case 'disable':
         if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
         if (args.length < 1) return CXD.reply(mess.needQuery())
         switch(args[0]) {
           case 'nsfw':
@@ -429,42 +429,42 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
             write('./database/nsfw.json', JSON.stringify(nsfw))
             CXD.reply(mess.done())
           break
-	  case 'welcome':
-	    _welcome.splice(welcome.getWelcomePosi(from), 1)
-	    CXD.reply(mess.done())
-	  break
+          case 'welcome':
+            _welcome.splice(welcome.getWelcomePosi(from), 1)
+            CXD.reply(mess.done())
+          break
         }
       break
       case 'artinama':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} Nazwa`)
         artiNama.result(q)
           .then(async (res) => {
             CXD.reply(res.result)
           })
       break
       case 'artimimpi':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} jatuh`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} jatuh`)
         artiMimpi.result(q)
           .then(async (res) => {
             CXD.reply(res.result)
           })
       break
       case 'haribaik':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} 14-4-2004`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} 14-4-2004`)
         hariBaik.result(q)
           .then(async (res) => {
             CXD.reply(res.result)
           })
       break
       case 'harilarangan':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} 14-4-2004`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} 14-4-2004`)
         hariLarangan.result(q)
           .then(async (res) => {
             CXD.reply(res.result)
           })
       break
       case 'kecocokannama':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|14-4-2004`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} Nazwa|14-4-2004`)
         var kn = body.slice(15)
         var nama = kn.split('|')[0]
         var tgl = kn.split('|')[1]
@@ -474,7 +474,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
           })
       break
       case 'ramaljodoh':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|Aksa`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} Nazwa|Aksa`)
         var rj = body.slice(12)
         var nama1 = rj.split('|')[0]
         var nama2 = rj.split('|')[1]
@@ -484,7 +484,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
           })
       break
       case 'ramalanjodoh':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|14-4-2004|Aksa|14-4-2008`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} Nazwa|14-4-2004|Aksa|14-4-2008`)
         var rj = body.slice(14)
         var nama1 = rj.split('|')[0]
         var tgl1 = rj.split('|')[1]
@@ -496,21 +496,21 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
           })
       break
       case 'rejekiweton':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|14-4-2004`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} Nazwa|14-4-2004`)
         rejekiWeton.result(q)
           .then(async (res) => {
             CXD.sendImage(from, res.statistik, `Penjelasan: ${res.penjelasan}`, true)
           })
       break
       case 'tanggaljadian':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} 14-4-2004`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} 14-4-2004`)
         tanggalJadian.result(q)
           .then(async (res) => {
             CXD.reply(res.result)
           })
       break
       case 'watakartis':
-        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${prefix}${command} Nazwa|14-4-2004`)
+        if (args.length < 1) return CXD.reply(mess.needQuery() + `\nExample: ${cmPrefix}${command} Nazwa|14-4-2004`)
         var wa = body.slice(12)
         var nama = wa.split('|')[0]
         var tgl = wa.split('|')[1]
@@ -531,14 +531,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
         if (isGroup) {
           if (!allow.nsfw) return CXD.sendButtonImg(from, './lib/fbi.jpg', mess.notAllowed(), "© Bot", [
             {
-              buttonId: `${prefix}hentai`,
+              buttonId: `${cmPrefix}hentai`,
               buttonText: {
                 displayText: '➡️ Next',
               },
               type: 1,
             },
             {
-              buttonId: `${prefix}menu`,
+              buttonId: `${cmPrefix}menu`,
               buttonText: {
                 displayText: '🔙 Back to menu',
               },
@@ -547,14 +547,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
           ], { quoted: msg })
           if (!isNsfw) return CXD.sendButton(from, mess.nsfwOff(), "© Bot", [
             {
-              buttonId: `${prefix}enable nsfw`,
+              buttonId: `${cmPrefix}enable nsfw`,
               buttonText: {
                 displayText: '🔛 Enable nsfw',
               },
               type: 1,
             },
             {
-              buttonId: `${prefix}menu`,
+              buttonId: `${cmPrefix}menu`,
               buttonText: {
                 displayText: '🔙 Back to menu',
               },
@@ -567,14 +567,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
               buf = res
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot", [
                 {
-                  buttonId: `${prefix}hentai`,
+                  buttonId: `${cmPrefix}hentai`,
                   buttonText: {
                     displayText: '➡️ Next',
                   },
                   type: 1,
                 },
                 {
-                  buttonId: `${prefix}menu`,
+                  buttonId: `${cmPrefix}menu`,
                   buttonText: {
                     displayText: '🔙 Back to menu',
                   },
@@ -585,7 +585,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
         } else {
           if (!allow.nsfw) return CXD.sendButtonImg(from, './lib/fbi.jpg', mess.notAllowed(), "© Bot", [
             {
-              buttonId: `${prefix}menu`,
+              buttonId: `${cmPrefix}menu`,
               buttonText: {
                 displayText: '🔙 Back to menu',
               },
@@ -599,14 +599,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
               CXD.sendButtonImg(from, buf, mess.done(), "© Bot",
                 [
                   {
-                    buttonId: `${prefix}hentai`,
+                    buttonId: `${cmPrefix}hentai`,
                     buttonText: {
                       displayText: '➡️ Next',
                     },
                     type: 1,
                   },
                   {
-                    buttonId: `${prefix}menu`,
+                    buttonId: `${cmPrefix}menu`,
                     buttonText: {
                       displayText: '🔙 Back to menu',
                     },
@@ -623,14 +623,14 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
             CXD.sendButtonImg(from, buf, mess.done(), "© Bot",
               [
                 {
-                  buttonId: `${prefix}wallpaper`,
+                  buttonId: `${cmPrefix}wallpaper`,
                   buttonText: {
                     displayText: '➡️ Next',
                   },
                   type: 1,
                 },
                 {
-                  buttonId: `${prefix}menu`,
+                  buttonId: `${cmPrefix}menu`,
                   buttonText: {
                     displayText: '🔙 Back to menu',
                   },
@@ -732,10 +732,6 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
       case 'stiker':
       case 's':
 	if ((isImage || isQuotedImage)) {
-	  var stickerInfo = {
-	    author: "© Bot",
-	    pack: ""
-	  }
 	  var anu = args.join(' ').split('|')
 	  var satu = anu[0] !== '' ? anu[0] : stickerInfo.pack
 	  var dua = typeof anu[1] !== 'undefined' ? anu[1] : stickerInfo.author
@@ -759,11 +755,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
       break
       case 'stickergif':
         if ((isVideo || isQuotedImage)) {
-	  var stickerInfo = {
-            author: "© Bot",
-            pack: ""
-          }
-          var anu = args.join(' ').split('|')
+	  var anu = args.join(' ').split('|')
           var satu = anu[0] !== '' ? anu[0] : stickerInfo.pack
           var dua = typeof anu[1] !== 'undefined' ? anu[1] : stickerInfo.author
           var mime = (quoted.msg || quoted).mimetype || ''
@@ -804,125 +796,140 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => { try {
           .then(async (res) => {
             CXD.reply(res.result)
           })
-      break/*
-      case 'math':
-	if (args.length < 1) return CXD.reply(mess.needQuery())
-	var mode = args[0]
-	math(from, mode, 60).then(console.log)
-      break*/
-      case 'test':
-	var arr = ["all", "te", "ma"]
-	const jawabannya = (yoi) => {
-	  let position = false;
-    	  Object.keys(arr).forEach((i) => {
-    	    if (arr[i] === yoi) {
-       	      position = i;
-    	    }
-  	  });
-  	  if (position !== false) {
-    	    return 'betul';
-    	  } else {
-      	    return 'salah'
-    	  }
-	}
-	CXD.reply(jawabannya(args[0]))
       break
       case 'tekateki':
-	if (!isGroup) return CXD.reply(mess.onlyGroup())
-	if (isGame(from, gameArray.tekateki)) return CXD.reply('There are still unsolved questions')
-	var data = read('./msg/command/game/database/tekateki.json')
-	var list = JSON.parse(data)
-	var random = Math.floor(Math.random() * list.length);
-	var p = list[random]
-	CXD.reply(`*Soal :*\n${p.soal}\n\n*Waktu :* ${gameTime}s\n*Note* : Reply pertanyaan ini untuk menjawab.`)
-	var anh = p.jawaban.toLowerCase();
-	addGame(from, anh, gameTime, gameArray.tekateki)
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (isGame(from, gameArray.tekateki)) return CXD.reply(mess.unsolvedQuestion())
+        var data = read('./msg/command/game/database/tekateki.json')
+        var list = JSON.parse(data)
+        var random = Math.floor(Math.random() * list.length);
+        var p = list[random]
+        CXD.reply(mess.gameQuestion(p, gameTime))
+        var anh = p.jawaban.toLowerCase();
+        addGame(from, anh, gameTime, gameArray.tekateki)
       break
-      case 'balance':
-      case 'bal':
-      case 'wallet':
-	CXD.reply(`Wallet: ${getWalletUser(sender)}`)
+      case 'igstory':
+        if (args.length < 1) return CXD.reply(mess.needLink())
+        try {
+          var igUser = args[0]
+          // Scraper by @piyoxz
+          await igstory.getstoryvideo(igUser)
+            .then(async (res) => {
+              data = res.data
+              teks = mess.igstory(igUser, data) + `\n`
+              for (let i of data) {
+                await shortlink.result(i)
+                  .then(async (res) => {
+                    teks += `*#* ${res}\n`
+                  })
+              }
+              await CXD.sendFileFromUrl(from, res.data[0] + '╰───────────', teks, true)
+            })
+        } catch {
+          CXD.reply('Error')
+        }
       break
-      case 'addwallet':
-        if (!isOwner) return CXD.reply('Only owner')
-	if (args.length < 1) return CXD.reply(mess.needLink())
-	var user = args[0] + '@s.whatsapp.net'
-	var jum = args[1]
-	addWalletUser(user, jum)
+      case 'setwelcome':
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
+        if (!isWelcome) return CXD.reply(mess.welcomeOff())
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+        switch(args[0]) {
+          case 'text':
+            await welcome.setWelcome(groupId, body.slice(16))
+            CXD.reply(mess.done())
+          break
+          case 'useprofile':
+            switch(args[1]) {
+              case 'true':
+                await welcome.setUseProfileImage(groupId, true)
+                CXD.reply(mess.done())
+              case 'false':
+                await welcome.setUseProfileImage(groupId, false)
+                CXD.reply(mess.done())
+              break
+              default:
+                CXD.reply(mess.invalidQuery())
+            }
+          break
+          case 'opt':
+            CXD.reply(welcomeOpt())
+          break
+          default:
+            CXD.reply(mess.invalidQuery())
+        }
       break
       case 'simulation':
       case 'simulasi':
-	if (!isWelcome) return CXD.reply('Welcome not active!')
-	if (args.length < 1) return CXD.reply(mess.needLink())
-	switch(args[0]) {
-	  case 'welcome':
-	    switch(welcome.getUseProfileImage(from)) {
-	      case true:
-	        var welcomeText = welcome.getWelcomeText(from)
-		try {
-		  var imgUrl = await CXD.profilePictureUrl(`${sender.split('@')[0]}@c.us`)
-		} catch {
-		  imgUrl = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-		}
-		if (welcomeText.includes('@user')) {
-		  welcomeText = welcomeText.replace("@user", `@${sender.split("@")[0]}`)
-		}
-		CXD.sendFileFromUrl(from, imgUrl, welcomeText, true, { mentions: [sender] })
-	      break
-	      case false:
-		var welcomeText = welcome.getWelcomeText(from)
-		if (welcomeText.includes('@user')) {
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (!isGroupAdmins) return CXD.reply(mess.onlyAdmin())
+        if (!isWelcome) return CXD.reply(mess.welcomeOff())
+        if (args.length < 1) return CXD.reply(mess.needQuery())
+        switch(args[0]) {
+          case 'welcome':
+            switch(welcome.getUseProfileImage(from)) {
+              case true:
+                var welcomeText = welcome.getWelcomeText(groupId)
+                try {
+                  var imgUrl = await CXD.profilePictureUrl(`${sender.split('@')[0]}@c.us`)
+                } catch {
+                  imgUrl = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+                }
+                if (welcomeText.includes('@user')) {
                   welcomeText = welcomeText.replace("@user", `@${sender.split("@")[0]}`)
                 }
-		CXD.SendTextWithMentions(welcomeText, `${sender.split('@')[0]}@s.whatsapp.net`, {
-		  quoted: msg
-		})
-	      break
-	    }
-	  break
-	}
-      break
-      case 'setwelcome':
-	if (!isWelcome) return CXD.reply('Welcome not active!')
-        if (args.length < 1) return CXD.reply(mess.needQuery())
-	switch(args[0]) {
-	  case 'text':
-	    await welcome.setWelcome(groupId, body.slice(16))
-	    CXD.reply(mess.done())
-	  break
-	  case 'useprofile':
-	    switch(args[1]) {
-	      case 'true':
-	      case 'yes':
-		await welcome.setUseProfileImage(groupId, true)
-		CXD.reply(mess.done())
-	      break
-	      case 'false':
-	      case 'no':
-		await welcome.setUseProfileImage(groupId, false)
-		CXD.reply(mess.done())
-	      break
-	      default:
-		CXD.reply(`The selected query does not match (${args[1]}`)
-	    }
-	  break
-	}
-      break
-      case 'igstory':
-	if (args.length < 1) return CXD.reply(mess.needLink())
-	var igUser = args[0]
-        await igstory.getstoryvideo(igUser)
-          .then(async (res) => {
-            data = res.data
-            teks = `Username: ${igUser}\nFound: ${data.length}\n\nOther:\n`
-            for (let i of data) {
-              await shortlink.result(i)
-                .then(async (res) => {
-                  teks += `*#* ${res}\n`
+                CXD.sendFileFromUrl(from, imgUrl, welcomeText, true, { mentions: [sender] })
+              break
+              case false:
+                var welcomeText = welcome.getWelcomeText(groupId)
+                if (welcomeText.includes('@user')) {
+                  welcomeText = welcomeText.replace("@user", `@${sender.split("@")[0]}`)
+                }
+                CXD.SendTextWithMentions(welcomeText, `${sender.split('@')[0]}@s.whatsapp.net`, {
+                  quoted: msg
                 })
+              break
             }
-            await CXD.sendFileFromUrl(from, res.data[0], teks, true)
-	  })
+          break
+          default:
+            CXD.reply(mess.invalidQuery())
+        }
+      break
+      case 'tebakanime':
+        if (!isGroup) return CXD.reply(mess.onlyGroup())
+        if (isGame(from, gameArray.tebakanime)) return CXD.reply(mess.unsolvedQuestion())
+        var data = read('./msg/command/game/database/tebakanime.json')
+        var list = JSON.parse(data)
+        tbkanime.createQuiz(list).then((res) => {
+          var anw = res.correctAnswer
+          addGame(from, anw, gameTime, gameArray.tebakanime)
+          CXD.sendButtonImg(from, res.image, res.question, "© Bot",
+            [
+              {
+                buttonId: res.answers[0],
+                buttonText: {
+                  displayText: res.answers[0]
+                },
+                type: 1
+                },
+              {
+                buttonId: res.answers[1],
+                buttonText: {
+                  displayText: res.answers[1]
+                },
+                type: 1
+              },
+              {
+                buttonId: res.answers[2],
+                buttonText: {
+                  displayText: res.answers[2]
+                },
+                type: 1
+              }
+            ],
+          { quoted: msg })
+          console.log(anw)
+        })
       break
     }
   } catch(err) {
