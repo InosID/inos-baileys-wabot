@@ -92,13 +92,7 @@ exports.yt4res = (res) => {
 ╰─────────
 `
 }
-exports.gameQuestion = (p, gameTime, noteType) => {
-  let noteText;
-  if (noteType == undefined || noteType == null) {
-    noteText = 'Reply to this question to answer.'
-  } else if (noteType == 'uppercase') {
-    noteText = 'Reply to this question to answer.\nUse capital letters at the beginning of words. Example:\nNaruto Uzumaki'
-  } else console.log('Invalid type')
+exports.gameQuestion = (p, gameTime) => {
   return `
 ╭﹝🄶🄰🄼🄴﹞
 ├ *Question :* ${p.soal}
