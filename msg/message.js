@@ -171,8 +171,8 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
     const isQuotedSticker = isQuotedMsg ? content.includes('stickerMessage') ? true : false : false
 
     // Game function
-    checkGameTime(CXD, gameArray.tekateki)
-    checkGameTime(CXD, gameArray.tebakanime)
+    checkGameTime(CXD, mess.gameTimeout(getGameAnswer(from, gameArray.tekateki)), gameArray.tekateki)
+    checkGameTime(CXD, mess.gameTimeout(getGameAnswer(from, gameArray.tebakanime)), gameArray.tebakanime)
 
     try {
       if (isGame(from, gameArray.tekateki)) {
