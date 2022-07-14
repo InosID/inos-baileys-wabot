@@ -9,6 +9,7 @@
 <a href="https://github.com/inosid/inos-baileys-wabot/network/members"><img title="Fork" src="https://img.shields.io/github/forks/CxD9-Teams/cxd9-bot?style=flat-square"></a>
 <a href="https://github.com/inos-baileys-wabot/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/CxD9-Teams/cxd9-bot?label=Watching&style=flat-square"></a>
 <a href="https://github.com/InosID/inos-baileys-wabot/graphs/contributors"><img title="Contributor" src="https://img.shields.io/github/contributors/inosid/inos-baileys-wabot?logo=github&style=flat-square"></a>
+<a href="https://www.codefactor.io/repository/github/inosid/inos-baileys-wabot"><img title="Code Factor" src="https://www.codefactor.io/repository/github/inosid/inos-baileys-wabot/badge"></a>
 </p>
 <p align="center">
 <a href="https://github.com/inosid/inos-baileys-wabot"><img src="https://img.shields.io/github/repo-size/inosid/inos-baileys-wabot?label=Repo%20size&style=flat-square"></a>
