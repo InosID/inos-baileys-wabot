@@ -92,10 +92,10 @@ exports.yt4res = (res) => {
 ╰─────────
 `
 }
-exports.gameQuestion = (p, gameTime) => {
+exports.gameQuestion = (question, gameTime) => {
   return `
 ╭﹝🄶🄰🄼🄴﹞
-├ *Question :* ${p.soal}
+├ *Question :* ${question}
 ├ *Time :* ${gameTime}s
 ├ *Note* : ${noteText}
 ╰────────`
@@ -108,6 +108,9 @@ exports.gameCorrectAnswer = () => {
 }
 exports.gameWrongAnswer = () => {
   return `❎ Wrong answer!`
+}
+exports.gameWrongAnswerEnd = (answer) => {
+  return `❎ Wrong answer!\nThe answer is : ${answer}`
 }
 exports.igstory = (username, data) => {
   return `
