@@ -55,7 +55,7 @@ function isGame(chatId, arr) {
  * @param {Function} CXD
  * @param {Object} arr
  */
-function checkGameTime(CXD, arr) {
+function checkGameTime(CXD, timeoutText, arr) {
   setInterval(() => {
     let position = null;
     Object.keys(arr).forEach((i) => {
@@ -64,7 +64,7 @@ function checkGameTime(CXD, arr) {
       }
     });
     if (position !== null) {
-      CXD.reply(`*Times Out!*\n\n*Answer :* ${arr[position].answer}`)
+      CXD.reply(timeoutText)
       arr.splice(position, 1);
     }
   }, 1000);
