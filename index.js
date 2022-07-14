@@ -42,7 +42,7 @@ let store = makeInMemoryStore({
 
 async function start() {
   // banner
-  console.log(color(figlet.textSync(`Inos Baileys\nWaBot`, 'Larry 3D'), 'cyan'))
+  console.log(color(figlet.textSync(`Inos\nBaileys\nWaBot`, 'Larry 3D'), 'cyan'))
   CFonts.say(`Created By : ${package.author} Team!`, {
     font: 'console',
     align: "center",
