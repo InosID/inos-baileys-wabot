@@ -198,7 +198,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
             CXD.reply(mess.gameCorrectAnswer())
             return gameArray.tebakanime.splice(getGamePosi(from, gameArray.tebakanime), 1)
           } else {
-            return CXD.sendButton(from, "Jawaban salah, jawaban yang benar: " + getGameAnswer(from, gameArray.tebakanime), "© Bot", [
+            CXD.sendButton(from, mess.wrongGameAnswerEnd(getGameAnswer(from, gameArray.tebakanime)), "© Bot", [
 	      {
 	        buttonId: `${cmPrefix}tebakanime`,
 	        buttonText: {
@@ -928,7 +928,6 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
               }
             ],
           { quoted: msg })
-          console.log(anw)
         })
       break
     }
