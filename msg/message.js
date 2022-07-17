@@ -131,7 +131,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
     let getGroupAdmins = (participants) => {
       admins = []
       for (let i of participants) {
-        i.isAdmin ? admins.push(i.jid) : ''
+        i.admin !== null ? admins.push(i.id) : ''
       }
       return admins
     }
