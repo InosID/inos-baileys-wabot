@@ -136,7 +136,7 @@ async function start() {
     conn.ev.on('messages.upsert', async chatUpdate => {
       require('./msg/message')(conn, chatUpdate)
     })
-    conn.ev.on('group-participants.update', async (chat) => {
+    /*conn.ev.on('group-participants.update', async (chat) => {
       try {
         let mdata = await conn.groupMetadata(chat.id)
         switch(chat.action) {
@@ -171,7 +171,7 @@ async function start() {
       } catch (err) {
         console.log("Error:", err)
       }
-    })
+    })*/
   }
   connect()
 }
