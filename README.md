@@ -15,9 +15,9 @@
 <a href="https://github.com/inosid/inos-baileys-wabot"><img src="https://img.shields.io/github/repo-size/inosid/inos-baileys-wabot?label=Repo%20size&style=flat-square"></a>
 </p>
 
-- [x] **HEROKU APP**
+<!--- [x] **HEROKU APP**
 
-<!-- Heroku Deploy **Beta**
+ Heroku Deploy **Beta**
 
 **First deploy bot**, Click the deploy icon below !
 
