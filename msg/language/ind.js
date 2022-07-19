@@ -97,7 +97,7 @@ exports.gameQuestion = (p, gameTime) => {
 ╭﹝🄶🄰🄼🄴﹞
 ├ *Soal :* ${p.soal}
 ├ *Waktu :* ${gameTime}s
-├ *Note* : ${noteText}
+├ *Note* : Reply pertanyaan ini untuk menjawab.
 ╰────────`
 }
 exports.unsolvedQuestion = () => {
