@@ -97,7 +97,7 @@ exports.gameQuestion = (question, gameTime) => {
 ╭﹝🄶🄰🄼🄴﹞
 ├ *Question :* ${question}
 ├ *Time :* ${gameTime}s
-├ *Note* : ${noteText}
+├ *Note* : Reply this message to answer.
 ╰────────`
 }
 exports.unsolvedQuestion = () => {
