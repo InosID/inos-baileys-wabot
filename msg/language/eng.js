@@ -112,6 +112,13 @@ exports.gameWrongAnswer = () => {
 exports.gameWrongAnswerEnd = (answer) => {
   return `❎ Wrong answer!\nThe answer is : ${answer}`
 }
+exports.gameTimeout = (answer) => {
+  return `
+╭﹝🄶🄰🄼🄴﹞
+├ *Timeout!*
+├ *Answer :* ${answer}
+╰────────`
+}
 exports.igstory = (username, data) => {
   return `
 ╭🄸🄶 🅂🅃🄾🅁🅈﹞
