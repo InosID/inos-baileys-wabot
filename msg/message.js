@@ -140,6 +140,7 @@ module.exports = msgMain = async(CXD, chatUpdate, store) => {
     let isGroupAdmins = groupAdmins.includes(sender) || false
     let isNsfw = isGroup ? nsfw.includes(groupId) : false
     let isWelcome = isGroup ? _welcome.includes(groupId) : false
+    let isOwner = global.owner.includes(sender)
 
     global.buffer = fetcher.getBuffer
     data = {
