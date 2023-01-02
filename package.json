@@ -23,7 +23,7 @@
   "author": "InosID",
   "license": "GPL-3.0",
   "dependencies": {
-    "@adiwajshing/baileys": "^4.1.0",
+    "@adiwajshing/baileys": "^5.0.0",
     "@hapi/boom": "^10.0.0",
     "axios": "^0.27.2",
     "cfonts": "^3.1.0",
