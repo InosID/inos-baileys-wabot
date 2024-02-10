@@ -1,0 +1,22 @@
+{
+  "120363214333771692@g.us": {
+    "id": "120363214333771692@g.us",
+    "welcome": {
+      "caption": "Hai @:user:! Selamat datang di group :gcname:.",
+      "withProfile": false
+    },
+    "goodbye": {
+      "caption": "Sayonara...",
+      "withProfile": true
+    }
+  },
+  "120363230212811696@g.us": {
+    "id": "120363230212811696@g.us"
+  },
+  "120363214806717609@g.us": {
+    "id": "120363214806717609@g.us"
+  },
+  "120363231252599401@g.us": {
+    "id": "120363231252599401@g.us"
+  }
+}
