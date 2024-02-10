@@ -1,7 +1,0 @@
-{
-  "name": "inos-baileys-wabot",
-  "description": "WhatsApp Bot Heroku",
-  "repository": "https://github.com/InosID/inos-baileys-wabot",
-  "logo": "https://node-js-sample.herokuapp.com/node.png",
-  "keywords": ["bot"]
-}
