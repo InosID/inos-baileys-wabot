@@ -1,0 +1,20 @@
+{
+  "bot": {
+    "name": "Mita",
+    "owner": ["+62 882-1829-2156"],
+    "defaultLanguage": "english"
+  },
+  "api": {
+    "removebg": {
+      "key": "qAJEZ5YHNvQjsuWgMVjXzaL2"
+    }
+  },
+  "stream": {
+    "bingchat": true
+  },
+  "defaultCooldown": 3,
+  "defaultSticker": {
+    "packname": "Bot",
+    "author": "Linia"
+  }
+}
