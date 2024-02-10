@@ -1,1 +1,0 @@
-exports.githubstalk = require('./githubstalk')

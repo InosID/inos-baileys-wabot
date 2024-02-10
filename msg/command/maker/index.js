@@ -1,1 +1,0 @@
-exports.photofunia = require('./photofunia')
