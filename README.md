@@ -36,7 +36,8 @@ src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoCo
 <a href="https://ffmpeg.org/download.html"><img src="http://img.shields.io/badge/-Ffmpeg-000000?style=flat&logo=ffmpeg&logoColor=green"></a>
 <a href="https://notepad-plus-plus.org/downloads/v8.1.9"><img src="http://img.shields.io/badge/-Notepad++-orange?style=flat"></a>
 
-[x] **Termux/Ubuntu/Linux User**
+- [x] **Termux/Ubuntu/Linux User**
+
 Make sure everything is in good condition
 
 First, install
