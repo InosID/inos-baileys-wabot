@@ -26,7 +26,7 @@
 Then click view web.
 After that, scan the qr, Done.
 -->
-<!-- - [x] **RDP/VPS USER**
+- [x] **RDP/VPS USER**
 
 **First download tools**, Click icon to download !
 
@@ -36,7 +36,7 @@ src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoCo
 <a href="https://ffmpeg.org/download.html"><img src="http://img.shields.io/badge/-Ffmpeg-000000?style=flat&logo=ffmpeg&logoColor=green"></a>
 <a href="https://notepad-plus-plus.org/downloads/v8.1.9"><img src="http://img.shields.io/badge/-Notepad++-orange?style=flat"></a>
 
-## Termux/Ubuntu/Linux User
+[x] **Termux/Ubuntu/Linux User**
 Make sure everything is in good condition
 
 First, install
@@ -55,11 +55,11 @@ If everything has been confirmed to be safe and installed, continue with the clo
 • npm start
 ```
 For all questions in the installation just select y 
-the second step is to just change the number of the owner of the bot and finally scan the qr code -->
+the second step is to just change the number of the owner of the bot and finally scan the qr code
 
 ## Group WhatsApp
 
 [![WhatsApp Group](https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/K0w1BggUAzr7AWJNka3Y81)
 
-# Note
+> [!NOTE]
 > If this script has an error, you can report it via issue.
