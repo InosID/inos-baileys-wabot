@@ -7,10 +7,6 @@
   "api": {
     "removebg": {
       "key": "qAJEZ5YHNvQjsuWgMVjXzaL2"
-    },
-    "betabotz": {
-      "url": "https://api.betabotz.eu.org/api/",
-      "key": "radhindev"
     }
   },
   "stream": {
