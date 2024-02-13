@@ -12,3 +12,6 @@ updates:
     ignore:
       - dependency-name: "axios"
       - dependency-name: "got"
+      - dependency-name: "file-type"
+      - dependency-name: "node-fetch"
+      - dependency-name: "awesome-phonenumber"
