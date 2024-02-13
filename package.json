@@ -35,7 +35,7 @@
     "gpti": "^2.0.1",
     "ikyy": "^5.0.7",
     "jsdom": "^23.2.0",
-    "node-fetch": "^2.0.0",
+    "node-fetch": "^3.3.2",
     "pino": "^8.17.1",
     "qrcode-terminal": "^0.12.0",
     "request": "^2.88.2",
