@@ -24,7 +24,7 @@
     "betabotz-tools": "^0.0.7",
     "caliph-api": "^1.0.0",
     "cdrake-se": "^1.1.2",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "^1.0.0-rc.12",
     "chess.js": "^1.0.0-beta.7",
     "country-language": "^0.1.7",
     "express": "^4.18.2",
