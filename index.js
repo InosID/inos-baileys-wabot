@@ -12,12 +12,12 @@ const Pino = require('pino');
 const { Boom } = require('@hapi/boom');
 const { readFeatures } = require('./lib');
 
-// const app = new express();
-// let PORT = 3000
+const app = new express();
+let PORT = 3000
 
-// app.get('/', function (req, res) {
-//   res.send('online');
-// });
+app.get('/', function (req, res) {
+  res.send('online');
+});
 
 // Initialize attributes object
 const attr = {
@@ -93,7 +93,7 @@ async function start() {
     conn.ev.on("creds.update", saveCreds);
 
     // Listen for 'connection.update' event and handle connection updates
-    /*conn.ev.on("connection.update", async (update) => {
+    conn.ev.on("connection.update", async (update) => {
       const { lastDisconnect, connection } = update;
     
       // Log connection status
@@ -149,7 +149,7 @@ async function start() {
         default:
           conn.end(`Unknown DisconnectReason: ${reason}|${error}`);
       }
-    }*/
+    }
 
     conn.ev.on("group-participants.update", async (msg) => {
       require("./system/welcome")(conn, msg);
