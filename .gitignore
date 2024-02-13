@@ -2,3 +2,5 @@ node_modules
 session
 package-json
 temp
+package-lock.json
+database
