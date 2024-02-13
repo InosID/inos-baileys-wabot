@@ -93,79 +93,78 @@ async function start() {
     conn.ev.on("creds.update", saveCreds);
 
     // Listen for 'connection.update' event and handle connection updates
-    /*conn.ev.on("connection.update", async (update) => {
-      const { lastDisconnect, connection } = update;
+    // conn.ev.on("connection.update", async (update) => {
+    //   const { lastDisconnect, connection } = update;
     
-      // Log connection status
-      if (connection) {
-        console.log(connection === "connecting" ? "Connecting to the WhatsApp bot..." : `Connection: ${connection}`);
-      }
+    //   // Log connection status
+    //   if (connection) {
+    //     console.log(connection === "connecting" ? "Connecting to the WhatsApp bot..." : `Connection: ${connection}`);
+    //   }
     
-      // Handle different connection states
-      switch (connection) {
-        case "open":
-          console.log("Successfully connected to WhatsApp");
-          break;
-        case "close":
-          handleDisconnect(lastDisconnect.error);
-          break;
-      }
-    });
+    //   // Handle different connection states
+    //   switch (connection) {
+    //     case "open":
+    //       console.log("Successfully connected to WhatsApp");
+    //       break;
+    //     case "close":
+    //       handleDisconnect(lastDisconnect.error);
+    //       break;
+    //   }
+    // });
     
     // Function to handle disconnect reasons
-    function handleDisconnect(error) {
-      const reason = new Boom(error).output.statusCode;
+    // function handleDisconnect(error) {
+    //   const reason = new Boom(error).output.statusCode;
     
-      // Handle specific disconnect reasons
-      switch (reason) {
-        case DisconnectReason.badSession:
-          console.log("Bad Session File, Please Delete session and Scan Again");
-          conn.logout();
-          break;
-        case DisconnectReason.connectionClosed:
-          console.log("Connection closed, reconnecting...");
-          start();
-          break;
-        case DisconnectReason.connectionLost:
-          console.log("Connection Lost from Server, reconnecting...");
-          start();
-          break;
-        case DisconnectReason.connectionReplaced:
-          console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First");
-          conn.logout();
-          break;
-        case DisconnectReason.loggedOut:
-          console.log("Device Logged Out, Please Delete session and Scan Again.");
-          conn.logout();
-          break;
-        case DisconnectReason.restartRequired:
-          console.log("Restart Required, Restarting...");
-          start();
-          break;
-        case DisconnectReason.timedOut:
-          console.log("Connection TimedOut, Reconnecting...");
-          start();
-          break;
-        default:
-          conn.end(`Unknown DisconnectReason: ${reason}|${error}`);
-      }
-    }*/
-
-    conn.ev.on("group-participants.update", async (msg) => {
-      require("./system/welcome")(conn, msg);
-    });
+    //   // Handle specific disconnect reasons
+    //   switch (reason) {
+    //     case DisconnectReason.badSession:
+    //       console.log("Bad Session File, Please Delete session and Scan Again");
+    //       conn.logout();
+    //       break;
+    //     case DisconnectReason.connectionClosed:
+    //       console.log("Connection closed, reconnecting...");
+    //       start();
+    //       break;
+    //     case DisconnectReason.connectionLost:
+    //       console.log("Connection Lost from Server, reconnecting...");
+    //       start();
+    //       break;
+    //     case DisconnectReason.connectionReplaced:
+    //       console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First");
+    //       conn.logout();
+    //       break;
+    //     case DisconnectReason.loggedOut:
+    //       console.log("Device Logged Out, Please Delete session and Scan Again.");
+    //       conn.logout();
+    //       break;
+    //     case DisconnectReason.restartRequired:
+    //       console.log("Restart Required, Restarting...");
+    //       start();
+    //       break;
+    //     case DisconnectReason.timedOut:
+    //       console.log("Connection TimedOut, Reconnecting...");
+    //       start();
+    //       break;
+    //     default:
+    //       conn.end(`Unknown DisconnectReason: ${reason}|${error}`);
+    //   }
+    // }
     
     // Listen for 'messages.upsert' event and call the handler function
     conn.ev.on("messages.upsert", async (message) => {
       require('./handler')(message, conn, attr);
+    });
+
+    conn.ev.on("group-participants.update", async (msg) => {
+      require("./system/welcome")(conn, msg);
     });
   } catch (error) {
     console.error(error);
   }
 }
 
-// Start the application by calling the 'start' function
-start();
+start()
 
 // app.listen(PORT, () => {
 //   console.log('App listened on port:', PORT)
