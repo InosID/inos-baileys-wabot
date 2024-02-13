@@ -19,7 +19,7 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@whiskeysockets/baileys": "github:WhiskeySockets/Baileys",
-    "awesome-phonenumber": "^2.70.0",
+    "awesome-phonenumber": "^6.4.0",
     "axios": "^0.26.1",
     "betabotz-tools": "^0.0.7",
     "caliph-api": "^1.0.0",
