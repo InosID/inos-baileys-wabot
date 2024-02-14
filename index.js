@@ -12,6 +12,7 @@ const Pino = require('pino');
 const { Boom } = require('@hapi/boom');
 const { readFeatures } = require('./lib');
 const express = require('express');
+const http = require('http');
 
 const app = new express();
 let PORT = process.env.PORT || 3000
@@ -171,3 +172,7 @@ start();
 app.listen(PORT, () => {
   console.log('App listened on port:', PORT)
 })
+
+setInterval(function() {
+  http.get("http://liniadeploy-1622d9568914.herokuapp.com");
+}, 300000);
