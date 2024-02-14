@@ -14,7 +14,7 @@ const { readFeatures } = require('./lib');
 const express = require('express');
 
 const app = new express();
-let PORT = 3000
+let PORT = process.env.PORT || 3000
 
 app.get('/', function (req, res) {
   res.send('online');
@@ -168,6 +168,6 @@ async function start() {
 // Start the application by calling the 'start' function
 start();
 
-// app.listen(PORT, () => {
-//   console.log('App listened on port:', PORT)
-// })
+app.listen(PORT, () => {
+  console.log('App listened on port:', PORT)
+})
