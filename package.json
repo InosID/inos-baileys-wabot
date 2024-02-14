@@ -16,6 +16,9 @@
   ],
   "author": "moo-d",
   "license": "ISC",
+  "engines": {
+    "node": "18.17.x"
+  },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@whiskeysockets/baileys": "github:WhiskeySockets/Baileys",
