@@ -11,9 +11,9 @@ module.exports = {
 
   // Asynchronous run function to handle the command logic
   async run({ msg }, { query }) {
-    const result = chatgpt(query) ? chatgpt(query) : false;
+    const result = await chatgpt(query) ? await chatgpt(query) : false;
     if (!result) return msg.reply('Terjadi kesalahan!')
-    msg.reply(result)
+    msg.reply(result.message)
   }
 };
 
