@@ -12,10 +12,13 @@ module.exports = {
   // Asynchronous run function to handle the command logic
   async run({ conn, msg }, { query }) {
     // Call the 'de' function to generate an image based on the query
-    let imageBuffer = await de(query);
+    let imageArray = await de2(query) ? await de2(query) : await de(query) ? await de(query) : false;
 
+    if (!imageArray) return msg.reply('Terjadi kesalahan')
     // Send the generated image as a reply to the user's message
-    conn.sendMessage(msg.from, { image: imageBuffer }, { quoted: msg });
+    for (let i = 0; i < imageArray.length; i++) {
+      conn.sendMessage(msg.from, { image: imageArray[i] }, { quoted: msg });
+    }
   },
 };
 
@@ -29,8 +32,20 @@ async function de(query) {
       if (err !== null) {
         resolve(err.message);
       } else {
-        resolve(data.images[0]);
+        resolve(data.images);
       }
     });
   });
+}
+
+async function de2(query) {
+  return new Promise((resolve) => {
+    dalle.v2({ prompt: query, markdown: false })
+  }, (err, data) => {
+    if (err) {
+      resolve(false)
+    } else {
+      resolve(data.images)
+    }
+  })
 }
