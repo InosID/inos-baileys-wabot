@@ -11,6 +11,7 @@ const {
 const Pino = require('pino');
 const { Boom } = require('@hapi/boom');
 const { readFeatures } = require('./lib');
+const express = require('express');
 
 const app = new express();
 let PORT = 3000
